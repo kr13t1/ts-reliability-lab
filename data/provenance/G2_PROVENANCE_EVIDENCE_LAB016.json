@@ -1,0 +1,70 @@
+{
+  "decision_id": "LAB-016",
+  "decision_date": "2026-11-01",
+  "stage": "G2 limited provenance only",
+  "decision": "CONDITIONAL GO for traceable local raw files in G2 preparation; NOT G2 GO",
+  "raw_transport_archive": "G2_RAW_FOR_AUDIT_05(1).zip",
+  "raw_transport_archive_sha256": "7aca931a3af368bae0ac932140aff270f9cd5f0c6c783e393c83c1672628f503",
+  "raw_bytes_verified_in_this_review": true,
+  "files": [
+    {
+      "filename": "data_1600_accel_phone.txt",
+      "size_bytes": 3451789,
+      "sha256": "40b7f60880b495ccb3c345b9ab11216dfa6bbb2bb887bcb45fb55020278fc22f",
+      "manifest_sha256_match": true,
+      "manifest_size_match": true,
+      "subject_id": "1600",
+      "rows": 64311,
+      "A_walking": 3574,
+      "E_standing": 3572,
+      "matches_02_report": true
+    },
+    {
+      "filename": "data_1601_accel_phone.txt",
+      "size_bytes": 4405756,
+      "sha256": "cafe0c35079ce96909ad6a42b8a65af7349cd416350fe4d0aa78354bb68b20ff",
+      "manifest_sha256_match": true,
+      "manifest_size_match": true,
+      "subject_id": "1601",
+      "rows": 81457,
+      "A_walking": 4512,
+      "E_standing": 4512,
+      "matches_02_report": true
+    },
+    {
+      "filename": "data_1602_accel_phone.txt",
+      "size_bytes": 4629305,
+      "sha256": "c815ae4099014aaf34a720cd5f56d604f3f84cf667fbdd31d18acd921f4049da",
+      "manifest_sha256_match": true,
+      "manifest_size_match": true,
+      "subject_id": "1602",
+      "rows": 84890,
+      "A_walking": 3572,
+      "E_standing": 3573,
+      "matches_02_report": true
+    },
+    {
+      "filename": "activity_key.txt",
+      "size_bytes": 210,
+      "sha256": "ddca4cfb34ea3c4642f73a22dc498e2d77f435be4e836f87f37c274ec5ee4c26",
+      "manifest_sha256_match": true,
+      "manifest_size_match": true
+    }
+  ],
+  "local_outer_zip_sha256_reported_not_available_as_bytes": "6e0147f181d8f5275918db65eeb9dc842a0185d37cb6b2f30cbf74ee6e205469",
+  "local_outer_zip_size_bytes_reported": 310292805,
+  "prefix_recheck": {
+    "bytes_compared_locally_per_report": 151511010,
+    "fraction": 0.48828399356536806,
+    "partial_report_states_exact_prefix": true,
+    "independent_binary_repeat_by_coordinator": false,
+    "remote_url_claimed_by_local_command": "https://archive.ics.uci.edu/static/public/507/wisdm%2Bsmartphone%2Band%2Bsmartwatch%2Bactivity%2Band%2Bbiometrics%2Bdataset.zip",
+    "full_remote_sha256_equality_confirmed": false,
+    "partial_sha256_reported": "38ebee7a70b81566548d0cb255cac006e036132996a8cac582cfab010c0f9395"
+  },
+  "official_listing_verified_via_public_UCI_webpage": true,
+  "official_public_sha256_found": false,
+  "independent_05_G2_audit_available_to_00": false,
+  "G2_completed": false,
+  "G3_started": false
+}

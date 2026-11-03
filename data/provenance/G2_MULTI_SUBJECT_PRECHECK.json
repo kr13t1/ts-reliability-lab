@@ -1,0 +1,1909 @@
+{
+  "G2_completed": false,
+  "G3_started": false,
+  "activity_key_mapping_fixed_before_scan": {
+    "A": "Walking",
+    "E": "Standing"
+  },
+  "comparison_to_previous_1600_report": {
+    "all_compared_fields_match": true,
+    "fields": {
+      "activity_counts": {
+        "LAB012_prior": {
+          "A": 3574,
+          "B": 3572,
+          "C": 3573,
+          "D": 3572,
+          "E": 3572,
+          "F": 3573,
+          "G": 3573,
+          "H": 3572,
+          "I": 3571,
+          "J": 3573,
+          "K": 3573,
+          "L": 3576,
+          "M": 3573,
+          "O": 3572,
+          "P": 3574,
+          "Q": 3573,
+          "R": 3573,
+          "S": 3572
+        },
+        "current": {
+          "A": 3574,
+          "B": 3572,
+          "C": 3573,
+          "D": 3572,
+          "E": 3572,
+          "F": 3573,
+          "G": 3573,
+          "H": 3572,
+          "I": 3571,
+          "J": 3573,
+          "K": 3573,
+          "L": 3576,
+          "M": 3573,
+          "O": 3572,
+          "P": 3574,
+          "Q": 3573,
+          "R": 3573,
+          "S": 3572
+        },
+        "match": true
+      },
+      "contiguous_activity_runs": {
+        "LAB012_prior": 18,
+        "current": 18,
+        "match": true
+      },
+      "line_count": {
+        "LAB012_prior": 64311,
+        "current": 64311,
+        "match": true
+      },
+      "nested_zip_sha256": {
+        "LAB012_prior": "1cf32e8d3a0ecc101bd299fba22545273dcb7de1c9565e0b7844abdfbc6b1695",
+        "current": "1cf32e8d3a0ecc101bd299fba22545273dcb7de1c9565e0b7844abdfbc6b1695",
+        "match": true
+      },
+      "nonincreasing_all_adjacent": {
+        "LAB012_prior": 8,
+        "current": 8,
+        "match": true
+      },
+      "nonincreasing_within_runs": {
+        "LAB012_prior": 0,
+        "current": 0,
+        "match": true
+      },
+      "outer_zip_sha256": {
+        "LAB012_prior": "6e0147f181d8f5275918db65eeb9dc842a0185d37cb6b2f30cbf74ee6e205469",
+        "current": "6e0147f181d8f5275918db65eeb9dc842a0185d37cb6b2f30cbf74ee6e205469",
+        "match": true
+      },
+      "parsed_rows": {
+        "LAB012_prior": 64311,
+        "current": 64311,
+        "match": true
+      },
+      "raw_file_sha256": {
+        "LAB012_prior": "40b7f60880b495ccb3c345b9ab11216dfa6bbb2bb887bcb45fb55020278fc22f",
+        "current": "40b7f60880b495ccb3c345b9ab11216dfa6bbb2bb887bcb45fb55020278fc22f",
+        "match": true
+      },
+      "raw_size_bytes": {
+        "LAB012_prior": 3451789,
+        "current": 3451789,
+        "match": true
+      }
+    }
+  },
+  "executed_on_original_raw": true,
+  "no_classification": true,
+  "no_corruption": true,
+  "no_train_validation_test_split": true,
+  "no_windowing": true,
+  "nominal_poll_hz_documented": 20,
+  "official_archive_activity_key": {
+    "fixed_mapping_found_on_same_line": {
+      "A": {
+        "expected_name": "Walking",
+        "same_line_key_evidence": true
+      },
+      "E": {
+        "expected_name": "Standing",
+        "same_line_key_evidence": true
+      }
+    },
+    "member_path": "wisdm-dataset/activity_key.txt",
+    "sha256": "ddca4cfb34ea3c4642f73a22dc498e2d77f435be4e836f87f37c274ec5ee4c26",
+    "size_bytes": 210,
+    "utf8_text_preview_lines": [
+      "walking = A",
+      "jogging = B",
+      "stairs = C",
+      "sitting = D",
+      "standing = E",
+      "typing = F",
+      "teeth = G",
+      "soup = H",
+      "chips = I",
+      "pasta = J",
+      "drinking = K",
+      "sandwich = L",
+      "kicking = M",
+      "catch = O",
+      "dribbling = P",
+      "writing = Q",
+      "clapping = R",
+      "folding = S",
+      ""
+    ]
+  },
+  "precheck_status": "READY_FOR_COORDINATOR_00_REVIEW_NOT_G2_GO",
+  "report_schema_version": "1.0",
+  "scope": "read_only_three_subjects_A_Walking_E_Standing",
+  "source": {
+    "dataset": "WISDM Smartphone and Smartwatch Activity and Biometrics 2019",
+    "doi": "10.24432/C5HK59",
+    "license": "CC BY 4.0 per official UCI entry",
+    "local_source_filename": "uci507.zip",
+    "nested_sha256_matches_LAB012_claim": true,
+    "outer_zip_matches_LAB012_claim": true,
+    "outer_zip_sha256": "6e0147f181d8f5275918db65eeb9dc842a0185d37cb6b2f30cbf74ee6e205469",
+    "outer_zip_size_bytes": 310292805,
+    "prior_LAB012_outer_sha256": "6e0147f181d8f5275918db65eeb9dc842a0185d37cb6b2f30cbf74ee6e205469",
+    "provenance_caveat": "Matching local hash ties to LAB-012 only; it cannot independently authenticate UCI's bytes without an official UCI checksum or independently verified acquisition chain",
+    "source_documentation": "https://archive.ics.uci.edu/ml/machine-learning-databases/00507/WISDM-dataset-description.pdf",
+    "uci_id": 507,
+    "uci_url": "https://archive.ics.uci.edu/dataset/507/wisdm%2Bsmartphone%2B",
+    "zip_layout": {
+      "layout": "nested_zip",
+      "nested_zip_info": {
+        "crc32_hex": "83f86753",
+        "stored_size_bytes": 309713877,
+        "uncompressed_size_bytes": 309713877
+      },
+      "nested_zip_member": "wisdm-dataset.zip",
+      "nested_zip_sha256": "1cf32e8d3a0ecc101bd299fba22545273dcb7de1c9565e0b7844abdfbc6b1695",
+      "nested_zip_size_bytes": 309713877
+    }
+  },
+  "stage": "G2 LIMITED PRECHECK; NOT G2 GO",
+  "subject_ids_requested": [
+    1600,
+    1601,
+    1602
+  ],
+  "subject_independent_grouping_feasibility": {
+    "distinct_requested_subject_ids_with_present_valid_A_and_E": [
+      1600,
+      1601,
+      1602
+    ],
+    "future_subject_disjoint_partitions_are_structurally_possible": true,
+    "group_key": "subject_id",
+    "note": "Three subjects suffice for checking identifiers, not robust estimation or an approved split. Prevent subject leakage before any future windowing.",
+    "sessions_independent_confirmed": false,
+    "split_created": false,
+    "statistical_independence_of_subjects_proven": false,
+    "three_distinct_subjects_with_A_and_E": true,
+    "train_validation_test_procedure_selected": false
+  },
+  "subjects": {
+    "1600": {
+      "activity_code_transitions_count": 17,
+      "activity_code_transitions_in_file_order_not_sessions": [
+        {
+          "delta_raw_integer_units": -399961846231,
+          "direct_A_E_transition": false,
+          "from_activity": "A",
+          "next_line_1_based": 3575,
+          "next_timestamp": 251987619821922,
+          "nonincreasing_at_boundary": true,
+          "previous_line_1_based": 3574,
+          "previous_timestamp": 252387581668153,
+          "to_activity": "B"
+        },
+        {
+          "delta_raw_integer_units": -5988559815078,
+          "direct_A_E_transition": false,
+          "from_activity": "B",
+          "next_line_1_based": 7147,
+          "next_timestamp": 246178874142123,
+          "nonincreasing_at_boundary": true,
+          "previous_line_1_based": 7146,
+          "previous_timestamp": 252167433957201,
+          "to_activity": "C"
+        },
+        {
+          "delta_raw_integer_units": -4760116409661,
+          "direct_A_E_transition": false,
+          "from_activity": "C",
+          "next_line_1_based": 10720,
+          "next_timestamp": 241598622217012,
+          "nonincreasing_at_boundary": true,
+          "previous_line_1_based": 10719,
+          "previous_timestamp": 246358738626673,
+          "to_activity": "D"
+        },
+        {
+          "delta_raw_integer_units": 113850400348,
+          "direct_A_E_transition": false,
+          "from_activity": "D",
+          "next_line_1_based": 14292,
+          "next_timestamp": 241892286783982,
+          "nonincreasing_at_boundary": false,
+          "previous_line_1_based": 14291,
+          "previous_timestamp": 241778436383634,
+          "to_activity": "E"
+        },
+        {
+          "delta_raw_integer_units": 3215910182713,
+          "direct_A_E_transition": false,
+          "from_activity": "E",
+          "next_line_1_based": 17864,
+          "next_timestamp": 245288011107632,
+          "nonincreasing_at_boundary": false,
+          "previous_line_1_based": 17863,
+          "previous_timestamp": 242072100924919,
+          "to_activity": "F"
+        },
+        {
+          "delta_raw_integer_units": 8703363226685,
+          "direct_A_E_transition": false,
+          "from_activity": "F",
+          "next_line_1_based": 21437,
+          "next_timestamp": 254171238814520,
+          "nonincreasing_at_boundary": false,
+          "previous_line_1_based": 21436,
+          "previous_timestamp": 245467875587835,
+          "to_activity": "G"
+        },
+        {
+          "delta_raw_integer_units": -639445496933,
+          "direct_A_E_transition": false,
+          "from_activity": "G",
+          "next_line_1_based": 25010,
+          "next_timestamp": 253711657799146,
+          "nonincreasing_at_boundary": true,
+          "previous_line_1_based": 25009,
+          "previous_timestamp": 254351103296079,
+          "to_activity": "H"
+        },
+        {
+          "delta_raw_integer_units": -8198262170584,
+          "direct_A_E_transition": false,
+          "from_activity": "H",
+          "next_line_1_based": 28582,
+          "next_timestamp": 245693209773699,
+          "nonincreasing_at_boundary": true,
+          "previous_line_1_based": 28581,
+          "previous_timestamp": 253891471944283,
+          "to_activity": "I"
+        },
+        {
+          "delta_raw_integer_units": 8070816197752,
+          "direct_A_E_transition": false,
+          "from_activity": "I",
+          "next_line_1_based": 32153,
+          "next_timestamp": 253943789760732,
+          "nonincreasing_at_boundary": false,
+          "previous_line_1_based": 32152,
+          "previous_timestamp": 245872973562980,
+          "to_activity": "J"
+        },
+        {
+          "delta_raw_integer_units": -11055613785155,
+          "direct_A_E_transition": false,
+          "from_activity": "J",
+          "next_line_1_based": 35726,
+          "next_timestamp": 243068040486030,
+          "nonincreasing_at_boundary": true,
+          "previous_line_1_based": 35725,
+          "previous_timestamp": 254123654271185,
+          "to_activity": "K"
+        },
+        {
+          "delta_raw_integer_units": 7985210466322,
+          "direct_A_E_transition": false,
+          "from_activity": "K",
+          "next_line_1_based": 39299,
+          "next_timestamp": 251233115442110,
+          "nonincreasing_at_boundary": false,
+          "previous_line_1_based": 39298,
+          "previous_timestamp": 243247904975788,
+          "to_activity": "L"
+        },
+        {
+          "delta_raw_integer_units": 1128188261141,
+          "direct_A_E_transition": false,
+          "from_activity": "L",
+          "next_line_1_based": 42875,
+          "next_timestamp": 252541319249860,
+          "nonincreasing_at_boundary": false,
+          "previous_line_1_based": 42874,
+          "previous_timestamp": 251413130988719,
+          "to_activity": "M"
+        },
+        {
+          "delta_raw_integer_units": 41844183676,
+          "direct_A_E_transition": false,
+          "from_activity": "M",
+          "next_line_1_based": 46448,
+          "next_timestamp": 252763027935503,
+          "nonincreasing_at_boundary": false,
+          "previous_line_1_based": 46447,
+          "previous_timestamp": 252721183751827,
+          "to_activity": "O"
+        },
+        {
+          "delta_raw_integer_units": 65359495970,
+          "direct_A_E_transition": false,
+          "from_activity": "O",
+          "next_line_1_based": 50020,
+          "next_timestamp": 253008201575311,
+          "nonincreasing_at_boundary": false,
+          "previous_line_1_based": 50019,
+          "previous_timestamp": 252942842079341,
+          "to_activity": "P"
+        },
+        {
+          "delta_raw_integer_units": -8177958752205,
+          "direct_A_E_transition": false,
+          "from_activity": "P",
+          "next_line_1_based": 53594,
+          "next_timestamp": 245010157685146,
+          "nonincreasing_at_boundary": true,
+          "previous_line_1_based": 53593,
+          "previous_timestamp": 253188116437351,
+          "to_activity": "Q"
+        },
+        {
+          "delta_raw_integer_units": -1363334656633,
+          "direct_A_E_transition": false,
+          "from_activity": "Q",
+          "next_line_1_based": 57167,
+          "next_timestamp": 243826687535134,
+          "nonincreasing_at_boundary": true,
+          "previous_line_1_based": 57166,
+          "previous_timestamp": 245190022191767,
+          "to_activity": "R"
+        },
+        {
+          "delta_raw_integer_units": 319496182801,
+          "direct_A_E_transition": false,
+          "from_activity": "R",
+          "next_line_1_based": 60740,
+          "next_timestamp": 244326048215533,
+          "nonincreasing_at_boundary": false,
+          "previous_line_1_based": 60739,
+          "previous_timestamp": 244006552032732,
+          "to_activity": "S"
+        }
+      ],
+      "activity_codes_and_counts": {
+        "A": 3574,
+        "B": 3572,
+        "C": 3573,
+        "D": 3572,
+        "E": 3572,
+        "F": 3573,
+        "G": 3573,
+        "H": 3572,
+        "I": 3571,
+        "J": 3573,
+        "K": 3573,
+        "L": 3576,
+        "M": 3573,
+        "O": 3572,
+        "P": 3574,
+        "Q": 3573,
+        "R": 3573,
+        "S": 3572
+      },
+      "all_contiguous_runs_in_original_order": [
+        {
+          "activity": "A",
+          "end_line_1_based": 3574,
+          "first_timestamp": 252207666810782,
+          "last_timestamp": 252387581668153,
+          "start_line_1_based": 1,
+          "timestamp_max": 252387581668153,
+          "timestamp_min": 252207666810782,
+          "valid_row_count": 3574
+        },
+        {
+          "activity": "B",
+          "end_line_1_based": 7146,
+          "first_timestamp": 251987619821922,
+          "last_timestamp": 252167433957201,
+          "start_line_1_based": 3575,
+          "timestamp_max": 252167433957201,
+          "timestamp_min": 251987619821922,
+          "valid_row_count": 3572
+        },
+        {
+          "activity": "C",
+          "end_line_1_based": 10719,
+          "first_timestamp": 246178874142123,
+          "last_timestamp": 246358738626673,
+          "start_line_1_based": 7147,
+          "timestamp_max": 246358738626673,
+          "timestamp_min": 246178874142123,
+          "valid_row_count": 3573
+        },
+        {
+          "activity": "D",
+          "end_line_1_based": 14291,
+          "first_timestamp": 241598622217012,
+          "last_timestamp": 241778436383634,
+          "start_line_1_based": 10720,
+          "timestamp_max": 241778436383634,
+          "timestamp_min": 241598622217012,
+          "valid_row_count": 3572
+        },
+        {
+          "activity": "E",
+          "end_line_1_based": 17863,
+          "first_timestamp": 241892286783982,
+          "last_timestamp": 242072100924919,
+          "start_line_1_based": 14292,
+          "timestamp_max": 242072100924919,
+          "timestamp_min": 241892286783982,
+          "valid_row_count": 3572
+        },
+        {
+          "activity": "F",
+          "end_line_1_based": 21436,
+          "first_timestamp": 245288011107632,
+          "last_timestamp": 245467875587835,
+          "start_line_1_based": 17864,
+          "timestamp_max": 245467875587835,
+          "timestamp_min": 245288011107632,
+          "valid_row_count": 3573
+        },
+        {
+          "activity": "G",
+          "end_line_1_based": 25009,
+          "first_timestamp": 254171238814520,
+          "last_timestamp": 254351103296079,
+          "start_line_1_based": 21437,
+          "timestamp_max": 254351103296079,
+          "timestamp_min": 254171238814520,
+          "valid_row_count": 3573
+        },
+        {
+          "activity": "H",
+          "end_line_1_based": 28581,
+          "first_timestamp": 253711657799146,
+          "last_timestamp": 253891471944283,
+          "start_line_1_based": 25010,
+          "timestamp_max": 253891471944283,
+          "timestamp_min": 253711657799146,
+          "valid_row_count": 3572
+        },
+        {
+          "activity": "I",
+          "end_line_1_based": 32152,
+          "first_timestamp": 245693209773699,
+          "last_timestamp": 245872973562980,
+          "start_line_1_based": 28582,
+          "timestamp_max": 245872973562980,
+          "timestamp_min": 245693209773699,
+          "valid_row_count": 3571
+        },
+        {
+          "activity": "J",
+          "end_line_1_based": 35725,
+          "first_timestamp": 253943789760732,
+          "last_timestamp": 254123654271185,
+          "start_line_1_based": 32153,
+          "timestamp_max": 254123654271185,
+          "timestamp_min": 253943789760732,
+          "valid_row_count": 3573
+        },
+        {
+          "activity": "K",
+          "end_line_1_based": 39298,
+          "first_timestamp": 243068040486030,
+          "last_timestamp": 243247904975788,
+          "start_line_1_based": 35726,
+          "timestamp_max": 243247904975788,
+          "timestamp_min": 243068040486030,
+          "valid_row_count": 3573
+        },
+        {
+          "activity": "L",
+          "end_line_1_based": 42874,
+          "first_timestamp": 251233115442110,
+          "last_timestamp": 251413130988719,
+          "start_line_1_based": 39299,
+          "timestamp_max": 251413130988719,
+          "timestamp_min": 251233115442110,
+          "valid_row_count": 3576
+        },
+        {
+          "activity": "M",
+          "end_line_1_based": 46447,
+          "first_timestamp": 252541319249860,
+          "last_timestamp": 252721183751827,
+          "start_line_1_based": 42875,
+          "timestamp_max": 252721183751827,
+          "timestamp_min": 252541319249860,
+          "valid_row_count": 3573
+        },
+        {
+          "activity": "O",
+          "end_line_1_based": 50019,
+          "first_timestamp": 252763027935503,
+          "last_timestamp": 252942842079341,
+          "start_line_1_based": 46448,
+          "timestamp_max": 252942842079341,
+          "timestamp_min": 252763027935503,
+          "valid_row_count": 3572
+        },
+        {
+          "activity": "P",
+          "end_line_1_based": 53593,
+          "first_timestamp": 253008201575311,
+          "last_timestamp": 253188116437351,
+          "start_line_1_based": 50020,
+          "timestamp_max": 253188116437351,
+          "timestamp_min": 253008201575311,
+          "valid_row_count": 3574
+        },
+        {
+          "activity": "Q",
+          "end_line_1_based": 57166,
+          "first_timestamp": 245010157685146,
+          "last_timestamp": 245190022191767,
+          "start_line_1_based": 53594,
+          "timestamp_max": 245190022191767,
+          "timestamp_min": 245010157685146,
+          "valid_row_count": 3573
+        },
+        {
+          "activity": "R",
+          "end_line_1_based": 60739,
+          "first_timestamp": 243826687535134,
+          "last_timestamp": 244006552032732,
+          "start_line_1_based": 57167,
+          "timestamp_max": 244006552032732,
+          "timestamp_min": 243826687535134,
+          "valid_row_count": 3573
+        },
+        {
+          "activity": "S",
+          "end_line_1_based": 64311,
+          "first_timestamp": 244326048215533,
+          "last_timestamp": 244505862358216,
+          "start_line_1_based": 60740,
+          "timestamp_max": 244505862358216,
+          "timestamp_min": 244326048215533,
+          "valid_row_count": 3572
+        }
+      ],
+      "contiguous_activity_runs_count_not_sessions": 18,
+      "duplicate_adjacent_timestamps_in_valid_segments": 0,
+      "duplicate_full_rows": 0,
+      "file_sha256": "40b7f60880b495ccb3c345b9ab11216dfa6bbb2bb887bcb45fb55020278fc22f",
+      "first_invalid_rows": [],
+      "first_timestamp_in_file_order": 252207666810782,
+      "invalid_row_count": 0,
+      "invalid_row_reasons": {},
+      "last_timestamp_in_file_order": 244505862358216,
+      "line_count": 64311,
+      "nonincreasing_adjacent_timestamps_in_valid_segments": 8,
+      "nonincreasing_timestamps_within_same_activity_run": 0,
+      "parsed_rows": 64311,
+      "repeated_timestamps_anywhere": 0,
+      "session_ids_available": false,
+      "size_bytes": 3451789,
+      "status": "RAW_PRECHECKED",
+      "subject_ids_and_counts": {
+        "1600": 64311
+      },
+      "target_activities": {
+        "A": {
+          "contiguous_runs_count_not_sessions": 1,
+          "first_timestamp_in_file_order": 252207666810782,
+          "last_timestamp_in_file_order": 252387581668153,
+          "official_activity_name": "Walking",
+          "present": true,
+          "row_count": 3574,
+          "runs": [
+            {
+              "activity": "A",
+              "end_line_1_based": 3574,
+              "first_timestamp": 252207666810782,
+              "last_timestamp": 252387581668153,
+              "start_line_1_based": 1,
+              "timestamp_max": 252387581668153,
+              "timestamp_min": 252207666810782,
+              "valid_row_count": 3574
+            }
+          ],
+          "timestamp_max": 252387581668153,
+          "timestamp_min": 252207666810782,
+          "timing_within_contiguous_runs": {
+            "effective_hz_from_positive_median_if_nanoseconds": 19.859393902419356,
+            "intervals_above_100ms_if_nanoseconds": 0,
+            "intervals_above_75ms_if_nanoseconds": 0,
+            "missing_physical_samples_inferred": false,
+            "nonpositive_count": 0,
+            "positive_delta_ms_if_nanoseconds": {
+              "count": 3573,
+              "max": 50.378589,
+              "min": 50.331507,
+              "p50": 50.354004,
+              "p95": 50.354004,
+              "p99": 50.354004
+            },
+            "positive_raw_delta_statistics": {
+              "count": 3573,
+              "max": 50378589,
+              "min": 50331507,
+              "p50": 50354004.0,
+              "p95": 50354004.0,
+              "p99": 50354004.0
+            },
+            "raw_integer_delta_statistics": {
+              "count": 3573,
+              "max": 50378589,
+              "min": 50331507,
+              "p50": 50354004.0,
+              "p95": 50354004.0,
+              "p99": 50354004.0
+            },
+            "within_run_consecutive_pair_count": 3573,
+            "zero_count": 0
+          }
+        },
+        "E": {
+          "contiguous_runs_count_not_sessions": 1,
+          "first_timestamp_in_file_order": 241892286783982,
+          "last_timestamp_in_file_order": 242072100924919,
+          "official_activity_name": "Standing",
+          "present": true,
+          "row_count": 3572,
+          "runs": [
+            {
+              "activity": "E",
+              "end_line_1_based": 17863,
+              "first_timestamp": 241892286783982,
+              "last_timestamp": 242072100924919,
+              "start_line_1_based": 14292,
+              "timestamp_max": 242072100924919,
+              "timestamp_min": 241892286783982,
+              "valid_row_count": 3572
+            }
+          ],
+          "timestamp_max": 242072100924919,
+          "timestamp_min": 241892286783982,
+          "timing_within_contiguous_runs": {
+            "effective_hz_from_positive_median_if_nanoseconds": 19.859393902419356,
+            "intervals_above_100ms_if_nanoseconds": 0,
+            "intervals_above_75ms_if_nanoseconds": 0,
+            "missing_physical_samples_inferred": false,
+            "nonpositive_count": 0,
+            "positive_delta_ms_if_nanoseconds": {
+              "count": 3571,
+              "max": 50.380757,
+              "min": 50.325801,
+              "p50": 50.354004,
+              "p95": 50.354004,
+              "p99": 50.354004
+            },
+            "positive_raw_delta_statistics": {
+              "count": 3571,
+              "max": 50380757,
+              "min": 50325801,
+              "p50": 50354004.0,
+              "p95": 50354004.0,
+              "p99": 50354004.0
+            },
+            "raw_integer_delta_statistics": {
+              "count": 3571,
+              "max": 50380757,
+              "min": 50325801,
+              "p50": 50354004.0,
+              "p95": 50354004.0,
+              "p99": 50354004.0
+            },
+            "within_run_consecutive_pair_count": 3571,
+            "zero_count": 0
+          }
+        }
+      },
+      "timestamp_max": 254351103296079,
+      "timestamp_min": 241598622217012,
+      "timestamp_unit_assumption": "nanoseconds_assumed_not_verified",
+      "timing_within_all_contiguous_runs": {
+        "effective_hz_from_positive_median_if_nanoseconds": 19.859393902419356,
+        "intervals_above_100ms_if_nanoseconds": 0,
+        "intervals_above_75ms_if_nanoseconds": 0,
+        "missing_physical_samples_inferred": false,
+        "nonpositive_count": 0,
+        "positive_delta_ms_if_nanoseconds": {
+          "count": 64293,
+          "max": 50.385595,
+          "min": 50.322129,
+          "p50": 50.354004,
+          "p95": 50.354004,
+          "p99": 50.354004
+        },
+        "positive_raw_delta_statistics": {
+          "count": 64293,
+          "max": 50385595,
+          "min": 50322129,
+          "p50": 50354004.0,
+          "p95": 50354004.0,
+          "p99": 50354004.0
+        },
+        "raw_integer_delta_statistics": {
+          "count": 64293,
+          "max": 50385595,
+          "min": 50322129,
+          "p50": 50354004.0,
+          "p95": 50354004.0,
+          "p99": 50354004.0
+        },
+        "within_run_consecutive_pair_count": 64293,
+        "zero_count": 0
+      },
+      "true_physical_missing_sample_count_established": false,
+      "unexpected_subject_rows": 0,
+      "zip_member": {
+        "compressed_size_bytes": 1276210,
+        "crc32_hex": "965e2cc1",
+        "path": "wisdm-dataset/raw/phone/accel/data_1600_accel_phone.txt",
+        "uncompressed_size_bytes": 3451789,
+        "zip_crc_checked_during_full_read": true
+      }
+    },
+    "1601": {
+      "activity_code_transitions_count": 17,
+      "activity_code_transitions_in_file_order_not_sessions": [
+        {
+          "delta_raw_integer_units": 38058667901,
+          "direct_A_E_transition": false,
+          "from_activity": "A",
+          "next_line_1_based": 4513,
+          "next_timestamp": 265291333312508,
+          "nonincreasing_at_boundary": false,
+          "previous_line_1_based": 4512,
+          "previous_timestamp": 265253274644607,
+          "to_activity": "B"
+        },
+        {
+          "delta_raw_integer_units": -7444460286310,
+          "direct_A_E_transition": false,
+          "from_activity": "B",
+          "next_line_1_based": 9025,
+          "next_timestamp": 258026909375140,
+          "nonincreasing_at_boundary": true,
+          "previous_line_1_based": 9024,
+          "previous_timestamp": 265471369661450,
+          "to_activity": "C"
+        },
+        {
+          "delta_raw_integer_units": 1800959573673,
+          "direct_A_E_transition": false,
+          "from_activity": "C",
+          "next_line_1_based": 13535,
+          "next_timestamp": 260007788422337,
+          "nonincreasing_at_boundary": false,
+          "previous_line_1_based": 13534,
+          "previous_timestamp": 258206828848664,
+          "to_activity": "D"
+        },
+        {
+          "delta_raw_integer_units": 35564707174,
+          "direct_A_E_transition": false,
+          "from_activity": "D",
+          "next_line_1_based": 18046,
+          "next_timestamp": 260223305429181,
+          "nonincreasing_at_boundary": false,
+          "previous_line_1_based": 18045,
+          "previous_timestamp": 260187740722007,
+          "to_activity": "E"
+        },
+        {
+          "delta_raw_integer_units": -1920995271233,
+          "direct_A_E_transition": false,
+          "from_activity": "E",
+          "next_line_1_based": 22558,
+          "next_timestamp": 258482326186734,
+          "nonincreasing_at_boundary": true,
+          "previous_line_1_based": 22557,
+          "previous_timestamp": 260403321457967,
+          "to_activity": "F"
+        },
+        {
+          "delta_raw_integer_units": 8818327769207,
+          "direct_A_E_transition": false,
+          "from_activity": "F",
+          "next_line_1_based": 27069,
+          "next_timestamp": 267480620152696,
+          "nonincreasing_at_boundary": false,
+          "previous_line_1_based": 27068,
+          "previous_timestamp": 258662292383489,
+          "to_activity": "G"
+        },
+        {
+          "delta_raw_integer_units": -631619179967,
+          "direct_A_E_transition": false,
+          "from_activity": "G",
+          "next_line_1_based": 31578,
+          "next_timestamp": 267028887783338,
+          "nonincreasing_at_boundary": true,
+          "previous_line_1_based": 31577,
+          "previous_timestamp": 267660506963305,
+          "to_activity": "H"
+        },
+        {
+          "delta_raw_integer_units": -7548486432405,
+          "direct_A_E_transition": false,
+          "from_activity": "H",
+          "next_line_1_based": 36090,
+          "next_timestamp": 259660408319614,
+          "nonincreasing_at_boundary": true,
+          "previous_line_1_based": 36089,
+          "previous_timestamp": 267208894752019,
+          "to_activity": "I"
+        },
+        {
+          "delta_raw_integer_units": 7415858160371,
+          "direct_A_E_transition": false,
+          "from_activity": "I",
+          "next_line_1_based": 40602,
+          "next_timestamp": 267256273536220,
+          "nonincreasing_at_boundary": false,
+          "previous_line_1_based": 40601,
+          "previous_timestamp": 259840415375849,
+          "to_activity": "J"
+        },
+        {
+          "delta_raw_integer_units": -4569709800076,
+          "direct_A_E_transition": false,
+          "from_activity": "J",
+          "next_line_1_based": 45112,
+          "next_timestamp": 262866477264045,
+          "nonincreasing_at_boundary": true,
+          "previous_line_1_based": 45111,
+          "previous_timestamp": 267436187064121,
+          "to_activity": "K"
+        },
+        {
+          "delta_raw_integer_units": 1503009865401,
+          "direct_A_E_transition": false,
+          "from_activity": "K",
+          "next_line_1_based": 49622,
+          "next_timestamp": 264549405343492,
+          "nonincreasing_at_boundary": false,
+          "previous_line_1_based": 49621,
+          "previous_timestamp": 263046395478091,
+          "to_activity": "L"
+        },
+        {
+          "delta_raw_integer_units": 1133336076252,
+          "direct_A_E_transition": false,
+          "from_activity": "L",
+          "next_line_1_based": 54133,
+          "next_timestamp": 265862707824882,
+          "nonincreasing_at_boundary": false,
+          "previous_line_1_based": 54132,
+          "previous_timestamp": 264729371748630,
+          "to_activity": "M"
+        },
+        {
+          "delta_raw_integer_units": 2318713561789,
+          "direct_A_E_transition": false,
+          "from_activity": "M",
+          "next_line_1_based": 58645,
+          "next_timestamp": 268361418314727,
+          "nonincreasing_at_boundary": false,
+          "previous_line_1_based": 58644,
+          "previous_timestamp": 266042704752938,
+          "to_activity": "O"
+        },
+        {
+          "delta_raw_integer_units": -2898795247128,
+          "direct_A_E_transition": false,
+          "from_activity": "O",
+          "next_line_1_based": 63164,
+          "next_timestamp": 265642537427010,
+          "nonincreasing_at_boundary": true,
+          "previous_line_1_based": 63163,
+          "previous_timestamp": 268541332674138,
+          "to_activity": "P"
+        },
+        {
+          "delta_raw_integer_units": -6413170619783,
+          "direct_A_E_transition": false,
+          "from_activity": "P",
+          "next_line_1_based": 67675,
+          "next_timestamp": 259409333525909,
+          "nonincreasing_at_boundary": true,
+          "previous_line_1_based": 67674,
+          "previous_timestamp": 265822504145692,
+          "to_activity": "Q"
+        },
+        {
+          "delta_raw_integer_units": 8180523193689,
+          "direct_A_E_transition": false,
+          "from_activity": "Q",
+          "next_line_1_based": 72437,
+          "next_timestamp": 267769823251299,
+          "nonincreasing_at_boundary": false,
+          "previous_line_1_based": 72436,
+          "previous_timestamp": 259589300057610,
+          "to_activity": "R"
+        },
+        {
+          "delta_raw_integer_units": -9220845823393,
+          "direct_A_E_transition": false,
+          "from_activity": "R",
+          "next_line_1_based": 76947,
+          "next_timestamp": 258728891874349,
+          "nonincreasing_at_boundary": true,
+          "previous_line_1_based": 76946,
+          "previous_timestamp": 267949737697742,
+          "to_activity": "S"
+        }
+      ],
+      "activity_codes_and_counts": {
+        "A": 4512,
+        "B": 4512,
+        "C": 4510,
+        "D": 4511,
+        "E": 4512,
+        "F": 4511,
+        "G": 4509,
+        "H": 4512,
+        "I": 4512,
+        "J": 4510,
+        "K": 4510,
+        "L": 4511,
+        "M": 4512,
+        "O": 4519,
+        "P": 4511,
+        "Q": 4762,
+        "R": 4510,
+        "S": 4511
+      },
+      "all_contiguous_runs_in_original_order": [
+        {
+          "activity": "A",
+          "end_line_1_based": 4512,
+          "first_timestamp": 265073308304101,
+          "last_timestamp": 265253274644607,
+          "start_line_1_based": 1,
+          "timestamp_max": 265253274644607,
+          "timestamp_min": 265073308304101,
+          "valid_row_count": 4512
+        },
+        {
+          "activity": "B",
+          "end_line_1_based": 9024,
+          "first_timestamp": 265291333312508,
+          "last_timestamp": 265471369661450,
+          "start_line_1_based": 4513,
+          "timestamp_max": 265471369661450,
+          "timestamp_min": 265291333312508,
+          "valid_row_count": 4512
+        },
+        {
+          "activity": "C",
+          "end_line_1_based": 13534,
+          "first_timestamp": 258026909375140,
+          "last_timestamp": 258206828848664,
+          "start_line_1_based": 9025,
+          "timestamp_max": 258206828848664,
+          "timestamp_min": 258026909375140,
+          "valid_row_count": 4510
+        },
+        {
+          "activity": "D",
+          "end_line_1_based": 18045,
+          "first_timestamp": 260007788422337,
+          "last_timestamp": 260187740722007,
+          "start_line_1_based": 13535,
+          "timestamp_max": 260187740722007,
+          "timestamp_min": 260007788422337,
+          "valid_row_count": 4511
+        },
+        {
+          "activity": "E",
+          "end_line_1_based": 22557,
+          "first_timestamp": 260223305429181,
+          "last_timestamp": 260403321457967,
+          "start_line_1_based": 18046,
+          "timestamp_max": 260403321457967,
+          "timestamp_min": 260223305429181,
+          "valid_row_count": 4512
+        },
+        {
+          "activity": "F",
+          "end_line_1_based": 27068,
+          "first_timestamp": 258482326186734,
+          "last_timestamp": 258662292383489,
+          "start_line_1_based": 22558,
+          "timestamp_max": 258662292383489,
+          "timestamp_min": 258482326186734,
+          "valid_row_count": 4511
+        },
+        {
+          "activity": "G",
+          "end_line_1_based": 31577,
+          "first_timestamp": 267480620152696,
+          "last_timestamp": 267660506963305,
+          "start_line_1_based": 27069,
+          "timestamp_max": 267660506963305,
+          "timestamp_min": 267480620152696,
+          "valid_row_count": 4509
+        },
+        {
+          "activity": "H",
+          "end_line_1_based": 36089,
+          "first_timestamp": 267028887783338,
+          "last_timestamp": 267208894752019,
+          "start_line_1_based": 31578,
+          "timestamp_max": 267208894752019,
+          "timestamp_min": 267028887783338,
+          "valid_row_count": 4512
+        },
+        {
+          "activity": "I",
+          "end_line_1_based": 40601,
+          "first_timestamp": 259660408319614,
+          "last_timestamp": 259840415375849,
+          "start_line_1_based": 36090,
+          "timestamp_max": 259840415375849,
+          "timestamp_min": 259660408319614,
+          "valid_row_count": 4512
+        },
+        {
+          "activity": "J",
+          "end_line_1_based": 45111,
+          "first_timestamp": 267256273536220,
+          "last_timestamp": 267436187064121,
+          "start_line_1_based": 40602,
+          "timestamp_max": 267436187064121,
+          "timestamp_min": 267256273536220,
+          "valid_row_count": 4510
+        },
+        {
+          "activity": "K",
+          "end_line_1_based": 49621,
+          "first_timestamp": 262866477264045,
+          "last_timestamp": 263046395478091,
+          "start_line_1_based": 45112,
+          "timestamp_max": 263046395478091,
+          "timestamp_min": 262866477264045,
+          "valid_row_count": 4510
+        },
+        {
+          "activity": "L",
+          "end_line_1_based": 54132,
+          "first_timestamp": 264549405343492,
+          "last_timestamp": 264729371748630,
+          "start_line_1_based": 49622,
+          "timestamp_max": 264729371748630,
+          "timestamp_min": 264549405343492,
+          "valid_row_count": 4511
+        },
+        {
+          "activity": "M",
+          "end_line_1_based": 58644,
+          "first_timestamp": 265862707824882,
+          "last_timestamp": 266042704752938,
+          "start_line_1_based": 54133,
+          "timestamp_max": 266042704752938,
+          "timestamp_min": 265862707824882,
+          "valid_row_count": 4512
+        },
+        {
+          "activity": "O",
+          "end_line_1_based": 63163,
+          "first_timestamp": 268361418314727,
+          "last_timestamp": 268541332674138,
+          "start_line_1_based": 58645,
+          "timestamp_max": 268541332674138,
+          "timestamp_min": 268361418314727,
+          "valid_row_count": 4519
+        },
+        {
+          "activity": "P",
+          "end_line_1_based": 67674,
+          "first_timestamp": 265642537427010,
+          "last_timestamp": 265822504145692,
+          "start_line_1_based": 63164,
+          "timestamp_max": 265822504145692,
+          "timestamp_min": 265642537427010,
+          "valid_row_count": 4511
+        },
+        {
+          "activity": "Q",
+          "end_line_1_based": 72436,
+          "first_timestamp": 259409333525909,
+          "last_timestamp": 259589300057610,
+          "start_line_1_based": 67675,
+          "timestamp_max": 259589300057610,
+          "timestamp_min": 259409333525909,
+          "valid_row_count": 4762
+        },
+        {
+          "activity": "R",
+          "end_line_1_based": 76946,
+          "first_timestamp": 267769823251299,
+          "last_timestamp": 267949737697742,
+          "start_line_1_based": 72437,
+          "timestamp_max": 267949737697742,
+          "timestamp_min": 267769823251299,
+          "valid_row_count": 4510
+        },
+        {
+          "activity": "S",
+          "end_line_1_based": 81457,
+          "first_timestamp": 258728891874349,
+          "last_timestamp": 258908858366259,
+          "start_line_1_based": 76947,
+          "timestamp_max": 258908858366259,
+          "timestamp_min": 258728891874349,
+          "valid_row_count": 4511
+        }
+      ],
+      "contiguous_activity_runs_count_not_sessions": 18,
+      "duplicate_adjacent_timestamps_in_valid_segments": 0,
+      "duplicate_full_rows": 0,
+      "file_sha256": "cafe0c35079ce96909ad6a42b8a65af7349cd416350fe4d0aa78354bb68b20ff",
+      "first_invalid_rows": [],
+      "first_timestamp_in_file_order": 265073308304101,
+      "invalid_row_count": 0,
+      "invalid_row_reasons": {},
+      "last_timestamp_in_file_order": 258908858366259,
+      "line_count": 81457,
+      "nonincreasing_adjacent_timestamps_in_valid_segments": 8,
+      "nonincreasing_timestamps_within_same_activity_run": 0,
+      "parsed_rows": 81457,
+      "repeated_timestamps_anywhere": 0,
+      "session_ids_available": false,
+      "size_bytes": 4405756,
+      "status": "RAW_PRECHECKED",
+      "subject_ids_and_counts": {
+        "1601": 81457
+      },
+      "target_activities": {
+        "A": {
+          "contiguous_runs_count_not_sessions": 1,
+          "first_timestamp_in_file_order": 265073308304101,
+          "last_timestamp_in_file_order": 265253274644607,
+          "official_activity_name": "Walking",
+          "present": true,
+          "row_count": 4512,
+          "runs": [
+            {
+              "activity": "A",
+              "end_line_1_based": 4512,
+              "first_timestamp": 265073308304101,
+              "last_timestamp": 265253274644607,
+              "start_line_1_based": 1,
+              "timestamp_max": 265253274644607,
+              "timestamp_min": 265073308304101,
+              "valid_row_count": 4512
+            }
+          ],
+          "timestamp_max": 265253274644607,
+          "timestamp_min": 265073308304101,
+          "timing_within_contiguous_runs": {
+            "effective_hz_from_positive_median_if_nanoseconds": 25.057652647210706,
+            "intervals_above_100ms_if_nanoseconds": 0,
+            "intervals_above_75ms_if_nanoseconds": 0,
+            "missing_physical_samples_inferred": false,
+            "nonpositive_count": 0,
+            "positive_delta_ms_if_nanoseconds": {
+              "count": 4511,
+              "max": 67.34974,
+              "min": 2.362136,
+              "p50": 39.907968,
+              "p95": 40.3168745,
+              "p99": 40.6471143
+            },
+            "positive_raw_delta_statistics": {
+              "count": 4511,
+              "max": 67349740,
+              "min": 2362136,
+              "p50": 39907968.0,
+              "p95": 40316874.5,
+              "p99": 40647114.3
+            },
+            "raw_integer_delta_statistics": {
+              "count": 4511,
+              "max": 67349740,
+              "min": 2362136,
+              "p50": 39907968.0,
+              "p95": 40316874.5,
+              "p99": 40647114.3
+            },
+            "within_run_consecutive_pair_count": 4511,
+            "zero_count": 0
+          }
+        },
+        "E": {
+          "contiguous_runs_count_not_sessions": 1,
+          "first_timestamp_in_file_order": 260223305429181,
+          "last_timestamp_in_file_order": 260403321457967,
+          "official_activity_name": "Standing",
+          "present": true,
+          "row_count": 4512,
+          "runs": [
+            {
+              "activity": "E",
+              "end_line_1_based": 22557,
+              "first_timestamp": 260223305429181,
+              "last_timestamp": 260403321457967,
+              "start_line_1_based": 18046,
+              "timestamp_max": 260403321457967,
+              "timestamp_min": 260223305429181,
+              "valid_row_count": 4512
+            }
+          ],
+          "timestamp_max": 260403321457967,
+          "timestamp_min": 260223305429181,
+          "timing_within_contiguous_runs": {
+            "effective_hz_from_positive_median_if_nanoseconds": 25.05729099011981,
+            "intervals_above_100ms_if_nanoseconds": 0,
+            "intervals_above_75ms_if_nanoseconds": 0,
+            "missing_physical_samples_inferred": false,
+            "nonpositive_count": 0,
+            "positive_delta_ms_if_nanoseconds": {
+              "count": 4511,
+              "max": 72.207709,
+              "min": 8.234479,
+              "p50": 39.908544,
+              "p95": 40.236615,
+              "p99": 40.3708434
+            },
+            "positive_raw_delta_statistics": {
+              "count": 4511,
+              "max": 72207709,
+              "min": 8234479,
+              "p50": 39908544.0,
+              "p95": 40236615.0,
+              "p99": 40370843.4
+            },
+            "raw_integer_delta_statistics": {
+              "count": 4511,
+              "max": 72207709,
+              "min": 8234479,
+              "p50": 39908544.0,
+              "p95": 40236615.0,
+              "p99": 40370843.4
+            },
+            "within_run_consecutive_pair_count": 4511,
+            "zero_count": 0
+          }
+        }
+      },
+      "timestamp_max": 268541332674138,
+      "timestamp_min": 258026909375140,
+      "timestamp_unit_assumption": "nanoseconds_assumed_not_verified",
+      "timing_within_all_contiguous_runs": {
+        "effective_hz_from_positive_median_if_nanoseconds": 25.05797852425997,
+        "intervals_above_100ms_if_nanoseconds": 0,
+        "intervals_above_75ms_if_nanoseconds": 9,
+        "missing_physical_samples_inferred": false,
+        "nonpositive_count": 0,
+        "positive_delta_ms_if_nanoseconds": {
+          "count": 81439,
+          "max": 84.422031,
+          "min": 2.263386,
+          "p50": 39.907449,
+          "p95": 40.2460991,
+          "p99": 40.501664919999996
+        },
+        "positive_raw_delta_statistics": {
+          "count": 81439,
+          "max": 84422031,
+          "min": 2263386,
+          "p50": 39907449.0,
+          "p95": 40246099.1,
+          "p99": 40501664.92
+        },
+        "raw_integer_delta_statistics": {
+          "count": 81439,
+          "max": 84422031,
+          "min": 2263386,
+          "p50": 39907449.0,
+          "p95": 40246099.1,
+          "p99": 40501664.92
+        },
+        "within_run_consecutive_pair_count": 81439,
+        "zero_count": 0
+      },
+      "true_physical_missing_sample_count_established": false,
+      "unexpected_subject_rows": 0,
+      "zip_member": {
+        "compressed_size_bytes": 1425685,
+        "crc32_hex": "0b298b7f",
+        "path": "wisdm-dataset/raw/phone/accel/data_1601_accel_phone.txt",
+        "uncompressed_size_bytes": 4405756,
+        "zip_crc_checked_during_full_read": true
+      }
+    },
+    "1602": {
+      "activity_code_transitions_count": 17,
+      "activity_code_transitions_in_file_order_not_sessions": [
+        {
+          "delta_raw_integer_units": 31471271341,
+          "direct_A_E_transition": false,
+          "from_activity": "A",
+          "next_line_1_based": 3573,
+          "next_timestamp": 99230812994243,
+          "nonincreasing_at_boundary": false,
+          "previous_line_1_based": 3572,
+          "previous_timestamp": 99199341722902,
+          "to_activity": "B"
+        },
+        {
+          "delta_raw_integer_units": 1027070611048,
+          "direct_A_E_transition": false,
+          "from_activity": "B",
+          "next_line_1_based": 7145,
+          "next_timestamp": 100437697750312,
+          "nonincreasing_at_boundary": false,
+          "previous_line_1_based": 7144,
+          "previous_timestamp": 99410627139264,
+          "to_activity": "C"
+        },
+        {
+          "delta_raw_integer_units": -2805806694553,
+          "direct_A_E_transition": false,
+          "from_activity": "C",
+          "next_line_1_based": 10718,
+          "next_timestamp": 97811755563831,
+          "nonincreasing_at_boundary": true,
+          "previous_line_1_based": 10717,
+          "previous_timestamp": 100617562258384,
+          "to_activity": "D"
+        },
+        {
+          "delta_raw_integer_units": 119943230585,
+          "direct_A_E_transition": false,
+          "from_activity": "D",
+          "next_line_1_based": 14290,
+          "next_timestamp": 98111512921688,
+          "nonincreasing_at_boundary": false,
+          "previous_line_1_based": 14289,
+          "previous_timestamp": 97991569691103,
+          "to_activity": "E"
+        },
+        {
+          "delta_raw_integer_units": 111534136272,
+          "direct_A_E_transition": false,
+          "from_activity": "E",
+          "next_line_1_based": 17863,
+          "next_timestamp": 98402911567454,
+          "nonincreasing_at_boundary": false,
+          "previous_line_1_based": 17862,
+          "previous_timestamp": 98291377431182,
+          "to_activity": "F"
+        },
+        {
+          "delta_raw_integer_units": 4082482147361,
+          "direct_A_E_transition": false,
+          "from_activity": "F",
+          "next_line_1_based": 21437,
+          "next_timestamp": 102665308538895,
+          "nonincreasing_at_boundary": false,
+          "previous_line_1_based": 21436,
+          "previous_timestamp": 98582826391534,
+          "to_activity": "G"
+        },
+        {
+          "delta_raw_integer_units": -901991261593,
+          "direct_A_E_transition": false,
+          "from_activity": "G",
+          "next_line_1_based": 25011,
+          "next_timestamp": 101943232116703,
+          "nonincreasing_at_boundary": true,
+          "previous_line_1_based": 25010,
+          "previous_timestamp": 102845223378296,
+          "to_activity": "H"
+        },
+        {
+          "delta_raw_integer_units": -899020377646,
+          "direct_A_E_transition": false,
+          "from_activity": "H",
+          "next_line_1_based": 33952,
+          "next_timestamp": 101224277657357,
+          "nonincreasing_at_boundary": true,
+          "previous_line_1_based": 33951,
+          "previous_timestamp": 102123298035003,
+          "to_activity": "I"
+        },
+        {
+          "delta_raw_integer_units": 60666511709,
+          "direct_A_E_transition": false,
+          "from_activity": "I",
+          "next_line_1_based": 41902,
+          "next_timestamp": 101464848939959,
+          "nonincreasing_at_boundary": false,
+          "previous_line_1_based": 41901,
+          "previous_timestamp": 101404182428250,
+          "to_activity": "J"
+        },
+        {
+          "delta_raw_integer_units": 62861959412,
+          "direct_A_E_transition": false,
+          "from_activity": "J",
+          "next_line_1_based": 50843,
+          "next_timestamp": 101707776806864,
+          "nonincreasing_at_boundary": false,
+          "previous_line_1_based": 50842,
+          "previous_timestamp": 101644914847452,
+          "to_activity": "K"
+        },
+        {
+          "delta_raw_integer_units": -920297757867,
+          "direct_A_E_transition": false,
+          "from_activity": "K",
+          "next_line_1_based": 58943,
+          "next_timestamp": 100967522575763,
+          "nonincreasing_at_boundary": true,
+          "previous_line_1_based": 58942,
+          "previous_timestamp": 101887820333630,
+          "to_activity": "L"
+        },
+        {
+          "delta_raw_integer_units": -1517971823839,
+          "direct_A_E_transition": false,
+          "from_activity": "L",
+          "next_line_1_based": 62517,
+          "next_timestamp": 99629465622327,
+          "nonincreasing_at_boundary": true,
+          "previous_line_1_based": 62516,
+          "previous_timestamp": 101147437446166,
+          "to_activity": "M"
+        },
+        {
+          "delta_raw_integer_units": 277551297790,
+          "direct_A_E_transition": false,
+          "from_activity": "M",
+          "next_line_1_based": 66089,
+          "next_timestamp": 100086831059765,
+          "nonincreasing_at_boundary": false,
+          "previous_line_1_based": 66088,
+          "previous_timestamp": 99809279761975,
+          "to_activity": "O"
+        },
+        {
+          "delta_raw_integer_units": -401824929618,
+          "direct_A_E_transition": false,
+          "from_activity": "O",
+          "next_line_1_based": 69661,
+          "next_timestamp": 99864820258216,
+          "nonincreasing_at_boundary": true,
+          "previous_line_1_based": 69660,
+          "previous_timestamp": 100266645187834,
+          "to_activity": "P"
+        },
+        {
+          "delta_raw_integer_units": -1420517705747,
+          "direct_A_E_transition": false,
+          "from_activity": "P",
+          "next_line_1_based": 73233,
+          "next_timestamp": 98624116704815,
+          "nonincreasing_at_boundary": true,
+          "previous_line_1_based": 73232,
+          "previous_timestamp": 100044634410562,
+          "to_activity": "Q"
+        },
+        {
+          "delta_raw_integer_units": 3614794142484,
+          "direct_A_E_transition": false,
+          "from_activity": "Q",
+          "next_line_1_based": 76805,
+          "next_timestamp": 102418724969196,
+          "nonincreasing_at_boundary": false,
+          "previous_line_1_based": 76804,
+          "previous_timestamp": 98803930826712,
+          "to_activity": "R"
+        },
+        {
+          "delta_raw_integer_units": -409075917438,
+          "direct_A_E_transition": false,
+          "from_activity": "R",
+          "next_line_1_based": 80379,
+          "next_timestamp": 102189563909772,
+          "nonincreasing_at_boundary": true,
+          "previous_line_1_based": 80378,
+          "previous_timestamp": 102598639827210,
+          "to_activity": "S"
+        }
+      ],
+      "activity_codes_and_counts": {
+        "A": 3572,
+        "B": 3572,
+        "C": 3573,
+        "D": 3572,
+        "E": 3573,
+        "F": 3574,
+        "G": 3574,
+        "H": 8941,
+        "I": 7950,
+        "J": 8941,
+        "K": 8100,
+        "L": 3574,
+        "M": 3572,
+        "O": 3572,
+        "P": 3572,
+        "Q": 3572,
+        "R": 3574,
+        "S": 4512
+      },
+      "all_contiguous_runs_in_original_order": [
+        {
+          "activity": "A",
+          "end_line_1_based": 3572,
+          "first_timestamp": 99019527581830,
+          "last_timestamp": 99199341722902,
+          "start_line_1_based": 1,
+          "timestamp_max": 99199341722902,
+          "timestamp_min": 99019527581830,
+          "valid_row_count": 3572
+        },
+        {
+          "activity": "B",
+          "end_line_1_based": 7144,
+          "first_timestamp": 99230812994243,
+          "last_timestamp": 99410627139264,
+          "start_line_1_based": 3573,
+          "timestamp_max": 99410627139264,
+          "timestamp_min": 99230812994243,
+          "valid_row_count": 3572
+        },
+        {
+          "activity": "C",
+          "end_line_1_based": 10717,
+          "first_timestamp": 100437697750312,
+          "last_timestamp": 100617562258384,
+          "start_line_1_based": 7145,
+          "timestamp_max": 100617562258384,
+          "timestamp_min": 100437697750312,
+          "valid_row_count": 3573
+        },
+        {
+          "activity": "D",
+          "end_line_1_based": 14289,
+          "first_timestamp": 97811755563831,
+          "last_timestamp": 97991569691103,
+          "start_line_1_based": 10718,
+          "timestamp_max": 97991569691103,
+          "timestamp_min": 97811755563831,
+          "valid_row_count": 3572
+        },
+        {
+          "activity": "E",
+          "end_line_1_based": 17862,
+          "first_timestamp": 98111512921688,
+          "last_timestamp": 98291377431182,
+          "start_line_1_based": 14290,
+          "timestamp_max": 98291377431182,
+          "timestamp_min": 98111512921688,
+          "valid_row_count": 3573
+        },
+        {
+          "activity": "F",
+          "end_line_1_based": 21436,
+          "first_timestamp": 98402911567454,
+          "last_timestamp": 98582826391534,
+          "start_line_1_based": 17863,
+          "timestamp_max": 98582826391534,
+          "timestamp_min": 98402911567454,
+          "valid_row_count": 3574
+        },
+        {
+          "activity": "G",
+          "end_line_1_based": 25010,
+          "first_timestamp": 102665308538895,
+          "last_timestamp": 102845223378296,
+          "start_line_1_based": 21437,
+          "timestamp_max": 102845223378296,
+          "timestamp_min": 102665308538895,
+          "valid_row_count": 3574
+        },
+        {
+          "activity": "H",
+          "end_line_1_based": 33951,
+          "first_timestamp": 101943232116703,
+          "last_timestamp": 102123298035003,
+          "start_line_1_based": 25011,
+          "timestamp_max": 102123298035003,
+          "timestamp_min": 101943232116703,
+          "valid_row_count": 8941
+        },
+        {
+          "activity": "I",
+          "end_line_1_based": 41901,
+          "first_timestamp": 101224277657357,
+          "last_timestamp": 101404182428250,
+          "start_line_1_based": 33952,
+          "timestamp_max": 101404182428250,
+          "timestamp_min": 101224277657357,
+          "valid_row_count": 7950
+        },
+        {
+          "activity": "J",
+          "end_line_1_based": 50842,
+          "first_timestamp": 101464848939959,
+          "last_timestamp": 101644914847452,
+          "start_line_1_based": 41902,
+          "timestamp_max": 101644914847452,
+          "timestamp_min": 101464848939959,
+          "valid_row_count": 8941
+        },
+        {
+          "activity": "K",
+          "end_line_1_based": 58942,
+          "first_timestamp": 101707776806864,
+          "last_timestamp": 101887820333630,
+          "start_line_1_based": 50843,
+          "timestamp_max": 101887820333630,
+          "timestamp_min": 101707776806864,
+          "valid_row_count": 8100
+        },
+        {
+          "activity": "L",
+          "end_line_1_based": 62516,
+          "first_timestamp": 100967522575763,
+          "last_timestamp": 101147437446166,
+          "start_line_1_based": 58943,
+          "timestamp_max": 101147437446166,
+          "timestamp_min": 100967522575763,
+          "valid_row_count": 3574
+        },
+        {
+          "activity": "M",
+          "end_line_1_based": 66088,
+          "first_timestamp": 99629465622327,
+          "last_timestamp": 99809279761975,
+          "start_line_1_based": 62517,
+          "timestamp_max": 99809279761975,
+          "timestamp_min": 99629465622327,
+          "valid_row_count": 3572
+        },
+        {
+          "activity": "O",
+          "end_line_1_based": 69660,
+          "first_timestamp": 100086831059765,
+          "last_timestamp": 100266645187834,
+          "start_line_1_based": 66089,
+          "timestamp_max": 100266645187834,
+          "timestamp_min": 100086831059765,
+          "valid_row_count": 3572
+        },
+        {
+          "activity": "P",
+          "end_line_1_based": 73232,
+          "first_timestamp": 99864820258216,
+          "last_timestamp": 100044634410562,
+          "start_line_1_based": 69661,
+          "timestamp_max": 100044634410562,
+          "timestamp_min": 99864820258216,
+          "valid_row_count": 3572
+        },
+        {
+          "activity": "Q",
+          "end_line_1_based": 76804,
+          "first_timestamp": 98624116704815,
+          "last_timestamp": 98803930826712,
+          "start_line_1_based": 73233,
+          "timestamp_max": 98803930826712,
+          "timestamp_min": 98624116704815,
+          "valid_row_count": 3572
+        },
+        {
+          "activity": "R",
+          "end_line_1_based": 80378,
+          "first_timestamp": 102418724969196,
+          "last_timestamp": 102598639827210,
+          "start_line_1_based": 76805,
+          "timestamp_max": 102598639827210,
+          "timestamp_min": 102418724969196,
+          "valid_row_count": 3574
+        },
+        {
+          "activity": "S",
+          "end_line_1_based": 84890,
+          "first_timestamp": 102189563909772,
+          "last_timestamp": 102369573888102,
+          "start_line_1_based": 80379,
+          "timestamp_max": 102369573888102,
+          "timestamp_min": 102189563909772,
+          "valid_row_count": 4512
+        }
+      ],
+      "contiguous_activity_runs_count_not_sessions": 18,
+      "duplicate_adjacent_timestamps_in_valid_segments": 0,
+      "duplicate_full_rows": 0,
+      "file_sha256": "c815ae4099014aaf34a720cd5f56d604f3f84cf667fbdd31d18acd921f4049da",
+      "first_invalid_rows": [],
+      "first_timestamp_in_file_order": 99019527581830,
+      "invalid_row_count": 0,
+      "invalid_row_reasons": {},
+      "last_timestamp_in_file_order": 102369573888102,
+      "line_count": 84890,
+      "nonincreasing_adjacent_timestamps_in_valid_segments": 8,
+      "nonincreasing_timestamps_within_same_activity_run": 0,
+      "parsed_rows": 84890,
+      "repeated_timestamps_anywhere": 0,
+      "session_ids_available": false,
+      "size_bytes": 4629305,
+      "status": "RAW_PRECHECKED",
+      "subject_ids_and_counts": {
+        "1602": 84890
+      },
+      "target_activities": {
+        "A": {
+          "contiguous_runs_count_not_sessions": 1,
+          "first_timestamp_in_file_order": 99019527581830,
+          "last_timestamp_in_file_order": 99199341722902,
+          "official_activity_name": "Walking",
+          "present": true,
+          "row_count": 3572,
+          "runs": [
+            {
+              "activity": "A",
+              "end_line_1_based": 3572,
+              "first_timestamp": 99019527581830,
+              "last_timestamp": 99199341722902,
+              "start_line_1_based": 1,
+              "timestamp_max": 99199341722902,
+              "timestamp_min": 99019527581830,
+              "valid_row_count": 3572
+            }
+          ],
+          "timestamp_max": 99199341722902,
+          "timestamp_min": 99019527581830,
+          "timing_within_contiguous_runs": {
+            "effective_hz_from_positive_median_if_nanoseconds": 19.859393902419356,
+            "intervals_above_100ms_if_nanoseconds": 0,
+            "intervals_above_75ms_if_nanoseconds": 0,
+            "missing_physical_samples_inferred": false,
+            "nonpositive_count": 0,
+            "positive_delta_ms_if_nanoseconds": {
+              "count": 3571,
+              "max": 50.379592,
+              "min": 50.333069,
+              "p50": 50.354004,
+              "p95": 50.354004,
+              "p99": 50.354004
+            },
+            "positive_raw_delta_statistics": {
+              "count": 3571,
+              "max": 50379592,
+              "min": 50333069,
+              "p50": 50354004.0,
+              "p95": 50354004.0,
+              "p99": 50354004.0
+            },
+            "raw_integer_delta_statistics": {
+              "count": 3571,
+              "max": 50379592,
+              "min": 50333069,
+              "p50": 50354004.0,
+              "p95": 50354004.0,
+              "p99": 50354004.0
+            },
+            "within_run_consecutive_pair_count": 3571,
+            "zero_count": 0
+          }
+        },
+        "E": {
+          "contiguous_runs_count_not_sessions": 1,
+          "first_timestamp_in_file_order": 98111512921688,
+          "last_timestamp_in_file_order": 98291377431182,
+          "official_activity_name": "Standing",
+          "present": true,
+          "row_count": 3573,
+          "runs": [
+            {
+              "activity": "E",
+              "end_line_1_based": 17862,
+              "first_timestamp": 98111512921688,
+              "last_timestamp": 98291377431182,
+              "start_line_1_based": 14290,
+              "timestamp_max": 98291377431182,
+              "timestamp_min": 98111512921688,
+              "valid_row_count": 3573
+            }
+          ],
+          "timestamp_max": 98291377431182,
+          "timestamp_min": 98111512921688,
+          "timing_within_contiguous_runs": {
+            "effective_hz_from_positive_median_if_nanoseconds": 19.859393902419356,
+            "intervals_above_100ms_if_nanoseconds": 0,
+            "intervals_above_75ms_if_nanoseconds": 0,
+            "missing_physical_samples_inferred": false,
+            "nonpositive_count": 0,
+            "positive_delta_ms_if_nanoseconds": {
+              "count": 3572,
+              "max": 50.373583,
+              "min": 50.334834,
+              "p50": 50.354004,
+              "p95": 50.354004,
+              "p99": 50.354004
+            },
+            "positive_raw_delta_statistics": {
+              "count": 3572,
+              "max": 50373583,
+              "min": 50334834,
+              "p50": 50354004.0,
+              "p95": 50354004.0,
+              "p99": 50354004.0
+            },
+            "raw_integer_delta_statistics": {
+              "count": 3572,
+              "max": 50373583,
+              "min": 50334834,
+              "p50": 50354004.0,
+              "p95": 50354004.0,
+              "p99": 50354004.0
+            },
+            "within_run_consecutive_pair_count": 3572,
+            "zero_count": 0
+          }
+        }
+      },
+      "timestamp_max": 102845223378296,
+      "timestamp_min": 97811755563831,
+      "timestamp_unit_assumption": "nanoseconds_assumed_not_verified",
+      "timing_within_all_contiguous_runs": {
+        "effective_hz_from_positive_median_if_nanoseconds": 19.859393902419356,
+        "intervals_above_100ms_if_nanoseconds": 0,
+        "intervals_above_75ms_if_nanoseconds": 1,
+        "missing_physical_samples_inferred": false,
+        "nonpositive_count": 0,
+        "positive_delta_ms_if_nanoseconds": {
+          "count": 84872,
+          "max": 90.637207,
+          "min": 16.784668,
+          "p50": 50.354004,
+          "p95": 50.354004,
+          "p99": 50.354004
+        },
+        "positive_raw_delta_statistics": {
+          "count": 84872,
+          "max": 90637207,
+          "min": 16784668,
+          "p50": 50354004.0,
+          "p95": 50354004.0,
+          "p99": 50354004.0
+        },
+        "raw_integer_delta_statistics": {
+          "count": 84872,
+          "max": 90637207,
+          "min": 16784668,
+          "p50": 50354004.0,
+          "p95": 50354004.0,
+          "p99": 50354004.0
+        },
+        "within_run_consecutive_pair_count": 84872,
+        "zero_count": 0
+      },
+      "true_physical_missing_sample_count_established": false,
+      "unexpected_subject_rows": 0,
+      "zip_member": {
+        "compressed_size_bytes": 1670672,
+        "crc32_hex": "ae259d55",
+        "path": "wisdm-dataset/raw/phone/accel/data_1602_accel_phone.txt",
+        "uncompressed_size_bytes": 4629305,
+        "zip_crc_checked_during_full_read": true
+      }
+    }
+  },
+  "timestamp_unit": "nanoseconds_assumed_not_verified"
+}

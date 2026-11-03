@@ -1,0 +1,45 @@
+============================= test session starts ==============================
+platform linux -- Python 3.13.5, pytest-9.0.2, pluggy-1.6.0 -- /opt/pyvenv/bin/python
+cachedir: .pytest_cache
+metadata: {'Python': '3.13.5', 'Platform': 'Linux-6.18.57-x86_64-with-glibc2.41', 'Packages': {'pytest': '9.0.2', 'pluggy': '1.6.0'}, 'Plugins': {'anyio': '4.13.0', 'ddtrace': '4.4.0', 'Faker': '40.1.2', 'asyncio': '1.3.0', 'cov': '7.0.0', 'json-report': '1.5.0', 'metadata': '3.1.1'}, 'PLATFORM': 'linux/amd64', 'CI': 'true'}
+rootdir: /mnt/data/g1_build/reliability-lab-g1
+configfile: pyproject.toml
+testpaths: tests
+plugins: anyio-4.13.0, ddtrace-4.4.0, Faker-40.1.2, asyncio-1.3.0, cov-7.0.0, json-report-1.5.0, metadata-3.1.1
+asyncio: mode=Mode.STRICT, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collecting ... collected 32 items
+
+tests/test_artifacts.py::test_real_artifacts_and_provenance[0.0] PASSED  [  3%]
+tests/test_artifacts.py::test_real_artifacts_and_provenance[0.5] PASSED  [  6%]
+tests/test_artifacts.py::test_real_artifacts_and_provenance[1.0] PASSED  [  9%]
+tests/test_artifacts.py::test_identical_two_runs_array_equal_and_identical_numeric_outputs PASSED [ 12%]
+tests/test_config_and_generation.py::test_config_matches_contract_file PASSED [ 15%]
+tests/test_config_and_generation.py::test_generator_shape_seed_order_and_finiteness PASSED [ 18%]
+tests/test_config_and_generation.py::test_only_alpha_is_adjustable[0.0] PASSED [ 21%]
+tests/test_config_and_generation.py::test_only_alpha_is_adjustable[0.5] PASSED [ 25%]
+tests/test_config_and_generation.py::test_only_alpha_is_adjustable[1.0] PASSED [ 28%]
+tests/test_config_and_generation.py::test_only_alpha_is_adjustable[0.1234] PASSED [ 31%]
+tests/test_config_and_generation.py::test_invalid_strength_rejected[-0.1] PASSED [ 34%]
+tests/test_config_and_generation.py::test_invalid_strength_rejected[1.0001] PASSED [ 37%]
+tests/test_config_and_generation.py::test_invalid_strength_rejected[nan] PASSED [ 40%]
+tests/test_config_and_generation.py::test_invalid_strength_rejected[inf] PASSED [ 43%]
+tests/test_config_and_generation.py::test_invalid_strength_rejected[0.5] PASSED [ 46%]
+tests/test_config_and_generation.py::test_invalid_strength_rejected[True] PASSED [ 50%]
+tests/test_config_and_generation.py::test_no_other_parameter_or_label_can_be_changed PASSED [ 53%]
+tests/test_corruption.py::test_alpha_one_freezes_x_only_and_edges_unchanged[0] PASSED [ 56%]
+tests/test_corruption.py::test_alpha_one_freezes_x_only_and_edges_unchanged[1] PASSED [ 59%]
+tests/test_corruption.py::test_half_strength_linear_formula_and_event_scaling[0] PASSED [ 62%]
+tests/test_corruption.py::test_half_strength_linear_formula_and_event_scaling[1] PASSED [ 65%]
+tests/test_corruption.py::test_alpha_zero_mask_is_all_zero_even_with_planned_window[0] PASSED [ 68%]
+tests/test_corruption.py::test_alpha_zero_mask_is_all_zero_even_with_planned_window[1] PASSED [ 71%]
+tests/test_corruption.py::test_mask_tracks_assigned_sites_even_if_reference_equals_anchor PASSED [ 75%]
+tests/test_corruption.py::test_freeze_independently_on_both_records PASSED [ 78%]
+tests/test_metrics.py::test_hand_calculation_axis_means_global_rms_and_classification_error PASSED [ 81%]
+tests/test_metrics.py::test_hand_calculation_event_rmse_not_divided_by_mask_size PASSED [ 84%]
+tests/test_metrics.py::test_threshold_is_fixed_and_inclusive PASSED      [ 87%]
+tests/test_metrics.py::test_record_metrics_are_consistent[0.0] PASSED    [ 90%]
+tests/test_metrics.py::test_record_metrics_are_consistent[0.5] PASSED    [ 93%]
+tests/test_metrics.py::test_record_metrics_are_consistent[1.0] PASSED    [ 96%]
+tests/test_metrics.py::test_reference_numbers_for_alpha_one_tolerance_1e_minus_9 PASSED [100%]
+
+============================== 32 passed in 4.49s ==============================

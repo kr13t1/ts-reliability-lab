@@ -1,0 +1,29 @@
+{
+  "experiment_id": "G1",
+  "experiment_scope": "синтетическая демонстрация, без оценки научного качества",
+  "specification": "G1_SPEC.md v1.0, approved for implementation by coordinator 00",
+  "python_version": "3.13.5",
+  "numpy_version": "2.3.5",
+  "matplotlib_version": "3.10.8",
+  "git_commit_sha": null,
+  "spec_sha256": "1229c488dd5ceefb5dc64b3e72f3968bdd8606fe0d74dea683dc948f3b919753",
+  "inputs": "fully synthetic; no external data files; one PRNG draw; corruption deterministic",
+  "record_order": [
+    "rest",
+    "walk"
+  ],
+  "mask_semantics": "assigned injection locations at alpha>0, not detection",
+  "source_artifact_sha256": {
+    "g1_arrays.npz": "d1f4a5ecb79bff26b3ec0ae81a2ee040d652259a274693ea327f76e71bc91987",
+    "results.csv": "81e459eb17517f1963084b7fc1cdc5e8909906889ecd06ca34363929b7976d92",
+    "signal_comparison.png": "5640db67d561a26adb95ec6b9446b02fbbe5987eadb7e5829f59754f443e50f5",
+    "mask.png": "9a9467099037dc8d5b1ae0290f60e3aed049d9ba2fba0ee924785b102788b680",
+    "config.json": "bbedf27624288257da48681716f1121e51f6f7012ddcbdc2866319a91d3425ca"
+  },
+  "limitations": [
+    "two invented records, not a statistical population",
+    "RMS heuristic classifies activity, not sensor faults",
+    "no training, detection, restoration, or independent test dataset",
+    "no scientific novelty or real-world performance claims"
+  ]
+}

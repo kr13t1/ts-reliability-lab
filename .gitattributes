@@ -1,0 +1,11 @@
+* text=auto
+*.png binary
+*.npz binary
+*.zip binary
+*.csv text eol=lf
+*.md text eol=lf
+*.py text eol=lf
+*.json text eol=lf
+
+# Preserve uploaded data provenance JSON exactly (including original CRLF).
+data/provenance/*.json -text

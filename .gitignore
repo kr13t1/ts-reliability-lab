@@ -1,0 +1,25 @@
+# Local-only data; never commit raw WISDM files or large archives.
+/data/raw/
+/data/processed/
+**/uci507.zip
+**/wisdm-dataset.zip
+*.zip
+*.7z
+*.rar
+# Python
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+*.egg-info/
+build/
+dist/
+# Secrets and local editor files
+.env
+.env.*
+!.env.example
+.vscode/
+.idea/
+.DS_Store
+# Do NOT ignore g1/results/ -- original audited G1 demo outputs are versioned intentionally.

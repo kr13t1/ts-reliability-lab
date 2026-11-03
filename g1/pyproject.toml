@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools>=75,<81"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "reliability-lab-g1"
+version = "1.0.0"
+description = "G1 synthetic tri-axial sensor corruption demonstration (not research validation)"
+requires-python = ">=3.11"
+dependencies = [
+    "numpy==2.3.5",
+    "matplotlib==3.10.8",
+]
+
+[project.optional-dependencies]
+test = ["pytest==9.0.2"]
+
+[project.scripts]
+g1-demo = "reliability_lab.run:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+addopts = "-ra"

@@ -1,0 +1,7 @@
+alpha=1 rest: S_ref=0.030236726394446, S_obs=0.039481271254547, delta=+0.009244544860101, E_event=0.105545200200003 mask_sum=60 pred=0->0 error=0->0
+alpha=1 walk: S_ref=0.404957682969991, S_obs=0.385989699824672, delta=-0.018967983145319, E_event=0.741924644697741 mask_sum=60 pred=1->1 error=0->0
+alpha=0 rest: S_ref=0.030236726394446, S_obs=0.030236726394446, delta=+0.000000000000000, E_event=0.000000000000000 mask_sum=0 pred=0->0 error=0->0
+alpha=0 walk: S_ref=0.404957682969991, S_obs=0.404957682969991, delta=+0.000000000000000, E_event=0.000000000000000 mask_sum=0 pred=1->1 error=0->0
+alpha=0.5 rest: S_ref=0.030236726394446, S_obs=0.032191241210656, delta=+0.001954514816210, E_event=0.052772600100002 mask_sum=60 pred=0->0 error=0->0
+alpha=0.5 walk: S_ref=0.404957682969991, S_obs=0.380106844039529, delta=-0.024850838930463, E_event=0.370962322348871 mask_sum=60 pred=1->1 error=0->0
+INDEPENDENT CHECK: PASS (scalar fsum vs saved CSV/NPZ, three alpha values)

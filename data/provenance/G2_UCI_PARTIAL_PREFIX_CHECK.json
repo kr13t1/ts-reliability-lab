@@ -1,0 +1,19 @@
+{
+  "checked_at_utc": "2026-11-01T15:40:42.382591+00:00",
+  "check_type": "interrupted_official_download_prefix_only",
+  "official_download_url_claimed_by_transfer_command": "https://archive.ics.uci.edu/static/public/507/wisdm%2Bsmartphone%2Band%2Bsmartwatch%2Bactivity%2Band%2Bbiometrics%2Bdataset.zip",
+  "complete_original_path": "C:\\Users\\Kristina\\Desktop\\МИСИС\\звук\\ясно\\g2_precheck_v2\\uci507.zip",
+  "complete_original_size_bytes": 310292805,
+  "complete_original_sha256": "6e0147f181d8f5275918db65eeb9dc842a0185d37cb6b2f30cbf74ee6e205469",
+  "complete_original_matches_previous_LAB012_sha256": true,
+  "partial_download_path": "C:\\Users\\Kristina\\Desktop\\МИСИС\\звук\\ясно\\g2_multi_subject\\uci507_official_fresh_download.zip",
+  "partial_download_size_bytes": 151511010,
+  "partial_download_sha256": "38ebee7a70b81566548d0cb255cac006e036132996a8cac582cfab010c0f9395",
+  "partial_is_exact_prefix_of_complete_original": true,
+  "status": "PREFIX_MATCH_ONLY_NOT_FULL_REMOTE_ATTESTATION",
+  "limitations": [
+    "Only transferred prefix bytes are independently cross-compared.",
+    "This does not confirm the full archive matches the current UCI download.",
+    "This report does not independently attest the remote server, transport, or external timestamp."
+  ]
+}
