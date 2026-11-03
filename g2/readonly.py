@@ -11,8 +11,8 @@ import csv
 import hashlib
 import json
 import math
-import os
 import re
+import shlex
 import subprocess
 import sys
 from dataclasses import dataclass
@@ -20,8 +20,11 @@ from pathlib import Path
 from typing import Any, Sequence
 
 CONTRACT = "LAB-020 G2_REAL_SIGNAL_SPEC §§2–6,8"
+APPROVED_SPEC_COMMIT_SHA = "ae612e338df6a25eb94281cc2b3969cd39824d44"
+PINNED_PRECHECK_SHA256 = "f534d093b003327019dec214c1c332e95c1d413ad25efd7943df4082422e8a57"
 EXPECTED = {
     "mode": "reference_only",
+    "approved_spec_commit_sha": APPROVED_SPEC_COMMIT_SHA,
     "source_member": "wisdm-dataset/raw/phone/accel/data_1600_accel_phone.txt",
     "subject": 1600,
     "activity": "A",
@@ -114,7 +117,32 @@ def contiguous_runs(rows: Sequence[Row]) -> list[tuple[int, int, int, str]]:
     return result
 
 
+def validate_precheck_shape(precheck: Any) -> None:
+    """Reject malformed metadata with a controlled error before source selection.
+
+    The full pinned SHA is checked separately. This shape validation is solely
+    to distinguish invalid reports from valid-but-unauthorized report changes.
+    """
+    if not isinstance(precheck, dict) or not isinstance(precheck.get("subjects"), dict):
+        raise Refusal("REJECTED_INPUT", "precheck must contain a subjects object")
+    for sid, info in precheck["subjects"].items():
+        if not isinstance(sid, str) or not sid.isdecimal() or not isinstance(info, dict):
+            raise Refusal("REJECTED_INPUT", "precheck has invalid subject entry")
+        runs = info.get("all_contiguous_runs_in_original_order")
+        if not isinstance(runs, list):
+            raise Refusal("REJECTED_INPUT", f"subject {sid}: runs must be a list")
+        for run in runs:
+            if not isinstance(run, dict):
+                raise Refusal("REJECTED_INPUT", f"subject {sid}: run must be an object")
+            if not isinstance(run.get("activity"), str) or len(run["activity"]) != 1:
+                raise Refusal("REJECTED_INPUT", f"subject {sid}: invalid run activity")
+            start, end = run.get("start_line_1_based"), run.get("end_line_1_based")
+            if type(start) is not int or type(end) is not int or start < 1 or end < start:
+                raise Refusal("REJECTED_INPUT", f"subject {sid}: invalid run line boundaries")
+
+
 def select_from_precheck(precheck: dict[str, Any]) -> tuple[int, str, int, int]:
+    validate_precheck_shape(precheck)
     options = []
     for sid, info in precheck["subjects"].items():
         for run in info["all_contiguous_runs_in_original_order"]:
@@ -162,7 +190,9 @@ def validate_source(raw: bytes, config: dict[str, Any], precheck: dict[str, Any]
                 config["expected_start_line"], config["expected_end_line"])
     if selected != expected:
         raise Refusal("REPORT_MISMATCH", f"precheck selection {selected} != {expected}")
-    subject_report = precheck["subjects"][str(config["subject"])]
+    subject_report = precheck["subjects"].get(str(config["subject"]))
+    if not isinstance(subject_report, dict) or any(k not in subject_report for k in ("file_sha256", "size_bytes", "line_count")):
+        raise Refusal("REJECTED_INPUT", "selected subject is missing required identity metadata")
     if subject_report["file_sha256"] != digest or subject_report["size_bytes"] != len(raw):
         raise Refusal("REPORT_MISMATCH", "precheck file identity differs")
     rows = parse_file(raw)
@@ -252,7 +282,8 @@ def git_state() -> dict[str, Any]:
         return {"git_sha": None, "git_dirty": None}
 
 
-def execute(raw_path: Path, out: Path, config_path: Path, precheck_path: Path) -> dict[str, Any]:
+def execute(raw_path: Path, out: Path, config_path: Path, precheck_path: Path,
+            invocation: Sequence[str] | None = None) -> dict[str, Any]:
     if out.exists() and any(out.iterdir()):
         raise Refusal("OUTPUT_NOT_EMPTY", "choose a fresh, empty output directory")
     out.mkdir(parents=True, exist_ok=True)
@@ -265,9 +296,13 @@ def execute(raw_path: Path, out: Path, config_path: Path, precheck_path: Path) -
             raise Refusal("BLOCKED_INPUT", "pinned precheck JSON unavailable")
         raw = raw_path.read_bytes()
         try:
-            precheck = json.loads(precheck_path.read_text(encoding="utf-8"))
-        except (ValueError, OSError) as exc:
+            precheck_bytes = precheck_path.read_bytes()
+            precheck = json.loads(precheck_bytes.decode("utf-8"))
+        except (ValueError, OSError, UnicodeDecodeError) as exc:
             raise Refusal("REJECTED_INPUT", "invalid precheck JSON") from exc
+        validate_precheck_shape(precheck)
+        if sha256(precheck_bytes) != PINNED_PRECHECK_SHA256:
+            raise Refusal("BLOCKED_IDENTITY", "precheck SHA-256 differs from frozen LAB-020 report")
         rows, selection = validate_source(raw, config, precheck)
         json_write(out / "selection.json", selection)
         write_reference(out / "reference.csv", rows)
@@ -288,6 +323,18 @@ def execute(raw_path: Path, out: Path, config_path: Path, precheck_path: Path) -
             "status": "PASS_READ_ONLY", "contract": CONTRACT,
             "input_member": config["source_member"], "local_input_name": raw_path.name,
             "input_sha256": sha256(raw), "precheck_sha256": sha_file(precheck_path),
+            "precheck_pinned_sha256": PINNED_PRECHECK_SHA256,
+            "approved_spec_commit_sha": config["approved_spec_commit_sha"],
+            "command_argv": list(invocation) if invocation is not None else None,
+            "command_display": shlex.join(invocation) if invocation is not None else None,
+            "command_origin": "CLI" if invocation is not None else "PYTHON_API",
+            "attribution": {
+                "dataset": "WISDM Smartphone and Smartwatch Activity and Biometrics Dataset (2019)",
+                "repository": "UCI Machine Learning Repository",
+                "doi": "10.24432/C5HK59",
+                "url": "https://archive.ics.uci.edu/dataset/507/wisdm%2Bsmartphone%2B",
+                "license": "CC BY 4.0 (as listed by UCI)",
+            },
             "source_implementation_sha256": sha_file(Path(__file__)),
             "files_sha256": {name: sha_file(out / name) for name in files},
             "versions": version, "timestamp_unit": "UNKNOWN", "session_id": None,
@@ -309,9 +356,12 @@ def main(argv: Sequence[str] | None = None) -> int:
     p.add_argument("--output-dir", type=Path, required=True, help="new or empty output directory")
     p.add_argument("--config", type=Path, default=Path("g2/configs/g2_readonly.json"))
     p.add_argument("--precheck", type=Path, default=Path("data/provenance/G2_MULTI_SUBJECT_PRECHECK.json"))
-    args = p.parse_args(argv)
+    invoked_args = list(sys.argv[1:] if argv is None else argv)
+    args = p.parse_args(invoked_args)
     try:
-        result = execute(args.input, args.output_dir, args.config, args.precheck)
+        command_argv = [sys.executable, "-m", "g2.readonly", *invoked_args]
+        result = execute(args.input, args.output_dir, args.config, args.precheck,
+                         invocation=command_argv)
     except Refusal as exc:
         result = {"status": exc.status, "detail": str(exc)}
     print(json.dumps(result, ensure_ascii=False, sort_keys=True))
