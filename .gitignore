@@ -23,3 +23,5 @@ dist/
 .idea/
 .DS_Store
 # Do NOT ignore g1/results/ -- original audited G1 demo outputs are versioned intentionally.
+# Generated G2 reference outputs (from local input; not source data)
+/g2/results*/
