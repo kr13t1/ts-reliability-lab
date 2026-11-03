@@ -8,7 +8,7 @@ import pytest
 
 from g2.readonly import (
     EXPECTED, Refusal, contiguous_runs, execute, load_config,
-    parse_file, parse_row, select_from_precheck, sha256, validate_source,
+    parse_file, parse_row, select_from_precheck, sha256, validate_precheck_shape, validate_source,
     write_reference,
 )
 
@@ -165,3 +165,70 @@ def test_immutable_row_objects():
     r = parse_row(row("A", 1).encode(), 1)
     with pytest.raises(Exception):
         r.q = 100
+
+
+@pytest.mark.parametrize("bad_report", [
+    {}, {"subjects": None}, {"subjects": []},
+    {"subjects": {"1600": {}}},
+    {"subjects": {"1600": {"all_contiguous_runs_in_original_order": None}}},
+    {"subjects": {"1600": {"all_contiguous_runs_in_original_order": [{}]}}},
+    {"subjects": {"1600": {"all_contiguous_runs_in_original_order": [
+        {"activity": "A", "start_line_1_based": 2, "end_line_1_based": 1}]}}},
+])
+def test_invalid_precheck_structure_returns_rejected_input(bad_report, tmp_path):
+    cfg = {"contract": "G2_REAL_SIGNAL_SPEC §§2–6,8; LAB-020",
+           "precheck_path": "data/provenance/G2_MULTI_SUBJECT_PRECHECK.json", **EXPECTED}
+    conf = tmp_path / "config_in.json"
+    conf.write_text(json.dumps(cfg))
+    input_file = tmp_path / "data.txt"
+    input_file.write_bytes(raw(row("A", 1)))
+    precheck_path = tmp_path / "precheck.json"
+    precheck_path.write_text(json.dumps(bad_report))
+    out = tmp_path / "results"
+    result = execute(input_file, out, conf, precheck_path)
+    assert result["status"] == "REJECTED_INPUT"
+    assert json.loads((out / "validation.json").read_text())["status"] == "REJECTED_INPUT"
+    assert not (out / "reference.png").exists()
+    assert not (out / "reference.csv").exists()
+
+
+def test_well_formed_but_unpinned_precheck_is_blocked(tmp_path):
+    cfg = {"contract": "G2_REAL_SIGNAL_SPEC §§2–6,8; LAB-020",
+           "precheck_path": "data/provenance/G2_MULTI_SUBJECT_PRECHECK.json", **EXPECTED}
+    conf = tmp_path / "config_in.json"
+    conf.write_text(json.dumps(cfg))
+    precheck_path = tmp_path / "precheck.json"
+    precheck_path.write_text(json.dumps({"subjects": {"1600": {
+        "all_contiguous_runs_in_original_order": [
+            {"activity": "A", "start_line_1_based": 1, "end_line_1_based": 1}
+        ]
+    }}}))
+    raw_path = tmp_path / "raw.txt"
+    raw_path.write_bytes(raw(row("A", 1)))
+    out = tmp_path / "results"
+    r = execute(raw_path, out, conf, precheck_path)
+    assert r["status"] == "BLOCKED_IDENTITY"
+    assert json.loads((out / "validation.json").read_text())["status"] == "BLOCKED_IDENTITY"
+    assert not (out / "reference.csv").exists()
+
+
+def test_pinned_provenance_fields_after_real_execution(tmp_path):
+    from g2.readonly import APPROVED_SPEC_COMMIT_SHA, PINNED_PRECHECK_SHA256
+    project_root = Path(__file__).resolve().parents[2]
+    raw_path = project_root / "data/raw/data_1600_accel_phone.txt"
+    precheck = project_root / "data/provenance/G2_MULTI_SUBJECT_PRECHECK.json"
+    if not raw_path.is_file():
+        pytest.skip("real raw file is not distributed with Git")
+    out = tmp_path / "results"
+    invocation = ["python", "-m", "g2.readonly", "--input", "data/raw/data_1600_accel_phone.txt"]
+    result = execute(raw_path, out, project_root / "g2/configs/g2_readonly.json",
+                     precheck, invocation=invocation)
+    assert result["status"] == "PASS_READ_ONLY"
+    config = json.loads((out / "config.json").read_text())
+    provenance = json.loads((out / "provenance.json").read_text())
+    assert config["approved_spec_commit_sha"] == APPROVED_SPEC_COMMIT_SHA
+    assert provenance["approved_spec_commit_sha"] == APPROVED_SPEC_COMMIT_SHA
+    assert provenance["command_argv"] == invocation
+    assert provenance["attribution"]["doi"] == "10.24432/C5HK59"
+    assert "CC BY 4.0" in provenance["attribution"]["license"]
+    assert provenance["precheck_sha256"] == PINNED_PRECHECK_SHA256
