@@ -1,9 +1,16 @@
 # PROJECT_STATE.md — Лаборатория надёжности временных рядов
 
-Версия: v1.12 (G1 — GO; G2 limited raw precheck — CONDITIONAL GO по независимому аудиту 05 и LAB-017; полный G2 не принят)  
-Дата фиксации: 2026-11-01  
+Версия: v1.13 (G1 — GO; G2.1 documentary timestamp precheck — GO по LAB-018; limited raw precheck — CONDITIONAL GO; полный G2 не принят)  
+Дата фиксации: 2026-11-03  
 Координатор: ветка 00  
 Нормативные документы: `RESEARCH_LAB_CHARTER_v1.md`; `RESEARCH_LAB_CHAT_STARTERS_v1.md`.
+
+## Актуальное решение / следующий шаг (LAB-018)
+
+- **G2.1:** GO только для документального read-only аудита семантики timestamp. Отчёт принят в GitHub PR #1; `main` содержит `docs/g2/G2_TIMESTAMP_SEMANTICS_02.md` после squash-коммита `e7881f41a3b883764def5691cc235c8c57bcc5c0`.
+- **Полный G2:** NOT GO. **G3–G6:** не начаты. Физические ns/эпоха, session IDs, причина различий интервальных масштабов и независимая аттестация полного UCI ZIP остаются неизвестными.
+- **Ровно одна следующая проверка:** ветка 02 ищет первичный исходный код/техническую спецификацию сборщика WISDM 2019, чтобы определить конкретную операцию формирования timestamp для phone accelerometer; результат `docs/g2/G2_TIMESTAMP_COLLECTOR_SOURCE_02.md`. Если код недоступен — статус UNKNOWN, без дальнейшего бесконечного поиска.
+- **Git:** код G1 и raw не модифицировать; 02 оформляет отдельный PR, merge только после решения 00. Не запускать G3, windowing, ML, resampling.
 
 ## Статус этапов
 
@@ -174,3 +181,12 @@
 - **Открыто:** MAJOR-01 независимая аттестация полного UCI ZIP; MINOR-01 физическая единица timestamp; MINOR-02 session IDs/порядок. По UCI карточке номинально 20 Hz; это не доказательство фактических частот каждого субъекта.
 - **Следующая ровно одна проверка:** 02, read-only `G2_TIMESTAMP_SEMANTICS_02.md`, без окон/классификации/resampling. Full-source provenance сохранять как отдельное не закрытое требование до финального G2.
 - **Файлы:** `G2_RAW_AUDIT_05.md` (Library), `G2_AUDIT_REVIEW_00_LAB017.md`, `PROJECT_STATE.md` v1.12, `DECISIONS.md`; Git SHA не предоставлен.
+
+
+## LAB-018 — приёмка документального G2.1 (2026-11-03)
+
+- Изучен один изменённый Markdown-файл GitHub PR #1, исходный head SHA `69c21dbfb21ad8bff1fc74e75d80d7d0592f0862`; PR принят координатором только в границах документального G2.1.
+- Свидетельства: UCI 507 описывает integer Unix time; авторский PDF — integer Linux time; Android SensorEvent использует ns/elapsedRealtimeNanos, но не доказана применимость именно к collector WISDM.
+- Целочисленные интервалы 1600/1601/1602 подтверждены raw-аудитом LAB-017; физическая частота и потери датчика не доказаны. Не делать ресемплинг по условным 20/25 Гц.
+- Открыты MAJOR-01 полного provenance UCI, идентификаторы сессий и источник timestamp. Полный G2 не закрыт, G3 не открывать.
+- Следующая одна минимальная read-only проверка: первичный сборщик timestamp → `docs/g2/G2_TIMESTAMP_COLLECTOR_SOURCE_02.md` (PR, не прямой merge).
