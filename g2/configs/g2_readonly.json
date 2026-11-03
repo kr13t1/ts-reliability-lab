@@ -22,5 +22,6 @@
   "session_id": null,
   "seed": null,
   "full_remote_attestation": "UNVERIFIED",
-  "physical_continuity": "UNKNOWN"
+  "physical_continuity": "UNKNOWN",
+  "approved_spec_commit_sha": "ae612e338df6a25eb94281cc2b3969cd39824d44"
 }
