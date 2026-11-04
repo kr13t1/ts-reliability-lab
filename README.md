@@ -2,11 +2,11 @@
 
 Репозиторий прикладного исследовательского стенда: проверяем, как **искусственные нарушения многоканальных измерений** отражаются на сигнале и простых downstream-решениях. Наличие демо ≠ доказательство эффективности или научной новизны.
 
-**Статусы (2026-11-04):** G1 — GO; G2.2 read-only — технический GO (PR #8 merged); G2.3 freeze-демонстрация — **технический GO** (PR #13 + независимый audit PR #15 merged); Standing/E input gate — **GO** (PR #19, LAB-027); G2.4 baseline A — авторский PR #21 опубликован и ждёт независимый аудит 05; **технический G2.4 не принят**; **полный G2 NOT GO**, G3–G6 не открыты. [Точный gate](docs/NEXT_ACTION.md).
+**Статусы (2026-11-04):** G1 — GO; G2.2 read-only — технический GO (PR #8 merged); G2.3 freeze-демонстрация — **технический GO** (PR #13 + независимый audit PR #15 merged); Standing/E input gate — **GO** (PR #19, LAB-027); G2.4 baseline A — **технический GO после независимого 05** (PR #21 merged, LAB-029); **полный G2 NOT GO**, G3–G6 не открыты. [Точный gate](docs/NEXT_ACTION.md).
 ## Куда смотреть
 
 - [Актуальная дорожная карта](ROADMAP.md) (старые картинки roadmap.png/svg отражают раннюю версию)
-- [Единственная следующая задача: независимый аудит 05 G2.4 PR #21](docs/NEXT_ACTION.md)
+- [Единственная следующая задача: наглядная offline-галерея из G2.3/G2.4](docs/NEXT_ACTION.md)
 - [Текущее состояние](docs/PROJECT_STATE.md) и [журнал решений](docs/DECISIONS.md)
 - [Проверенное синтетическое G1](g1/README.md), исходный код, 32 теста, сохранённые результаты
 - [Паспорт реальных данных — черновик](data/DATASET_CARD_G2_DRAFT.md), [provenance](data/provenance/), [принятый read-only G2.2](g2/README.md), [принятый G2.3 freeze-demo](g23/README.md), [независимый отчёт 05](docs/audits/G23_FREEZE_IMPLEMENTATION_AUDIT_05.md)
@@ -24,9 +24,11 @@ py -3.13 -m venv .venv
 
 Конкретные параметры запуска содержатся в `g1/README.md`; **используйте его и не изменяйте принятый контракт**. Сохранённые файлы `g1/results/` относятся только к синтетическому G1. `g1/` скопирован без изменения файлов из проверенного `G1_RELIABILITY_LAB_v1(1).zip`; в исходном архиве нет git-commit SHA.
 
+- **[Начать с графиков: визуальная лаборатория](docs/LAB_VISUAL_WALKTHROUGH.md)** — G1/G2.3 изображения, G2.4 результат и шаги локального запуска. Новый интерфейс ещё не построен ([Issue #25](https://github.com/kr13t1/ts-reliability-lab/issues/25)).
+
 - [Проверенные ближайшие исследования 2025–2026](docs/research/G4_SCOUT_FREEZE_2026-11-04.md) и [план трёх результатов с требованиями НИР-7](docs/publications/THREE_OUTPUTS_AND_NIR7_PLAN.md)
 
-- [Проверенный математический контракт baseline A](docs/g2/G24_CONSTANT_RUN_BASELINE_SPEC.md) и [review 00](docs/g2/G24_SPEC_REVIEW_00.md) — документ GO, detector **не реализован**. [Вход Standing/E проверен 02 и 00](docs/g2/G24_STANDING_CONTROL_PRECHECK_02.md); [G2.4 PR #21 на аудите 05](https://github.com/kr13t1/ts-reliability-lab/pull/21); [аудиторское поручение Issue #23](https://github.com/kr13t1/ts-reliability-lab/issues/23).
+- [Проверенный математический контракт baseline A](docs/g2/G24_CONSTANT_RUN_BASELINE_SPEC.md) и [review 00](docs/g2/G24_SPEC_REVIEW_00.md) — документ GO, detector **не реализован**. [Вход Standing/E проверен 02 и 00](docs/g2/G24_STANDING_CONTROL_PRECHECK_02.md); [Принятый G2.4 детектор](g24/README.md), [первичный аудит 05](docs/audits/G24_CONSTANT_RUN_IMPLEMENTATION_AUDIT_05.md), [дельта-GO 05](https://github.com/kr13t1/ts-reliability-lab/issues/23#issuecomment-6627225305).
 
 ## Три независимых целевых выхода
 
