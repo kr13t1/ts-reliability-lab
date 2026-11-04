@@ -1,0 +1,24 @@
+{
+  "results": [
+    {
+      "D_I": 0.0,
+      "D_Z": null,
+      "D_Z_status": "NOT_APPLICABLE",
+      "L_out": 0.0,
+      "alpha": 0,
+      "n_assigned": 0,
+      "n_changed": 0,
+      "outside_identical": true
+    },
+    {
+      "D_I": 3.0753845270371265,
+      "D_Z": 3.0753845270371265,
+      "D_Z_status": "DEFINED",
+      "L_out": 0.0,
+      "alpha": 1,
+      "n_assigned": 1191,
+      "n_changed": 1191,
+      "outside_identical": true
+    }
+  ]
+}
