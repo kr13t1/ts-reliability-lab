@@ -1,0 +1,46 @@
+# G4_SCOUT_FREEZE_2026-11-04 — ограниченная проверка ближайших работ, не решение о научной нише
+
+**Дата:** 2026-11-04 · **Статус:** LIMITED PRIMARY-SOURCE SCOUT, G4 formal NOT GO · **Связанный код:** PR #13, fixed head `ac5eed80e169d153b94b5d92ffac38e820e8bed7` (пока без независимого 05 GO) · **Рамки:** 1-осевой freeze/stuck-at на трёхосном accelerometer, detection, repair, selective reliability/HAR. Это не систематический обзор всех методов; не подменяет ни G3, ни G4.
+
+## Вопрос и отрицательный вывод для новизны
+
+**Зафиксированный инженерный вопрос:** можем ли мы по одному `X_obs`, не используя сохранённые `X_ref` или истинную маску `Z` при принятии решения, определить искусственное stuck-at значение одной оси, не путая его с нормальными низковариативными участками? Этот вопрос **уже изучался в смежных условиях**. Показать нулевую дисперсию или межосевую несогласованность **не является новым методом**; улучшение B над A — не научный вклад без независимого протокола и сравнения с аналогами.
+
+`X_ref` для WISDM — наблюдаемая историческая запись, не доказанный безошибочный физический сигнал; `Z` — только маска НАШЕЙ инъекции. Алгоритм, который использует `Z` либо `X_ref` на входе, не является честным детектором. Реальный корпус пока **один subject=1600, walking=A, строки 1–3574**; из него нельзя заключить о ложных срабатываниях в классе покоя, о межсубъектной обобщающей способности, о связи с downstream HAR. Никаких ROC, F1, recall и доверительных интервалов на PR #13 пока не посчитано.
+
+## Проверенные первоисточники (точная близость и отсутствие прямой переносимости)
+
+| Источник | Задача / тип сбоя | Проверенная ссылка | Доступность кода/данных | Граница переноса |
+|---|---|---|---|---|
+| Gallon, Schiemenz, Menicucci, Gill (2025), *Convolutional neural network design and evaluation for real-time multivariate time series fault detection in spacecraft attitude sensors*, *Advances in Space Research* 76(5) | Detection + FDIR; stuck-value на отдельных/нескольких осях акселерометра/гироскопа | [Издатель, DOI 10.1016/j.asr.2025.06.068](https://doi.org/10.1016/j.asr.2025.06.068) | Open access статья; полный повторимый raw/code **не подтверждён** | Прямой аналог типа повреждения, но космический симулятор и CNN не равны одному смартфону |
+| Varaldi, Genta, Manzone, Vacca (2026), *STORM: Hardware-Aware Tiny Transformer Co-Design for Low-Power Inertial Human Activity Recognition*, *Electronics* 15(9), 1924 | Downstream robustness HAR: stuck-value, outage, noise, drift при test-time corruption; не детектор freeze | [DOI 10.3390/electronics15091924](https://doi.org/10.3390/electronics15091924), [публичный GitHub](https://github.com/AlessandroVaraldi/storm) | GitHub проект существует, README/code доступны; отдельное воспроизведение fault stress test **не сделано** | Cross-source/subject split, 6 каналов Acc+Gyro, сложный Transformer; метрики авторов **не наши** |
+| Cisse, Ishimaru (2026), *Detect and Repair: Robust Self-Supervised Wearable Sensing Under Missing Modalities*, *Sensors* 26(8), 2419 | Detection/repair отсутствующих модальностей, simulated dropout, WESAD/MobiAct | [DOI 10.3390/s26082419](https://doi.org/10.3390/s26082419), [PubMed](https://pubmed.ncbi.nlm.nih.gov/42076526/) | Авторы сообщают о released code/dashboard; точный репозиторий/исполняемость **не проверены** | Отсутствие целой модальности и восстановление ≠ одноосевой last-value freeze |
+| Sekiguchi, Minowa, Yamashita, Kawakatsu (2026), *Ensemble Learning with Heterogeneous Models for Human Activity Recognition in Missing Sensor Scenarios*, *IEICE Transactions on Information and Systems* E109-D(6) | Robust downstream HAR при пропавшей модальности; ensemble моделей | [DOI 10.1587/transinf.2025HCP0004](https://doi.org/10.1587/transinf.2025HCP0004) | Издательский открытый текст; публичные веса/code **не подтверждены** | Missing Acc/Gyr/Mag modality; **не** поиск unknown frozen interval |
+| Lamaakal et al. (2026), *Efficient uncertainty aware human activity recognition on microcontrollers using hyperdimensional computing and conformal prediction*, *Scientific Reports* 16, 26262 | Selective/uncertainty of HAR, missing-axis and distribution shift; datasets включают WISDM | [DOI 10.1038/s41598-026-57375-8](https://doi.org/10.1038/s41598-026-57375-8), [PubMed](https://pubmed.ncbi.nlm.nih.gov/42265269/) | Статья открыта; публичный runnable code **не проверен** | Калибровка/coverage в авторской задаче, не детекция датчиков; покрытие под shift нельзя предполагать автоматически |
+| Yang, Wang (2016), *A Wavelet Based Multiscale Weighted Permutation Entropy Method for Sensor Fault Feature Extraction and Identification*, *Journal of Sensors* | Старая работа по fault identification, включая stuck-at, на многоканальных газовых сенсорах | [DOI 10.1155/2016/9693651](https://doi.org/10.1155/2016/9693651) | Детали и обзор в `docs/G1_PRIOR_ART_NOTE.md`, код/raw **не подтверждены** | Сложность/энтропия для stuck-at не является принципиально новой идеей, но другая физика |
+| Yemeni et al. (2022; online 2021), *CFDDR: A Centralized Faulty Data Detection and Recovery Approach for WSN With Faults Identification*, *IEEE Systems Journal* 16(2) | Detection / recovery / fault type в sensor networks, включая stuck-at | [DOI 10.1109/JSYST.2021.3099830](https://doi.org/10.1109/JSYST.2021.3099830) | Только первичная библиография/abstract в раннем `G1_PRIOR_ART_NOTE.md`; детали кода и raw **не подтверждены** | Другая система и другие физические каналы; не основание брать Калман без простых baseline |
+
+**Происхождение:** 2025–2026 записи проверены по страницам издателя/DOI (публичность STORM code дополнительно по GitHub); более ранние [Yang; Yemeni] пересмотрены в текущем проекте **только** по ранее сохранённой разведке и прямым DOI — повторного полного read-through не было. Все DOI/названия выше существуют в найденных первичных источниках; точные протоколы авторов не воспроизводились. Ограниченный поиск может пропустить близкую работу.
+
+**Основные ссылки для текущих данных:** [WISDM, UCI 507, DOI 10.24432/C5HK59](https://archive.ics.uci.edu/dataset/507/wisdm%2Bsmartphone%2B), dataset license CC BY 4.0, authorship Gary Weiss (2019). UCI сообщает nominal 20 Hz, но **в реальном 1600/A поле q остаётся UNKNOWN по собственному независимому provenance**. Нельзя механически применять секундную шкалу к q без аттестации единицы.
+
+## Матрица prior-art (что именно сделано до нас)
+
+- **Freeze/stuck-at сам по себе:** EXISTING; как отдельная модель сбоя у Gallon и как стресс-тест у STORM. Не заявлять «придумана инъекция freeze».
+- **Обнаружение одноосевого плоского участка:** очевидный прозрачный baseline, не новый метод; строгая научная ближайшая работа требует поиска ещё по fault isolation and stuck sensor.
+- **Использование поведения других осей:** инженерная гипотеза; похожие multivariate detection подходы уже есть; НЕ заявлять новизну и улучшение без проверки confounders.
+- **Восстановление искажения:** есть CFDDR и CognifySSL в иных задачах, не гарантируют восстановимость одного осевого freeze без дополнительной информации.
+- **Selective confidence/HAR:** есть STORM и HDUQ-HAR по последствиям fault/shift; не объединять с детекцией и repair в одну метрику.
+- **Открытый вопрос для нашей лаборатории:** под строгим subject-independent split и с negative controls определить, когда простые baseline терпят failure и нет ли сильного аналога, который уже решает это. **Это исследовательский вопрос, не установленная ниша.**
+
+## Минимальные будущие baseline (ПРЕДЛОЖЕНИЕ, не разрешение реализации)
+
+**A — constant-run:** порог абсолютного приращения одной оси плюс минимальная длина последовательности. **B — cross-axis control:** тот же A и диагностический признак вариабельности других осей, без использования `Z` на инференсе. B не гарантированно лучше A; движение может быть направленным, оси зависят от ориентации, quantization/idle даёт естественные плоские участки.
+
+**Прежде чем сравнивать A/B:** независимый аудит PR #13 → отдельный математический контракт 03 → G2 full provenance/splits и source-independent controls (включая реальное Standing E, без объявления его «идеальным покоем»). Разбиение по subjects/записям до windows, thresholds train/val only, final test не использовать для выбора. Осознанно предусмотреть отрицательный случай: неподвижность, квантизация, нулевой фактический эффект инъекции (`Z=1, X_obs=X_ref`). Расхождение между Z и численной разностью не ошибка метрики.
+
+**Минимальный опровергающий эксперимент (proposal G3 после разрешения):** по заранее фиксированным порогам сравнить детекцию на инъецированном freeze и ложные тревоги на неинъецированном Standing (разные субъекты); если B улучшает recall только ценой большой FPR или A и B одинаковы, никакого «улучшения» не объявлять. На одном 1600/A G2.3 и при ручном подборе результата такую проверку **запускать нельзя**.
+
+## Статус решения
+
+Это **не** научное открытие, **не** G4 GO и **не** инструкция немедленно реализовать детектор. Текущая одна операционная проверка: независимый аудит 05 PR #13 на фиксированном SHA. Затем 00 решает G2.3 gate, и только после этого утверждается следующий узкий контракт. Отдельно держать актуальность трёх выходов (Хабр, старая статья A/B, НИР-7).
