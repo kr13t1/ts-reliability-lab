@@ -32,6 +32,25 @@ MASK_COLS = ("i", "source_line", "q", "obs_x", "Zhat_x", "Z_x")
 PNG_MAGIC = b"\x89PNG\r\n\x1a\n"
 MAX_BYTES = 8_000_000
 
+# Trust anchors come from the frozen, independently audited source lineage, not
+# from the user-supplied G2.4 provenance.json being checked below.
+# Walking CSVs/results: byte-for-byte equal to committed accepted G2.4 Git blobs.
+# Standing CSV: reproduced independently from the source raw TXT whose exact
+# 1600/E segment SHA-256 is E_SHA; the source uses unchanged q and float64 x.
+# PNGs: byte-specific display references from the frozen Linux Python 3.13.5 /
+# Matplotlib 3.10.8 rendering. They are AUTHOR CANDIDATE fingerprints to be
+# independently ratified by 05, not platform-independent semantic attestations.
+# A different platform rendering must REFUSE instead of claiming to be verified.
+G24_FIXED_PINS = {
+    "results.csv": "abde1e1c95da63c0e7eb829defcc54babd34b7462053026f70ed3682269f83b4",
+    "1600_A_alpha_0/masks.csv": "d582599adcb81efab436e5306bd68071741932dc750d222dbbe5bd3cb4d55438",
+    "1600_A_alpha_1/masks.csv": "95ef70fe8330973c0dbbe4894b561ae8f9faf8861f40a41770394a2301c5b0a7",
+    "1600_E_raw/masks.csv": "4c0bcdd6665c0dcf20697de66bdab128680a78f4059689f20824f8bb5ec10642",
+    "1600_A_alpha_0/detection.png": "30925c8884bf1aaf4d3586b35c2d6b3e123ba2b424c7d5b90309d2690b2fb84a",
+    "1600_A_alpha_1/detection.png": "633842cc5aeaa7a96926b3185468cf4d211cbe961885412af7e0207a7f0ea93d",
+    "1600_E_raw/detection.png": "87d72ca4c9267268bae41973542beca4814a998962a464790bb1f594c4f928b8",
+}
+
 
 class InputError(ValueError):
     """Controlled refusal on unavailable, forged, or incompatible inputs."""
@@ -260,6 +279,12 @@ def verified_inputs(g23: Path, g24: Path) -> tuple[dict, dict[str, str]]:
                 f"G2.4 fixed case disagrees with independently audited intervals: {case}")
         data_by_case[case] = {"metrics": metrics, "observed": observed, "pred": predicted,
                               "z": assigned, "image": images[f"{case}/detection.png"]}
+    # Only after all structural/semantic checks: compare against fixed source
+    # references embedded in the viewer code, never mutable G2.4 provenance.
+    for rel, expected in G24_FIXED_PINS.items():
+        require(hashes.get(f"g24/{rel}") == expected,
+                f"G2.4 independent fixed-source SHA mismatch: {rel}. "
+                "PNG bytes may vary by platform; cannot approve an unverified image")
     return {"cases": data_by_case, "g23_rows": g23_rows, "images": images,
             "g23_report": g23_result,
             "p24": p24}, hashes
@@ -373,6 +398,9 @@ def build(g23: Path, g24: Path, out: Path) -> dict:
                 "input_sha256": hashes, "html_sha256": digest(page),
                 "g24_original_source_git_sha_reported": model["p24"].get("git_sha"),
                 "viewer_git_sha": _git_sha(Path(__file__).resolve().parents[1]),
+                "viewer_executed_source_sha256": digest(Path(__file__).resolve().read_bytes()),
+                "g24_fixed_source_pins": G24_FIXED_PINS,
+                "g24_png_attestation_scope": "Exact bytes only: Linux Python 3.13.5 / Matplotlib 3.10.8; 05 ratification pending",
                 "python": platform.python_version(), "seed": None,
                 "external_services": False, "read_raw": False, "recomputed_detector": False,
                 "g23_cases": ["alpha_0", "alpha_1"], "g24_cases": list(CASE_IDS),
