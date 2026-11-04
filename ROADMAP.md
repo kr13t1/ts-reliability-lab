@@ -21,8 +21,8 @@ flowchart LR
   A["G1: синтетика GO"] --> B["G2.2: WISDM read-only GO"]
   B --> C["G2.3: real freeze demo GO"]
   C --> G["G2.4: constant-run baseline A GO"]
-  G --> V["Визуальная offline-галерея, Issue #25"]
-  V --> F["Наглядный инженерный Хабр после review"]
+  G --> V["Viewer PR #26: CONDITIONAL GO\\n1 MAJOR — trust boundary"]\n  V --> D["04 fix -> 05 delta review\\nNO MERGE yet"]
+  D -.-> F["Наглядный инженерный Хабр после GO"]
   G -.-> H["Full G2 NOT GO; G3 CLOSED"]
   H -.-> I["G4: научная ниша не подтверждена"]
 ```
@@ -39,4 +39,4 @@ flowchart LR
 
 ## Ровно один текущий тикет
 
-**[Issue #25 — offline галерея из принятых G2.3/G2.4](https://github.com/kr13t1/ts-reliability-lab/issues/25)**. Технический G2.4 принят после независимого дельта-аудита 05 на fixed `a242f09eba6c1b2b2dcbe2073665e26580c211a2`; PR #21 merged. Уже подготовлен [путеводитель по настоящим графикам](docs/LAB_VISUAL_WALKTHROUGH.md). Следующая роль 04 собирает только презентацию existing CSV/PNG, без нового метода, ML, новых датчиков или изменения параметров; после PR отдельная presentation-review 05/00. Full G2 NOT GO, G3 закрыт.
+**[Issue #25 — узкое исправление input integrity визуального PR #26](https://github.com/kr13t1/ts-reliability-lab/issues/25)**. Проверка 05 на HEAD `ec5d108bd4ad7c30391e6976eef12af8f359182a` дала **CONDITIONAL GO presentation-only: 0 CRITICAL, 1 MAJOR, 1 MINOR**. Реальная страница/CLI воспроизводимы, но PNG или Standing x можно подменить с одновременным изменением `g24/provenance.json`. Роль 04 исправляет независимый trust anchor, добавляет два adversarial regression-tests и SHA исполняемого viewer в manifest; затем дельта-аудит 05 нового HEAD и отдельное решение 00. **PR #26 пока не merge**. Исходные G2.4 вычисления приняты и не меняются; full G2 NOT GO, G3 закрыт.
