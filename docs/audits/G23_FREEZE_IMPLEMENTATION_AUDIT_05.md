@@ -9,6 +9,8 @@
 
 Через GitHub connector по **неизменному commit SHA** непосредственно прочитаны `docs/RESEARCH_LAB_CHARTER_v1.md`, `docs/PROJECT_STATE.md`, `docs/DECISIONS.md` (LAB-023/024), `docs/g2/G2_REAL_SIGNAL_SPEC.md`, `g23/freeze.py`, `g23/configs/freeze.json`, `g23/tests/test_freeze.py`, `g23/reports/EXECUTION_REPORT.md`, `g23/example/results.csv`, `g23/example/provenance.json`, а также `g23/README.md`, `g23/example/results.json`, `g23/example/validation.json`, CI workflow и состав PR #13.
 
+**Версионирование решений:** LAB-023 прочитан непосредственно в `docs/DECISIONS.md` на frozen SHA (blob `e55e14c7270510cc2dd94ccc4d8b0a3a0ba9b0ec`). **LAB-024 отсутствует в этом старом снимке**; отдельно прочитан в актуальном `main` по Git blob `80556c6b17d3ccad2b0c0e3fce25fbecdadbbd07`. LAB-024 поручает именно аудит PR #13, но не заменяет независимый результат. Источники разных ревизий не смешивались без этого уточнения.
+
 PR #13 содержит 20 добавленных путей: `g23/` и `.github/workflows/g23-tests.yml`; отсутствуют изменения `g1/`, `g2/`, `data/raw/` и `data/provenance/`. Код был независимо восстановлен в изолированный каталог аудита из GitHub и **сравнен побайтно по SHA-256 и Git blob SHA-1**:
 
 | Файл | SHA-256 локального исходника | Git blob SHA-1 (совпадает с GitHub) |
