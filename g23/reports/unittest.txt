@@ -1,0 +1,20 @@
+test_assigned_not_changed_on_constant_signal (test_freeze.FreezeTests.test_assigned_not_changed_on_constant_signal) ... ok
+test_determinism (test_freeze.FreezeTests.test_determinism) ... ok
+test_hand_calculated_freeze (test_freeze.FreezeTests.test_hand_calculated_freeze) ... ok
+test_identity_empty_mask (test_freeze.FreezeTests.test_identity_empty_mask) ... ok
+test_input_and_other_axes_immutable (test_freeze.FreezeTests.test_input_and_other_axes_immutable) ... ok
+test_invalid_parameters (test_freeze.FreezeTests.test_invalid_parameters) ... ok
+test_metrics_detect_outside_change (test_freeze.FreezeTests.test_metrics_detect_outside_change) ... ok
+test_nonfinite_input (test_freeze.FreezeTests.test_nonfinite_input) ... ok
+test_production_mask (test_freeze.FreezeTests.test_production_mask) ... ok
+test_wrong_mask (test_freeze.FreezeTests.test_wrong_mask) ... ok
+test_changed_config (test_freeze.RefusalTests.test_changed_config) ... ok
+test_malformed_config (test_freeze.RefusalTests.test_malformed_config) ... ok
+test_missing_raw (test_freeze.RefusalTests.test_missing_raw) ... ok
+test_stale_output_refused (test_freeze.RefusalTests.test_stale_output_refused) ... ok
+test_wrong_raw (test_freeze.RefusalTests.test_wrong_raw) ... ok
+
+----------------------------------------------------------------------
+Ran 15 tests in 0.068s
+
+OK

@@ -1,0 +1,10 @@
+{
+  "checks": {
+    "both_modes": "PASS",
+    "outside_mask_unchanged": "PASS",
+    "raw_identity": "PASS",
+    "reference_identity": "PASS",
+    "reference_unchanged": "PASS"
+  },
+  "status": "PASS_DEMO"
+}

@@ -1,0 +1,22 @@
+{
+  "activity": "A",
+  "delta_count": 3573,
+  "delta_max": "50378589",
+  "delta_median": "50354004",
+  "delta_min": "50331507",
+  "delta_sum": "179914857371",
+  "end_line": 3574,
+  "file_lines": 64311,
+  "file_sha256": "40b7f60880b495ccb3c345b9ab11216dfa6bbb2bb887bcb45fb55020278fc22f",
+  "file_size_bytes": 3451789,
+  "member": "wisdm-dataset/raw/phone/accel/data_1600_accel_phone.txt",
+  "n": 3574,
+  "next_activity": "B",
+  "physical_continuity": "UNKNOWN",
+  "q_first": "252207666810782",
+  "q_last": "252387581668153",
+  "session_id": null,
+  "start_line": 1,
+  "subject": 1600,
+  "timestamp_unit": "UNKNOWN"
+}

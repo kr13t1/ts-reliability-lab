@@ -1,0 +1,12 @@
+{
+  "a": 1191,
+  "alphas": [
+    0,
+    1
+  ],
+  "axis": 0,
+  "b": 2382,
+  "baseline": "identity",
+  "contract": "LAB-023; G2_REAL_SIGNAL_SPEC §7",
+  "seed": null
+}
