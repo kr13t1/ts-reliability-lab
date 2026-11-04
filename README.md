@@ -3,10 +3,12 @@
 Репозиторий прикладного исследовательского стенда: проверяем, как **искусственные нарушения многоканальных измерений** отражаются на сигнале и простых downstream-решениях. Наличие демо ≠ доказательство эффективности или научной новизны.
 
 **Статусы (2026-11-04):** G1 — GO; G2.2 read-only — технический GO (PR #8 merged); G2.3 freeze-демонстрация — **технический GO** (PR #13 + независимый audit PR #15 merged); Standing/E input gate — **GO** (PR #19, LAB-027); G2.4 baseline A — **технический GO после независимого 05** (PR #21 merged, LAB-029); offline viewer — **presentation-only GO** (PR #26, LAB-032); **полный G2 NOT GO**, G3–G6 не открыты. [Точный gate](docs/NEXT_ACTION.md).
+**Действующая публикационная стратегия (LAB-033):** инженерный Хабр, **новая научная статья по текущей лаборатории C**, НИР-7 и будущая ВКР на общей базе. Собственный метод/вклад пока не подтверждён. [Три действующие цели](docs/GOALS.md) · [Research & Invention](docs/publications/C_SCIENTIFIC_ARTICLE_AND_INVENTION_PLAN.md). Локальный Windows viewer пока не совместим: original G2.4 PASS_DEMO, но REJECTED_INPUT из-за Windows provenance paths и PNG byte pins; проверенные CSV не изменены.
+
 ## Куда смотреть
 
 - [Актуальная дорожная карта](ROADMAP.md) (старые картинки roadmap.png/svg отражают раннюю версию)
-- [Следующее действие: лично открыть принятую визуальную лабораторию](docs/NEXT_ACTION.md)
+- [Следующее действие: воспроизвести Windows viewer compatibility defect](docs/NEXT_ACTION.md)
 - [Текущее состояние](docs/PROJECT_STATE.md) и [журнал решений](docs/DECISIONS.md)
 - [Проверенное синтетическое G1](g1/README.md), исходный код, 32 теста, сохранённые результаты
 - [Паспорт реальных данных — черновик](data/DATASET_CARD_G2_DRAFT.md), [provenance](data/provenance/), [принятый read-only G2.2](g2/README.md), [принятый G2.3 freeze-demo](g23/README.md), [независимый отчёт 05](docs/audits/G23_FREEZE_IMPLEMENTATION_AUDIT_05.md)
