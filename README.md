@@ -2,11 +2,11 @@
 
 Репозиторий прикладного исследовательского стенда: проверяем, как **искусственные нарушения многоканальных измерений** отражаются на сигнале и простых downstream-решениях. Наличие демо ≠ доказательство эффективности или научной новизны.
 
-**Статусы (2026-11-04):** G1 — GO; G2.2 read-only — технический GO (PR #8 merged); G2.3 freeze-демонстрация — **технический GO** (PR #13 + независимый audit PR #15 merged); Standing/E input gate — **GO** (PR #19, LAB-027); G2.4 baseline A — только реализация разрешена, результатов ещё нет; **полный G2 NOT GO**, G3–G6 не открыты. [Точный gate](docs/NEXT_ACTION.md).
+**Статусы (2026-11-04):** G1 — GO; G2.2 read-only — технический GO (PR #8 merged); G2.3 freeze-демонстрация — **технический GO** (PR #13 + независимый audit PR #15 merged); Standing/E input gate — **GO** (PR #19, LAB-027); G2.4 baseline A — авторский PR #21 опубликован и ждёт независимый аудит 05; **технический G2.4 не принят**; **полный G2 NOT GO**, G3–G6 не открыты. [Точный gate](docs/NEXT_ACTION.md).
 ## Куда смотреть
 
 - [Актуальная дорожная карта](ROADMAP.md) (старые картинки roadmap.png/svg отражают раннюю версию)
-- [Единственная следующая задача: роль 04 реализует учебный G2.4 baseline A](docs/NEXT_ACTION.md)
+- [Единственная следующая задача: независимый аудит 05 G2.4 PR #21](docs/NEXT_ACTION.md)
 - [Текущее состояние](docs/PROJECT_STATE.md) и [журнал решений](docs/DECISIONS.md)
 - [Проверенное синтетическое G1](g1/README.md), исходный код, 32 теста, сохранённые результаты
 - [Паспорт реальных данных — черновик](data/DATASET_CARD_G2_DRAFT.md), [provenance](data/provenance/), [принятый read-only G2.2](g2/README.md), [принятый G2.3 freeze-demo](g23/README.md), [независимый отчёт 05](docs/audits/G23_FREEZE_IMPLEMENTATION_AUDIT_05.md)
@@ -26,7 +26,7 @@ py -3.13 -m venv .venv
 
 - [Проверенные ближайшие исследования 2025–2026](docs/research/G4_SCOUT_FREEZE_2026-11-04.md) и [план трёх результатов с требованиями НИР-7](docs/publications/THREE_OUTPUTS_AND_NIR7_PLAN.md)
 
-- [Проверенный математический контракт baseline A](docs/g2/G24_CONSTANT_RUN_BASELINE_SPEC.md) и [review 00](docs/g2/G24_SPEC_REVIEW_00.md) — документ GO, detector **не реализован**. [Вход Standing/E проверен 02 и 00](docs/g2/G24_STANDING_CONTROL_PRECHECK_02.md); [G2.4 код ждём от 04](https://github.com/kr13t1/ts-reliability-lab/issues/20).
+- [Проверенный математический контракт baseline A](docs/g2/G24_CONSTANT_RUN_BASELINE_SPEC.md) и [review 00](docs/g2/G24_SPEC_REVIEW_00.md) — документ GO, detector **не реализован**. [Вход Standing/E проверен 02 и 00](docs/g2/G24_STANDING_CONTROL_PRECHECK_02.md); [G2.4 PR #21 на аудите 05](https://github.com/kr13t1/ts-reliability-lab/pull/21); [аудиторское поручение Issue #23](https://github.com/kr13t1/ts-reliability-lab/issues/23).
 
 ## Три независимых целевых выхода
 
