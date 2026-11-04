@@ -1,11 +1,19 @@
 # PROJECT_STATE.md — Лаборатория надёжности временных рядов
 
-Версия: v1.24 (G1, G2.2, G2.3, G2.4 ограниченные технические GO; полный G2 NOT GO, G3 CLOSED; далее наглядная offline-сборка)  
+Версия: v1.25 (G1/G2.2/G2.3/G2.4 ограниченные технические GO; offline viewer PR #26 CONDITIONAL GO, исправление MAJOR-01 ожидается; full G2 NOT GO, G3 CLOSED)  
 Дата фиксации: 2026-11-04  
 Координатор: ветка 00  
 Нормативные документы: `RESEARCH_LAB_CHARTER_v1.md`; `RESEARCH_LAB_CHAT_STARTERS_v1.md`.
 
-## LAB-029 — актуальный статус на 2026-11-04
+## LAB-030 — актуальный статус на 2026-11-04
+
+- **Принятый вычислительный фундамент неизменен:** G1 синтетика GO; G2.2 WISDM read-only GO; G2.3 искусственный freeze GO; G2.4 существующий exact constant-run baseline A **технический GO**, PR #21 merged по LAB-029. Ни новых методов, ни решений о научной нише или классификации.
+- **Наглядный интерфейс:** [PR #26](https://github.com/kr13t1/ts-reliability-lab/pull/26) HEAD `ec5d108bd4ad7c30391e6976eef12af8f359182a` **OPEN/UNMERGED** по результату независимого 05 [Issue #25](https://github.com/kr13t1/ts-reliability-lab/issues/25#issuecomment-6627926365): **CONDITIONAL GO presentation-only, CRITICAL=0/MAJOR=1/MINOR=1**. Обычный оригинальный G2.4 CLI → `visual_lab.build`, 15/15 tests, статический HTML/screenshot воспроизведены, но *безусловная приёмка интерфейса заблокирована*.
+- **MAJOR-01:** mutable `g24/provenance.json` как единственный reference для SHA G2.4 PNG не препятствует подмене `1600_E_raw/detection.png` или Standing `masks.csv.obs_x` **вместе с** исправлением self-declared checksum. Аудитор воспроизвёл ложный `PASS_PRESENTATION`. Требуется отдельно доверенный upstream anchor/validating content для изображения и Standing-series, два regression tests и честная оговорка о платформенно зависимых PNG. **MINOR-01:** в viewer manifest сохранять настоящий SHA-256 файла `visual_lab/build.py` даже без Git.
+- **Одно следующее действие:** ветка **04** корректирует только input-integrity в том же PR #26 по [Issue #25](https://github.com/kr13t1/ts-reliability-lab/issues/25) и [комментарию 00](https://github.com/kr13t1/ts-reliability-lab/pull/26#issuecomment-6627967845), публикует новый HEAD и результаты негативных тестов. После этого 05 независимо делает **дельта-аудит нового SHA**, 00 решает merge. Сейчас PR #26 не merge. Work не требуется.
+- **Границы:** **Full G2 NOT GO, G3 CLOSED**, G4 лишь preliminary scout, G5/G6 closed. Данные WISDM subject 1600/A/E не подтверждают истинные fault labels, independent sessions или полный remote UCI checksum; ни Хабр, ни НИР-7 не равны научному доказательству; отдельная статья EEG/HFD A/B не смешивается с текущей лабораторией.
+
+## LAB-029 — исторический статус (заменён LAB-030)
 
 - **G2.4 технически принят по решению 00 после независимого дельта-аудита 05:** original audit PR #24 (COND GO on SHA `99c88cff3970f7b71fabefeb94f7c88f7a662013`) в main, squash `37aa12e4b50f4d15cd948dfbd51e7085f45f8a5e`; delta review 05 [Issue #23](https://github.com/kr13t1/ts-reliability-lab/issues/23#issuecomment-6627225305) на новом fixed HEAD `a242f09eba6c1b2b2dcbe2073665e26580c211a2` **GO**, CRITICAL/MAJOR/MINOR=0/0/0 оставшихся. Implementation [PR #21](https://github.com/kr13t1/ts-reliability-lab/pull/21) merged `91bd08c3564e8c335013480274ce2c0c5428acbb`, PR #22 закрыт как дублирующая реализация без merge. Issues #20/#23 закрыты.
 - **Факт аудитa:** original принят G2.2/G2.3 в связке с G2.4 (source-копия проверена по Git blobs, **без .git checkout** и без adapters), независимый raw SHA, 28/28 локальных тестов, три PASS_DEMO, одинаковые non-provenance выходы. Отдельный G2.4 CI fixture-only: 20 исполненных и 8 честно skipped raw-tests; raw отдельно проверен аудитором.
