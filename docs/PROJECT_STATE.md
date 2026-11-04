@@ -1,11 +1,18 @@
 # PROJECT_STATE.md — Лаборатория надёжности временных рядов
 
-Версия: v1.27 (G1/G2.2/G2.3/G2.4 и offline viewer — ограниченные технические GO; full G2 NOT GO; G3 CLOSED)  
+Версия: v1.28 (LAB-033: новая научная статья только по C; G1/G2.2/G2.3/G2.4 и Linux viewer — ограниченные технические GO; full G2 NOT GO; G3 CLOSED)  
 Дата фиксации: 2026-11-04  
 Координатор: ветка 00  
 Нормативные документы: `RESEARCH_LAB_CHARTER_v1.md`; `RESEARCH_LAB_CHAT_STARTERS_v1.md`.
 
-## LAB-032 — актуальный статус на 2026-11-04
+## LAB-033 — действующие публикационные цели и реальный Windows feedback / 2026-11-04
+
+- **Решение пользователя:** единственная планируемая научная статья — **по текущему проекту C** (надёжность алгоритмов на повреждённых измерительных рядах), а не по прежнему архивному направлению. Архив сохраняется как история, но не входит в активные планы и обсуждения. Совместная база **Хабр + новая научная статья C + НИР-7/будущая ВКР C**; [GOALS](GOALS.md), [план Article & Invention](publications/C_SCIENTIFIC_ARTICLE_AND_INVENTION_PLAN.md). Ниша/новый метод/тема ещё не выбраны, G4 scout only, G5/G6 не открыты.
+- **На Windows подтверждено пользователем:** `python3` 3.11.9 и настоящий WISDM raw дают `g24.demo = PASS_DEMO` (raw/source/three_cases PASS). Но `visual_lab.build = REJECTED_INPUT` на `1600_A_alpha_0/masks.csv`, потому что входной `g24/provenance.json` записал Windows backslash path keys; независимая проверка fixed pins показывает **4/4 CSV SHA OK**, **3/3 PNG SHA DIFF** относительно Linux frozen build. `index.html` официальным viewer на Windows **не создан**. Отдельный HTML preview был статическим, не интерактивным. **Нельзя объявлять UI готовым для пользователя.** Linux presentation-only GO LAB-032 остаётся в границах той среды.
+- **Единственный следующий минимальный эксперимент:** чистое end-to-end воспроизведение Windows incompatible provenance & image-byte rendering с зафиксированными outputs и диагностическим отчётом; следующий совместимый UI/fix — только после отдельного принятого инженерного контракта и 05 аудита. Не править CSV/хеши ради PASS, не начинать G3/новый алгоритм.
+- **Границы:** технические G1/G2.2/G2.3/G2.4 GO не отменяются. **Full G2 NOT GO, G3 CLOSED**. Научная статья не готова, результат не доказывает надёжность на реальных физических сбоях и independent subjects.
+
+## LAB-032 — исторический статус (дополнен LAB-033)
 
 - **Offline-визуализация `visual_lab/` принята только технически.** [PR #26](https://github.com/kr13t1/ts-reliability-lab/pull/26) HEAD `db4b124f4e320ec273ec0322139520eefbfa7ec4` merged squash `35424bd4c80f417c6e7da238a253122052b759a4`. [Независимый дельта-аудит 05](https://github.com/kr13t1/ts-reliability-lab/issues/25#issuecomment-6628348140) дал **GO только presentation-only, C=0/M=0/m=0**, MAJOR/ MINOR старого review закрыты. Normal CLI `g24.demo` PASS, `visual_lab.build` PASS ×2, **17/17 тестов**, 7/7 SHA G2.4 CSV/PNG независимо перепроверены на настоящем raw, обе adversarial tamper атаки отвергнуты. Viewer не рассчитывает детектор и не изменяет принятый raw/G2.4.
 - **Граница воспроизводимости:** независимая source-копия сверена по Git blobs, но была без `.git`; физическая git checkout provenance не проверялась. PNG SHA закреплены для Linux Python 3.13.5 / NumPy 2.3.5 / Matplotlib 3.10.8, иной renderer может получать `REJECTED_INPUT` даже при правильных значениях.
