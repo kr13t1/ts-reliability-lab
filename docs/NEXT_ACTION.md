@@ -1,16 +1,20 @@
-# Единственное следующее действие — дельта-аудит 05 визуального PR #26 на новом SHA (LAB-031)
+# Единственное следующее действие — посмотреть принятую offline-лабораторию (LAB-032)
 
-**Исходный контекст:** [Issue #25](https://github.com/kr13t1/ts-reliability-lab/issues/25), [PR #26](https://github.com/kr13t1/ts-reliability-lab/pull/26). **Новый frozen HEAD:** `db4b124f4e320ec273ec0322139520eefbfa7ec4` (**OPEN, NOT MERGED** при фиксации). Предыдущий условно проверенный HEAD: `ec5d108bd4ad7c30391e6976eef12af8f359182a`. Diff — только `visual_lab/build.py`, `visual_lab/tests/test_viewer.py`, `visual_lab/README.md`, 3 коммита.
+**Техническая база принята:** [PR #26](https://github.com/kr13t1/ts-reliability-lab/pull/26), fixed implementation HEAD `db4b124f4e320ec273ec0322139520eefbfa7ec4`, merged squash `35424bd4c80f417c6e7da238a253122052b759a4`. Независимый [delta audit 05](https://github.com/kr13t1/ts-reliability-lab/issues/25#issuecomment-6628348140): **GO только presentation-only**, C/M/m=0/0/0. Код G1/G2.2/G2.3/G2.4 был принят ранее; этот viewer не вводит нового алгоритма или результата.
 
-**Роль 05:** независимый **дельта-аудит presentation-only**, не новый G2/G3 эксперимент. Основной G1/G2.2/G2.3/G2.4 принят технически; обычный viewer на предыдущем SHA был воспроизведён, но отмечен input-trust MAJOR. До проверки нового HEAD статус **READY_FOR_DELTA_PRESENTATION_AUDIT**, **НЕ GO**, PR не сливать.
+**Практическая цель:** один раз **лично открыть** единую страницу и оценить, понятно ли что измерялось, что искусственно внесено, что обнаружено, как именно появился FP на `i=1190`. Это user-experience sanity-check, не новый научный эксперимент. **Не создаём новую ветку Work или Issue ради просмотра.**
 
-**Ровно что проверить:**
-1. Побайтный source SHA изменённых `visual_lab/`, original `g24.demo` + реальные WISDM input, нормальный `visual_lab.build` (HTML, manifest, при возможности скриншот); отличать полноценный Git checkout от побайтно проверенной source-копии.
-2. **Независимо подтвердить авторские G24_FIXED_PINS** для `results.csv`, `1600_A_alpha_0/masks.csv`, `1600_A_alpha_1/masks.csv`, `1600_E_raw/masks.csv` и всех трёх `detection.png`. Standing эталон пересчитать по source-line 14292..17863 и raw SHA `40b7f60880b495ccb3c345b9ab11216dfa6bbb2bb887bcb45fb55020278fc22f`. PNG hashes candidate until independently matched on documented Linux Python/NumPy/Matplotlib stack; если текущий рендеринг отличается по байтам, это controlled `REJECTED_INPUT`, не автоматическое принятие нового SHA.
-3. **Обе негативные атаки** в копиях upstream outputs: замена `1600_E_raw/detection.png` на walking freeze PNG + обновление `g24/provenance.json.files_sha256`; изменение `1600_E_raw/masks.csv.obs_x` + такое же обновление self-declared SHA. **Оба не должны завершаться PASS_PRESENTATION или выпускать успешный HTML/manifest**. Правильный upstream должен давать нормальный viewer.
-4. Проверить поле `viewer_executed_source_sha256` в manifest против **реальных исполняемых байтов `visual_lab/build.py`**, честно `viewer_git_sha=null` без .git.
-5. Выдать **CRITICAL/MAJOR/MINOR и GO/CONDITIONAL GO/NO-GO только презентационной лаборатории** на точном новом HEAD, документировать команды/контрольные файлы/hashes/platform и границы. Отчёт в Issue #25 или отдельном audit PR. Никаких правок PR #26 аудитором.
+1. Из репозитория посмотреть уже сохранённые реальные графики и объяснение в [LAB_VISUAL_WALKTHROUGH.md](LAB_VISUAL_WALKTHROUGH.md).
+2. Если локально доступен **проверенный raw WISDM** `data/raw/data_1600_accel_phone.txt` (SHA-256 `40b7f60880b495ccb3c345b9ab11216dfa6bbb2bb887bcb45fb55020278fc22f`), из корня checkout выполнить команды из [visual_lab/README.md](../visual_lab/README.md). Windows PowerShell:
+```powershell
+py -3.13 -m pip install -r g24/requirements.txt
+py -3.13 -m g24.demo --g23-dir g23/example --standing-input data/raw/data_1600_accel_phone.txt --axis x --min-run-samples 3 --output-dir output_g24
+py -3.13 -m visual_lab.build --g23-dir g23/example --g24-dir output_g24 --output-dir visual_lab_out
+start visual_lab_out/index.html
+```
+Если `output_g24` уже построен из верного raw, запуск `g24.demo` повторять не нужно, достаточно viewer с **новой пустой** output-директорией. Не подменять отсутствующий raw примерами/заглушками. Без raw нельзя утверждать о локальной генерации HTML. PNG, сгенерированные на другой платформе, могут побайтно отличаться и viewer **контролируемо откажет** (это известное ограничение pinned Linux renderer, не доказательство неправильной математики).
+3. **Критерий минимальной готовности:** экран показывает Reference/Observed, истинную назначенную Z, предсказанную Zhat, выделенный boundary FP `i=1190` и три фиксированных случая 1600/A alpha0, 1600/A alpha1, 1600/E no injection. Если экран непонятен, записать **одну конкретную правку представления**, не менять результаты/пороги. Никаких новых научных claims.
 
-**Подробное координационное поручение:** [комментарий 00 к Issue #25](https://github.com/kr13t1/ts-reliability-lab/issues/25#issuecomment-6628212767). **После 05** только координатор 00 принимает решение о merge. Work не нужен.
+**Что заблокировано:** **full G2 NOT GO, G3 CLOSED**, G4 только ограниченная научная разведка, G5/G6 закрыты. No new G2.5; реальные hardware fault labels/subject-disjoint test отсутствуют. Инженерный Хабр и НИР-7 могут ссылаться на аудированную демонстрацию, но сами материалы ещё не готовы; старая научная EEG/HFD публикация — отдельный путь. Work не нужен.
 
-**Границы:** Full G2 NOT GO, G3 CLOSED; никакого G2.5 stage, нового детектора, repair, ML или научных claims. Исходный WISDM может содержать естественные неисправности; `Z=0` означает только отсутствие нашей инъекции. Три цели: честный инженерный Хабр, отдельная проверяемая научная статья EEG/HFD A/B, НИР-7 на воспроизводимых данных C.
+**Истина:** [PROJECT_STATE.md](PROJECT_STATE.md) v1.27 и [DECISIONS.md](DECISIONS.md) LAB-032. Исходный 05 проверял побайтно сверенную GitHub source-копию **без .git checkout**, не заявлять обратное.
