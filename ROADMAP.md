@@ -9,7 +9,7 @@
 | G0 | Организационные границы и разделение старых направлений A/B с C зафиксированы | Не означает утверждённую тему ВКР |
 | **G1** | **GO:** игрушечный синтетический freeze-сигнал, runnable Python, тесты, аудит | Проверка механики, не физических сенсорных отказов |
 | **G2.1 / G2.2** | **Технический GO:** независимый precheck WISDM и read-only 1600/A, принятый PR #8, график | q unit/полные official UCI bytes/session identity остаются UNKNOWN |
-| **G2.3** | **PR #13 авторски выполнен, 05 аудит pending:** α=0/1, x freeze [1191,2382), masks и описательные metrics | Код и иллюстрация пока **не приняты**; аудировать fixed SHA `ac5eed80e169d153b94b5d92ffac38e820e8bed7` |
+| **G2.3** | **Технический GO (LAB-025):** α=0/1, x freeze [1191,2382), точная Z и метрики; PR #13 + audit PR #15 приняты в main | Принят только искусственный freeze одной записи; не качество detector/repair/ML |
 | **Full G2** | **NOT GO:** полный provenance и независимый dataset/split protocol пока не закрыты | Нельзя научно оценивать generalization по одной записи |
 | **G3** | NOT OPEN: три задачи детекция, восстановление, selective reliability | Сначала формализовать контракт baseline/split и получить разрешение 00 |
 | **G4** | LIMITED SCOUT: проверены аналоги 2025–2026, но полной prior-art matrix нет | Научная ниша и вклад не подтверждены |
@@ -18,11 +18,8 @@
 ```mermaid
 flowchart LR
   A["G1: синтетика\nGO"] --> B["G2.2: WISDM reference\nтехнический GO"]
-  B --> C["G2.3: freeze на реальном сигнале\nPR #13, ждёт 05"]
-  C --> D{"Независимый аудит 05\nи решение 00"}
-  D -->|GO| E["G2.3 принят, PR merge"]
-  D -->|замечания| F["Вернуть код на конкретное исправление"]
-  E --> G["Следующий контракт: baseline,\nnegative controls, split"]
+  B --> C["G2.3: freeze на реальном сигнале\nGO по независимому 05"]
+  C --> G["PROPOSED контракт baseline A\nIssue #16, роль 03"]
   G --> H["G3: detector/repair/reliability\nНЕ ОТКРЫТ"]
   H --> I["G4: prior-art gap\nНЕ ПРИНЯТ"]
   I --> J["G5: одна математическая задача\nНЕ ВЫБРАНА"]
@@ -40,4 +37,4 @@ flowchart LR
 
 ## Ровно один текущий тикет
 
-**[Issue #14 — независимый аудит 05 G2.3](https://github.com/kr13t1/ts-reliability-lab/issues/14)** на fixed PR #13 SHA `ac5eed80e169d153b94b5d92ffac38e820e8bed7`. После отчёта — решение 00. Ни baseline B с cross-axis, ни classifier, ни train/test split не реализовывать до отдельного утверждённого математического контракта.
+**[Issue #16 — PROPOSED математический контракт baseline A](https://github.com/kr13t1/ts-reliability-lab/issues/16)**. Только формализация простого детектора constant-run, маски, метрик, negative controls и data/split blockers. PR #13 и audit PR #15 уже приняты. Ни код detector, ни baseline B cross-axis, ни classifier, ни train/test split не запускать без отдельного GO 00.
