@@ -7,6 +7,7 @@ import json
 from pathlib import Path
 import sys
 import platform
+import subprocess
 import numpy as np
 from .detector import detect_constant_runs
 from .evaluator import evaluate_mask
@@ -18,6 +19,16 @@ class Refusal(ValueError):
     def __init__(self, code, detail):
         super().__init__(detail)
         self.code = code
+
+
+def git_state():
+    root = HERE.parent
+    try:
+        sha = subprocess.run(['git', 'rev-parse', 'HEAD'], cwd=root, capture_output=True, text=True, timeout=3, check=True).stdout.strip()
+        dirty = bool(subprocess.run(['git', 'status', '--porcelain'], cwd=root, capture_output=True, text=True, timeout=3, check=True).stdout.strip())
+        return {'git_sha': sha, 'git_dirty': dirty}
+    except (OSError, subprocess.SubprocessError):
+        return {'git_sha': None, 'git_dirty': None}
 
 
 def sha(data): return hashlib.sha256(data).hexdigest()
@@ -147,7 +158,7 @@ def run(g23_dir, standing_input, output, config_path, axis, L):
         status={'status':'READY_FOR_INDEPENDENT_05_AUDIT','cases':len(cases),'no_training':True,'no_remote_attestation':True}
         write_json(output/'validation.json',status)
         import matplotlib
-        provenance={'raw_sha256':sha(raw),'input_g23_sha256':{f'alpha_{a}/arrays.csv':sha((g23_dir/f'alpha_{a}'/'arrays.csv').read_bytes()) for a in (0,1)},'standing_segment_sha256':CONFIG['standing_segment_sha256'],'source_sha256':{p.name:sha(p.read_bytes()) for p in sorted(HERE.glob('*.py'))},'spec':'G24_CONSTANT_RUN_BASELINE_SPEC.md v0.1 / LAB-027','git_sha':None,'seed':None,'timestamp_unit':'UNKNOWN','session_id':None,'full_UCI_remote_attestation':'UNVERIFIED','versions':{'python':platform.python_version(),'numpy':np.__version__,'matplotlib':matplotlib.__version__},'limitations':'Only injection-relative FP/FPR; one subject, not independent observations; not hardware validation','output_sha256':{str(p.relative_to(output)):sha(p.read_bytes()) for p in sorted(output.rglob('*')) if p.is_file()}}
+        provenance={'raw_sha256':sha(raw),'input_g23_sha256':{f'alpha_{a}/arrays.csv':sha((g23_dir/f'alpha_{a}'/'arrays.csv').read_bytes()) for a in (0,1)},'standing_segment_sha256':CONFIG['standing_segment_sha256'],'source_sha256':{p.name:sha(p.read_bytes()) for p in sorted(HERE.glob('*.py'))},'spec':'G24_CONSTANT_RUN_BASELINE_SPEC.md v0.1 / LAB-027',**git_state(),'seed':None,'timestamp_unit':'UNKNOWN','session_id':None,'full_UCI_remote_attestation':'UNVERIFIED','versions':{'python':platform.python_version(),'numpy':np.__version__,'matplotlib':matplotlib.__version__},'limitations':'Only injection-relative FP/FPR; one subject, not independent observations; not hardware validation','output_sha256':{str(p.relative_to(output)):sha(p.read_bytes()) for p in sorted(output.rglob('*')) if p.is_file()}}
         write_json(output/'provenance.json',provenance)
         return status
     except Refusal as exc:

@@ -7,7 +7,7 @@ import unittest
 from g24 import demo
 
 BASE=Path(__file__).resolve().parents[2]
-RAW=BASE/'raw/data_1600_accel_phone.txt'
+RAW=BASE/'raw/data_1600_accel_phone.txt' if (BASE/'raw/data_1600_accel_phone.txt').is_file() else BASE/'data/raw/data_1600_accel_phone.txt'
 G23=BASE/'g23_reconstructed' if (BASE/'g23_reconstructed').is_dir() else BASE/'g23/example'
 
 @unittest.skipUnless(RAW.is_file() and G23.is_dir(), 'verified raw input is not installed; do not fabricate execution')
