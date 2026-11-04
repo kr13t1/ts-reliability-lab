@@ -1,0 +1,80 @@
+{
+  "1600_A_alpha_0": {
+    "FN": 0,
+    "FP": 0,
+    "FPR": 0.0,
+    "FPR_null_reason": null,
+    "N": 3574,
+    "TN": 3574,
+    "TP": 0,
+    "n_pred": 0,
+    "n_true": 0,
+    "precision": null,
+    "precision_null_reason": "NO_PREDICTED_POSITIVES",
+    "pred_events": [],
+    "pred_events_without_true_overlap": 0,
+    "recall": null,
+    "recall_null_reason": "NO_INJECTED_POSITIVES",
+    "specificity": 1.0,
+    "specificity_null_reason": null,
+    "true_event_overlap_fraction": null,
+    "true_event_overlaps": [],
+    "true_events": []
+  },
+  "1600_A_alpha_1": {
+    "FN": 0,
+    "FP": 1,
+    "FPR": 0.000419639110365086,
+    "FPR_null_reason": null,
+    "N": 3574,
+    "TN": 2382,
+    "TP": 1191,
+    "n_pred": 1192,
+    "n_true": 1191,
+    "precision": 0.9991610738255033,
+    "precision_null_reason": null,
+    "pred_events": [
+      [
+        1190,
+        2382
+      ]
+    ],
+    "pred_events_without_true_overlap": 0,
+    "recall": 1.0,
+    "recall_null_reason": null,
+    "specificity": 0.9995803608896349,
+    "specificity_null_reason": null,
+    "true_event_overlap_fraction": 1.0,
+    "true_event_overlaps": [
+      true
+    ],
+    "true_events": [
+      [
+        1191,
+        2382
+      ]
+    ]
+  },
+  "1600_E_raw": {
+    "FN": 0,
+    "FP": 0,
+    "FPR": 0.0,
+    "FPR_null_reason": null,
+    "N": 3572,
+    "TN": 3572,
+    "TP": 0,
+    "n_pred": 0,
+    "n_true": 0,
+    "precision": null,
+    "precision_null_reason": "NO_PREDICTED_POSITIVES",
+    "pred_events": [],
+    "pred_events_without_true_overlap": 0,
+    "recall": null,
+    "recall_null_reason": "NO_INJECTED_POSITIVES",
+    "specificity": 1.0,
+    "specificity_null_reason": null,
+    "true_event_overlap_fraction": null,
+    "true_event_overlaps": [],
+    "true_events": []
+  }
+}

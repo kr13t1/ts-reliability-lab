@@ -1,0 +1,14 @@
+{
+  "contract": "G24_CONSTANT_RUN_BASELINE_SPEC v0.1; LAB-027",
+  "axis": "x",
+  "min_run_samples": 3,
+  "epsilon": 0,
+  "seed": null,
+  "cases": ["1600_A_alpha_0", "1600_A_alpha_1", "1600_E_raw"],
+  "standing_start_line": 14292,
+  "standing_end_line": 17863,
+  "standing_segment_sha256": "50edfd731735d54cd76fe4c0a38da914fca7b567ae4e3b3d389f2d687fadb61d",
+  "raw_sha256": "40b7f60880b495ccb3c345b9ab11216dfa6bbb2bb887bcb45fb55020278fc22f",
+  "g23_reference_sha256": "8bf61ee71f68e0648ead7bc8eb8b6c44414e28411bd6de65e5f9dadf9c28eb38",
+  "timestamp_unit": "UNKNOWN"
+}
