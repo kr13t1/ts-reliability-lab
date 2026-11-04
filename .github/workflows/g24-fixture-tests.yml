@@ -22,7 +22,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
-          python-version-file: g24/.python-version
+          python-version: '3.13'
       - name: Install fixed G2.4 dependencies
         run: python -m pip install -r g24/requirements.txt
       - name: Run fixture and malformed-provenance tests
