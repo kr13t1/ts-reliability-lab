@@ -1,11 +1,19 @@
 # PROJECT_STATE.md — Лаборатория надёжности временных рядов
 
-Версия: v1.26 (G1/G2.2/G2.3/G2.4 ограниченные технические GO; viewer PR #26 new SHA READY_FOR_DELTA_PRESENTATION_AUDIT, not accepted; full G2 NOT GO, G3 CLOSED)  
+Версия: v1.27 (G1/G2.2/G2.3/G2.4 и offline viewer — ограниченные технические GO; full G2 NOT GO; G3 CLOSED)  
 Дата фиксации: 2026-11-04  
 Координатор: ветка 00  
 Нормативные документы: `RESEARCH_LAB_CHARTER_v1.md`; `RESEARCH_LAB_CHAT_STARTERS_v1.md`.
 
-## LAB-031 — актуальный статус на 2026-11-04
+## LAB-032 — актуальный статус на 2026-11-04
+
+- **Offline-визуализация `visual_lab/` принята только технически.** [PR #26](https://github.com/kr13t1/ts-reliability-lab/pull/26) HEAD `db4b124f4e320ec273ec0322139520eefbfa7ec4` merged squash `35424bd4c80f417c6e7da238a253122052b759a4`. [Независимый дельта-аудит 05](https://github.com/kr13t1/ts-reliability-lab/issues/25#issuecomment-6628348140) дал **GO только presentation-only, C=0/M=0/m=0**, MAJOR/ MINOR старого review закрыты. Normal CLI `g24.demo` PASS, `visual_lab.build` PASS ×2, **17/17 тестов**, 7/7 SHA G2.4 CSV/PNG независимо перепроверены на настоящем raw, обе adversarial tamper атаки отвергнуты. Viewer не рассчитывает детектор и не изменяет принятый raw/G2.4.
+- **Граница воспроизводимости:** независимая source-копия сверена по Git blobs, но была без `.git`; физическая git checkout provenance не проверялась. PNG SHA закреплены для Linux Python 3.13.5 / NumPy 2.3.5 / Matplotlib 3.10.8, иной renderer может получать `REJECTED_INPUT` даже при правильных значениях.
+- **Один следующий шаг — пользовательский просмотр лаборатории, не новый алгоритм:** открыть `docs/LAB_VISUAL_WALKTHROUGH.md`, затем выполнить команды `visual_lab/README.md` на **локальном верифицированном WISDM raw** и открыть `visual_lab_out/index.html`; зафиксировать конкретные замечания о читаемости Reference/Observed, Z/Zhat, FP i=1190 и контролях Walking/Standing. **Это проверка представления, не независимая новая оценка датчика.** Если verified raw недоступен, нельзя заявлять, что HTML локально построен.
+- **Проверенное до этого:** G1 учебная синтетика GO; G2.2 read-only реальный WISDM GO; G2.3 искусственная инъекция GO; G2.4 constant-run baseline A GO, только на трёх учебных случаях. **Full G2 NOT GO, G3 CLOSED; G4 только scout, G5/G6 не открыты, никакого G2.5.** No new recovery/ML, natural hardware fault labels absent, q units/session IDs and remote full ZIP unknown. Один subject и одна искусственная длинная инъекция не исследовательская генеральная выборка.
+- **Три продукта раздельно:** Хабр — технически готова лабораторная база, но инженерная статья не написана/не опубликована; научная EEG/HFD публикация A/B по отдельному аудиту не завершена; НИР-7 требует отдельного математического обзора, полноценного отчёта и проверки актуального регламента. Научная новизна и тема ВКР не утверждены.
+
+## LAB-031 — исторический статус (заменён LAB-032)
 
 - **05 дельта-аудит ожидается:** [PR #26](https://github.com/kr13t1/ts-reliability-lab/pull/26) OPEN, NOT MERGED, новый frozen HEAD `db4b124f4e320ec273ec0322139520eefbfa7ec4`. Compare с ранее условно проверенным `ec5d108bd4ad7c30391e6976eef12af8f359182a`: **3 коммита, 3 файла только `visual_lab/`** (builder, viewer tests, README). Данные и вычислительные G1/G2/G2.2/G2.3/G2.4 не затронуты. Исходный вывод 05 был CONDITIONAL GO C0/M1/m1; этот статус не повышается по авторскому отчёту автоматически.
 - **Заявлено автором, независимо ещё не подтверждено:** фиксированные SHA G2.4 PNG/CSV/Standing mask независимы от self-declared `g24/provenance.json`, два tamper-tests отклоняют подменённые PNG и Standing x с изменённым self-declared checksum; HTML обычного случая совпадает, 17/17 тестов автора; `viewer_executed_source_sha256` сохраняется при отсутствии `.git`. **Кандидатные PNG hashes и их renderer/platform ограничение должны быть подтверждены 05**, иначе нельзя выдавать PASS_PRESENTATION за проверенное изображение.
