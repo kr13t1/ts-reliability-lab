@@ -11,22 +11,21 @@
 | **G2.1 / G2.2** | **Технический GO:** независимый precheck WISDM и read-only 1600/A, принятый PR #8, график | q unit/полные official UCI bytes/session identity остаются UNKNOWN |
 | **G2.3** | **Технический GO (LAB-025):** α=0/1, x freeze [1191,2382), точная Z и метрики; PR #13 + audit PR #15 приняты в main | Принят только искусственный freeze одной записи; не качество detector/repair/ML |
 | **Full G2** | **NOT GO:** полный provenance и независимый dataset/split protocol пока не закрыты | Нельзя научно оценивать generalization по одной записи |
-| **G2.4 baseline A** | Математическая спецификация принята по LAB-026, **код BLOCKED** до Issue #18 и отдельного GO 00 | L=3 не обучался, это простой existing baseline, не собственный метод |\n| **G3** | NOT OPEN: три задачи детекция, восстановление, selective reliability | Сначала формализовать контракт baseline/split и получить разрешение 00 |
+| **G2.4 baseline A** | Контракт 03 и вход Standing/E приняты по LAB-026/027; **разрешён только код G2.4, результаты ещё не получены** | L=3 фиксирован, existing baseline, не собственный метод; до 05 аудитa и 00 нельзя считать реализацию принятой |\n| **G3** | NOT OPEN: три задачи детекция, восстановление, selective reliability | Сначала формализовать контракт baseline/split и получить разрешение 00 |
 | **G4** | LIMITED SCOUT: проверены аналоги 2025–2026, но полной prior-art matrix нет | Научная ниша и вклад не подтверждены |
 | **G5/G6** | NOT OPEN | Никаких собственных методов, научных улучшений/публикационных claims заранее |
 
 ```mermaid
 flowchart LR
-  A["G1: синтетика\nGO"] --> B["G2.2: WISDM reference\nтехнический GO"]
-  B --> C["G2.3: freeze на реальном сигнале\nGO по независимому 05"]
-  C --> G["Baseline A: математический контракт\n00 GO, PR #17"]
-  G --> R["Standing/E read-only precheck\nIssue #18 · роль 02"]
-  R --> P{"00 разрешит учебный G2.4?"}
-  P -->|положительное решение| T["Код и независимый аудит 05\nЕщё НЕ РАЗРЕШЕНЫ"]
-  P -->|блокер| X["Устранить ограничение источника"]
-  T -.-> H["G3: detector/repair/reliability\nНЕ ОТКРЫТ"]
-  H --> I["G4: prior-art gap\nНЕ ПРИНЯТ"]
-  I --> J["G5: одна математическая задача\nНЕ ВЫБРАНА"]
+  A["G1: синтетика\\nGO"] --> B["G2.2: WISDM reference\\nтехнический GO"]
+  B --> C["G2.3: freeze на реальном сигнале\\nGO по независимому 05"]
+  C --> G["Baseline A: математический контракт\\nGO, PR #17"]
+  G --> R["Standing/E raw control\\nGO, PR #19"]
+  R --> T["G2.4: один инженерный sanity-check\\nIssue #20, роль 04"]
+  T --> P{"Независимый аудит 05\\nи решение 00"}
+  P -.-> H["G3: detection/repair/reliability\\nНЕ ОТКРЫТ"]
+  H --> I["G4: prior-art gap\\nНЕ ПРИНЯТ"]
+  I --> J["G5: одна математическая задача\\nНЕ ВЫБРАНА"]
 ```
 
 ## Три результата — три разных критерия готовности
@@ -41,4 +40,4 @@ flowchart LR
 
 ## Ровно один текущий тикет
 
-**[Issue #18 — роль 02 read-only Standing/E](https://github.com/kr13t1/ts-reliability-lab/issues/18)**. Математическая спецификация baseline A принята только как документ 00 (PR #17); требуется подтвердить raw Stand­ing/E, identity и no-injection semantics до разрешения кода. PR #13 и audit #15 приняты ранее. Ни detector, ни baseline B cross-axis, ни classifier, ни train/test split не запускать без отдельного GO 00.
+**[Issue #20 — роль 04 реализует ограниченный G2.4 baseline A](https://github.com/kr13t1/ts-reliability-lab/issues/20)**. Standing/E input принят в PR #19 (LAB-027); без подбора параметров, только фиксированные три случая и separate evaluator. PR с кодом должен пройти независимый аудит 05 перед решением 00 о merge. Full G2 NOT GO и G3 закрыт.
