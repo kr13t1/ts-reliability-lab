@@ -1,0 +1,4 @@
+case_id,subject,activity,alpha,N,L,TP,FP,FN,TN,n_true,n_pred,precision,precision_null_reason,recall,recall_null_reason,FPR,FPR_null_reason,specificity,specificity_null_reason,n_true_events,n_pred_events,true_events_overlapped,pred_events_without_true_overlap,true_event_overlap_fraction
+1600_A_alpha_0,1600,A,0,3574,3,0,0,0,3574,0,0,null,NO_PREDICTED_POSITIVES,null,NO_INJECTED_POSITIVES,0.0,null,1.0,null,0,0,0,0,null
+1600_A_alpha_1,1600,A,1,3574,3,1191,1,0,2382,1191,1192,0.9991610738255033,null,1.0,null,0.000419639110365086,null,0.9995803608896349,null,1,1,1,0,1.0
+1600_E_raw,1600,E,none,3572,3,0,0,0,3572,0,0,null,NO_PREDICTED_POSITIVES,null,NO_INJECTED_POSITIVES,0.0,null,1.0,null,0,0,0,0,null
