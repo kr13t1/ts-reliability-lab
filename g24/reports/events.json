@@ -2,7 +2,7 @@
   "1600_A_alpha_0": {
     "FN": 0,
     "FP": 0,
-    "FPR": 0,
+    "FPR": 0.0,
     "FPR_null_reason": null,
     "N": 3574,
     "TN": 3574,
@@ -15,7 +15,7 @@
     "pred_events_without_true_overlap": 0,
     "recall": null,
     "recall_null_reason": "NO_INJECTED_POSITIVES",
-    "specificity": 1,
+    "specificity": 1.0,
     "specificity_null_reason": null,
     "true_event_overlap_fraction": null,
     "true_event_overlaps": [],
@@ -40,11 +40,11 @@
       ]
     ],
     "pred_events_without_true_overlap": 0,
-    "recall": 1,
+    "recall": 1.0,
     "recall_null_reason": null,
     "specificity": 0.9995803608896349,
     "specificity_null_reason": null,
-    "true_event_overlap_fraction": 1,
+    "true_event_overlap_fraction": 1.0,
     "true_event_overlaps": [
       true
     ],
@@ -58,7 +58,7 @@
   "1600_E_raw": {
     "FN": 0,
     "FP": 0,
-    "FPR": 0,
+    "FPR": 0.0,
     "FPR_null_reason": null,
     "N": 3572,
     "TN": 3572,
@@ -71,7 +71,7 @@
     "pred_events_without_true_overlap": 0,
     "recall": null,
     "recall_null_reason": "NO_INJECTED_POSITIVES",
-    "specificity": 1,
+    "specificity": 1.0,
     "specificity_null_reason": null,
     "true_event_overlap_fraction": null,
     "true_event_overlaps": [],
