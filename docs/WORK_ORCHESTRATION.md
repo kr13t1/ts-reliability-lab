@@ -1,8 +1,8 @@
 # Автономная координация исследовательского проекта через GitHub
 
 **Проект C:** `kr13t1/ts-reliability-lab`; нормативная база — устав и `docs/PROJECT_STATE.md`, `docs/DECISIONS.md`.
-**Последнее решение:** LAB-019; G1 GO, G2 limited raw precheck CONDITIONAL GO, G2.1/G2.1b document-only GO; полный G2 NOT GO; G3–G6 не открыты.
-**Следующая одна задача:** GitHub Issue #4 — проект контракта G2.2.
+**Последнее решение:** LAB-024 (2026-11-04): G1 GO, G2.2 технический GO и merged PR #8, G2.3 implementation PR #13 ожидает независимого аудита 05; полный G2 NOT GO, G3–G6 не открыты. Сверять с актуальным `docs/PROJECT_STATE.md`.
+**Следующая одна задача:** [GitHub Issue #14](https://github.com/kr13t1/ts-reliability-lab/issues/14) — независимый аудит фиксированного SHA PR #13 `ac5eed80e169d153b94b5d92ffac38e820e8bed7`. Нельзя одновременно выступать автором G2.3 и его независимым аудитором.
 
 ## Что автоматизируем
 
