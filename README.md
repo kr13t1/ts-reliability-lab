@@ -2,11 +2,11 @@
 
 Репозиторий прикладного исследовательского стенда: проверяем, как **искусственные нарушения многоканальных измерений** отражаются на сигнале и простых downstream-решениях. Наличие демо ≠ доказательство эффективности или научной новизны.
 
-**Статусы (2026-11-04):** G1 — GO; G2.2 read-only — технический GO (PR #8 merged); G2.3 freeze-демонстрация — **технический GO** (PR #13 + независимый audit PR #15 merged); Standing/E input gate — **GO** (PR #19, LAB-027); G2.4 baseline A — **технический GO после независимого 05** (PR #21 merged, LAB-029); **полный G2 NOT GO**, G3–G6 не открыты. [Точный gate](docs/NEXT_ACTION.md).
+**Статусы (2026-11-04):** G1 — GO; G2.2 read-only — технический GO (PR #8 merged); G2.3 freeze-демонстрация — **технический GO** (PR #13 + независимый audit PR #15 merged); Standing/E input gate — **GO** (PR #19, LAB-027); G2.4 baseline A — **технический GO после независимого 05** (PR #21 merged, LAB-029); offline viewer — **presentation-only GO** (PR #26, LAB-032); **полный G2 NOT GO**, G3–G6 не открыты. [Точный gate](docs/NEXT_ACTION.md).
 ## Куда смотреть
 
 - [Актуальная дорожная карта](ROADMAP.md) (старые картинки roadmap.png/svg отражают раннюю версию)
-- [Единственная следующая задача: наглядная offline-галерея из G2.3/G2.4](docs/NEXT_ACTION.md)
+- [Следующее действие: лично открыть принятую визуальную лабораторию](docs/NEXT_ACTION.md)
 - [Текущее состояние](docs/PROJECT_STATE.md) и [журнал решений](docs/DECISIONS.md)
 - [Проверенное синтетическое G1](g1/README.md), исходный код, 32 теста, сохранённые результаты
 - [Паспорт реальных данных — черновик](data/DATASET_CARD_G2_DRAFT.md), [provenance](data/provenance/), [принятый read-only G2.2](g2/README.md), [принятый G2.3 freeze-demo](g23/README.md), [независимый отчёт 05](docs/audits/G23_FREEZE_IMPLEMENTATION_AUDIT_05.md)
@@ -24,7 +24,7 @@ py -3.13 -m venv .venv
 
 Конкретные параметры запуска содержатся в `g1/README.md`; **используйте его и не изменяйте принятый контракт**. Сохранённые файлы `g1/results/` относятся только к синтетическому G1. `g1/` скопирован без изменения файлов из проверенного `G1_RELIABILITY_LAB_v1(1).zip`; в исходном архиве нет git-commit SHA.
 
-- **[Наглядный viewer PR #26](https://github.com/kr13t1/ts-reliability-lab/pull/26)**: независимая presentation-review 05 — **CONDITIONAL GO, 1 MAJOR**. Обычный HTML успешно проверен, но подмена PNG/Standing CSV с обновлением self-declared provenance SHA пока может пройти. **Не принят и не merged**; [единственная задача — trust-boundary fix](docs/NEXT_ACTION.md) в том же PR, затем дельта-аудит 05.\n- **[Начать с графиков: визуальная лаборатория](docs/LAB_VISUAL_WALKTHROUGH.md)** — G1/G2.3 изображения, G2.4 результат и шаги локального запуска. Новый интерфейс ещё не построен ([Issue #25](https://github.com/kr13t1/ts-reliability-lab/issues/25)).
+- **[Принятая offline-лаборатория](visual_lab/README.md)**: PR #26 merged после независимого 05 дельта-GO на точном SHA, 17/17 тестов, 7/7 output SHA, обе ранее выявленные подмены отвергаются. Только визуализация, не новая исследовательская задача.\n- **[Начать с графиков: визуальная лаборатория](docs/LAB_VISUAL_WALKTHROUGH.md)** — G1/G2.3 изображения, G2.4 результат и шаги локального запуска. Offline HTML viewer принят (LAB-032); raw WISDM не хранится в GitHub.
 
 - [Проверенные ближайшие исследования 2025–2026](docs/research/G4_SCOUT_FREEZE_2026-11-04.md) и [план трёх результатов с требованиями НИР-7](docs/publications/THREE_OUTPUTS_AND_NIR7_PLAN.md)
 
