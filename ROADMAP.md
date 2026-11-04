@@ -21,7 +21,7 @@ flowchart LR
   A["G1: синтетика GO"] --> B["G2.2: WISDM read-only GO"]
   B --> C["G2.3: real freeze demo GO"]
   C --> G["G2.4: constant-run baseline A GO"]
-  G --> V["Viewer PR #26: CONDITIONAL GO\\n1 MAJOR — trust boundary"]\n  V --> D["04 fix -> 05 delta review\\nNO MERGE yet"]
+  G --> V["Viewer PR #26: presentation-only GO\\n05 delta audit accepted"]\n  V --> D["Открыть HTML локально\\nпо verified raw"]
   D -.-> F["Наглядный инженерный Хабр после GO"]
   G -.-> H["Full G2 NOT GO; G3 CLOSED"]
   H -.-> I["G4: научная ниша не подтверждена"]
@@ -39,4 +39,4 @@ flowchart LR
 
 ## Ровно один текущий тикет
 
-**[Issue #25 — узкое исправление input integrity визуального PR #26](https://github.com/kr13t1/ts-reliability-lab/issues/25)**. Проверка 05 на HEAD `ec5d108bd4ad7c30391e6976eef12af8f359182a` дала **CONDITIONAL GO presentation-only: 0 CRITICAL, 1 MAJOR, 1 MINOR**. Реальная страница/CLI воспроизводимы, но PNG или Standing x можно подменить с одновременным изменением `g24/provenance.json`. Роль 04 исправляет независимый trust anchor, добавляет два adversarial regression-tests и SHA исполняемого viewer в manifest; затем дельта-аудит 05 нового HEAD и отдельное решение 00. **PR #26 пока не merge**. Исходные G2.4 вычисления приняты и не меняются; full G2 NOT GO, G3 закрыт.
+**Непосредственно сейчас:** [открыть принятый viewer по инструкциям](visual_lab/README.md) или [посмотреть уже сохранённые графики](docs/LAB_VISUAL_WALKTHROUGH.md). PR #26 merged после 05 delta-GO (C/M/m=0/0/0) на `db4b124f4e320ec273ec0322139520eefbfa7ec4`; обе подмены защищены и подтвердили controlled refusal. Никакого G2.5. Следующая проверка — **понятность экрана человеку**, не новый исследовательский запуск. Full G2 NOT GO, G3 закрыт.
