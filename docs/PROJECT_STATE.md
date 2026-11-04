@@ -1,11 +1,21 @@
 # PROJECT_STATE.md — Лаборатория надёжности временных рядов
 
-Версия: v1.19 (G1 GO; G2.2 технический GO; G2.3 PR #13 awaiting independent 05; полный G2 NOT GO; G3–G6 не открыты)  
+Версия: v1.20 (G1 GO; G2.2 и G2.3 технические GO; полный G2 NOT GO; G3–G6 не открыты)  
 Дата фиксации: 2026-11-04  
 Координатор: ветка 00  
 Нормативные документы: `RESEARCH_LAB_CHARTER_v1.md`; `RESEARCH_LAB_CHAT_STARTERS_v1.md`.
 
-## LAB-024 — актуальный статус на 2026-11-04
+## LAB-025 — актуальный статус на 2026-11-04
+
+- **G1:** GO, учебная синтетическая модель.
+- **G2.2:** GO только технический read-only WISDM 1600/A; PR #8 merged.
+- **G2.3:** **GO техническая педагогическая freeze-демонстрация**, независимый 05 [отчёт](audits/G23_FREEZE_IMPLEMENTATION_AUDIT_05.md), C/M/m=0/0/0; PR #13 на frozen `ac5eed80e169d153b94b5d92ffac38e820e8bed7` merged в main, squash `3140c28fa7e93fc804a3fe26a6aa23dc48484717`. Audit PR #15 merged, squash `ba62d43b91f149073b9cbede888da394afc13ad9`. Raw WISDM 1600/A x freeze [1191,2382), 1191 assigned, 1191 changed, D_I=D_Z=3.0753845270371265, L_out=0, 15 unit tests и два реальных запуска независимо воспроизведены 05. **Это величина вмешательства, не ошибка детектора/repair.**
+- **Полный G2:** NOT GO; official full-UCI remote authenticity не установлена, физическая единица q/первичный collector и independent session identity — UNKNOWN. Нет оснований заявлять отсутствие исходных естественных faults.
+- **G3:** закрыт; ни detection, ни recovery, ни selective reliability на реальных независимых группах ещё не оценены. **G4:** предварительная ограниченная разведка, научная ниша НЕ установлена; G5/G6 закрыты. Старое EEG/HFD A/B отдельно.
+- **Три продукта:** Хабр с честной runnable демонстрацией и failure cases; отдельная научная публикация A/B после отдельного проверенного выбора/аудита; НИР-7 по C с обзором и математическим экспериментом, тема ВКР не утверждена. См. [план](publications/THREE_OUTPUTS_AND_NIR7_PLAN.md).
+- **Единственная следующая задача:** [Issue #16](https://github.com/kr13t1/ts-reliability-lab/issues/16), роль 03 — **только PROPOSED математический контракт** baseline A constant-run detection, без кода и без G3 GO. Учесть отрицательные примеры, независимые субъекты/sessions и контроль утечек; выпуск реального эксперимента только после отдельного GO 00 и проверки данных 02.
+
+## LAB-024 — исторический статус (заменён LAB-025)
 
 - **Подтверждено:** G1 GO, G2.2 read-only технический GO, source PR #8 merged. Raw 1600/A SHA `40b7f60880b495ccb3c345b9ab11216dfa6bbb2bb887bcb45fb55020278fc22f`, 3574 строк; q unit/physical sessions UNKNOWN, remote full UCI checksum UNVERIFIED. Полный G2 NOT GO.
 - **G2.3 (единственный код на рассмотрении):** PR #13 **OPEN, NOT MERGED**, frozen HEAD `ac5eed80e169d153b94b5d92ffac38e820e8bed7`. Автор заявляет PASS_DEMO на α0/α1, 15 tests + CI; координатор отдельно пересчитал x[1190]=0.43917847, n_changed=1191, D_I≈3.075384527037127 по raw. Это не заменяет 05 аудит. `docs/g2/G23_COORDINATOR_SPOTCHECK_00.md`.
@@ -252,3 +262,8 @@
 ## LAB-024 — новая координация (2026-11-04)
 
 Операционный статус и доказательные ограничения — в верхней секции LAB-024. Создана Issue #14 для независимого 05 по PR #13; новое практическое/научное направление не открывалось. Подробное решение: `docs/DECISIONS.md` LAB-024.
+
+
+## LAB-025 — факт приёмки G2.3 и следующий gate (2026-11-04)
+
+Решение 00 в `docs/DECISIONS.md`, audit PR #15 и implementation PR #13 приняты; техническая G2.3 закрыта. Без разрешения 00 не переходить от предложенного математического контракта baseline A к программированию, моделям и G3.
