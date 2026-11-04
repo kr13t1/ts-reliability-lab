@@ -24,7 +24,7 @@ py -3.13 -m venv .venv
 
 Конкретные параметры запуска содержатся в `g1/README.md`; **используйте его и не изменяйте принятый контракт**. Сохранённые файлы `g1/results/` относятся только к синтетическому G1. `g1/` скопирован без изменения файлов из проверенного `G1_RELIABILITY_LAB_v1(1).zip`; в исходном архиве нет git-commit SHA.
 
-- **[Начать с графиков: визуальная лаборатория](docs/LAB_VISUAL_WALKTHROUGH.md)** — G1/G2.3 изображения, G2.4 результат и шаги локального запуска. Новый интерфейс ещё не построен ([Issue #25](https://github.com/kr13t1/ts-reliability-lab/issues/25)).
+- **[Наглядный viewer PR #26](https://github.com/kr13t1/ts-reliability-lab/pull/26)**: независимая presentation-review 05 — **CONDITIONAL GO, 1 MAJOR**. Обычный HTML успешно проверен, но подмена PNG/Standing CSV с обновлением self-declared provenance SHA пока может пройти. **Не принят и не merged**; [единственная задача — trust-boundary fix](docs/NEXT_ACTION.md) в том же PR, затем дельта-аудит 05.\n- **[Начать с графиков: визуальная лаборатория](docs/LAB_VISUAL_WALKTHROUGH.md)** — G1/G2.3 изображения, G2.4 результат и шаги локального запуска. Новый интерфейс ещё не построен ([Issue #25](https://github.com/kr13t1/ts-reliability-lab/issues/25)).
 
 - [Проверенные ближайшие исследования 2025–2026](docs/research/G4_SCOUT_FREEZE_2026-11-04.md) и [план трёх результатов с требованиями НИР-7](docs/publications/THREE_OUTPUTS_AND_NIR7_PLAN.md)
 
