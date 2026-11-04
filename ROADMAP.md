@@ -11,22 +11,20 @@
 | **G2.1 / G2.2** | **Технический GO:** независимый precheck WISDM и read-only 1600/A, принятый PR #8, график | q unit/полные official UCI bytes/session identity остаются UNKNOWN |
 | **G2.3** | **Технический GO (LAB-025):** α=0/1, x freeze [1191,2382), точная Z и метрики; PR #13 + audit PR #15 приняты в main | Принят только искусственный freeze одной записи; не качество detector/repair/ML |
 | **Full G2** | **NOT GO:** полный provenance и независимый dataset/split protocol пока не закрыты | Нельзя научно оценивать generalization по одной записи |
-| **G2.4 baseline A** | Контракт 03 и вход Standing/E приняты по LAB-026/027; **PR #21 опубликован, авторские результаты получены, независимый аудит 05 ожидается** | L=3 фиксирован, existing baseline, не собственный метод; до 05 аудитa и 00 нельзя считать реализацию принятой |
+| **G2.4 baseline A** | Контракт 03 и вход Standing/E приняты по LAB-026/027; **Технический GO (LAB-029), PR #21 принят после независимого 05**, три учебных случая проверены | L=3 фиксирован, existing baseline, не собственный метод; не подтверждает обобщение, real hardware faults или научную новизну |
 | **G3** | NOT OPEN: три задачи детекция, восстановление, selective reliability | Сначала формализовать контракт baseline/split и получить разрешение 00 |
 | **G4** | LIMITED SCOUT: проверены аналоги 2025–2026, но полной prior-art matrix нет | Научная ниша и вклад не подтверждены |
 | **G5/G6** | NOT OPEN | Никаких собственных методов, научных улучшений/публикационных claims заранее |
 
 ```mermaid
 flowchart LR
-  A["G1: синтетика\\nGO"] --> B["G2.2: WISDM reference\\nтехнический GO"]
-  B --> C["G2.3: freeze на реальном сигнале\\nGO по независимому 05"]
-  C --> G["Baseline A: математический контракт\\nGO, PR #17"]
-  G --> R["Standing/E raw control\\nGO, PR #19"]
-  R --> T["G2.4: авторский PR #21\\nАудит 05, Issue #23"]
-  T --> P{"Независимый аудит 05\\nи решение 00"}
-  P -.-> H["G3: detection/repair/reliability\\nНЕ ОТКРЫТ"]
-  H --> I["G4: prior-art gap\\nНЕ ПРИНЯТ"]
-  I --> J["G5: одна математическая задача\\nНЕ ВЫБРАНА"]
+  A["G1: синтетика GO"] --> B["G2.2: WISDM read-only GO"]
+  B --> C["G2.3: real freeze demo GO"]
+  C --> G["G2.4: constant-run baseline A GO"]
+  G --> V["Визуальная offline-галерея, Issue #25"]
+  V --> F["Наглядный инженерный Хабр после review"]
+  G -.-> H["Full G2 NOT GO; G3 CLOSED"]
+  H -.-> I["G4: научная ниша не подтверждена"]
 ```
 
 ## Три результата — три разных критерия готовности
@@ -41,4 +39,4 @@ flowchart LR
 
 ## Ровно один текущий тикет
 
-**[Issue #23 — независимый аудит 05 G2.4 PR #21](https://github.com/kr13t1/ts-reliability-lab/issues/23)** на frozen HEAD `99c88cff3970f7b71fabefeb94f7c88f7a662013`. Автор сдал код, но его локальные прогоны использовали временные совместимые g2/g23 adapters, поэтому 05 обязан воспроизвести исходную реализацию с оригинальными модулями и реальными raw bytes. Альтернативный PR #22 закрыт как дубль. Full G2 NOT GO, G3 закрыт.
+**[Issue #25 — offline галерея из принятых G2.3/G2.4](https://github.com/kr13t1/ts-reliability-lab/issues/25)**. Технический G2.4 принят после независимого дельта-аудита 05 на fixed `a242f09eba6c1b2b2dcbe2073665e26580c211a2`; PR #21 merged. Уже подготовлен [путеводитель по настоящим графикам](docs/LAB_VISUAL_WALKTHROUGH.md). Следующая роль 04 собирает только презентацию existing CSV/PNG, без нового метода, ML, новых датчиков или изменения параметров; после PR отдельная presentation-review 05/00. Full G2 NOT GO, G3 закрыт.
