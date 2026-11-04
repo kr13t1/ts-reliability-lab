@@ -1,11 +1,18 @@
 # PROJECT_STATE.md — Лаборатория надёжности временных рядов
 
-Версия: v1.25 (G1/G2.2/G2.3/G2.4 ограниченные технические GO; offline viewer PR #26 CONDITIONAL GO, исправление MAJOR-01 ожидается; full G2 NOT GO, G3 CLOSED)  
+Версия: v1.26 (G1/G2.2/G2.3/G2.4 ограниченные технические GO; viewer PR #26 new SHA READY_FOR_DELTA_PRESENTATION_AUDIT, not accepted; full G2 NOT GO, G3 CLOSED)  
 Дата фиксации: 2026-11-04  
 Координатор: ветка 00  
 Нормативные документы: `RESEARCH_LAB_CHARTER_v1.md`; `RESEARCH_LAB_CHAT_STARTERS_v1.md`.
 
-## LAB-030 — актуальный статус на 2026-11-04
+## LAB-031 — актуальный статус на 2026-11-04
+
+- **05 дельта-аудит ожидается:** [PR #26](https://github.com/kr13t1/ts-reliability-lab/pull/26) OPEN, NOT MERGED, новый frozen HEAD `db4b124f4e320ec273ec0322139520eefbfa7ec4`. Compare с ранее условно проверенным `ec5d108bd4ad7c30391e6976eef12af8f359182a`: **3 коммита, 3 файла только `visual_lab/`** (builder, viewer tests, README). Данные и вычислительные G1/G2/G2.2/G2.3/G2.4 не затронуты. Исходный вывод 05 был CONDITIONAL GO C0/M1/m1; этот статус не повышается по авторскому отчёту автоматически.
+- **Заявлено автором, независимо ещё не подтверждено:** фиксированные SHA G2.4 PNG/CSV/Standing mask независимы от self-declared `g24/provenance.json`, два tamper-tests отклоняют подменённые PNG и Standing x с изменённым self-declared checksum; HTML обычного случая совпадает, 17/17 тестов автора; `viewer_executed_source_sha256` сохраняется при отсутствии `.git`. **Кандидатные PNG hashes и их renderer/platform ограничение должны быть подтверждены 05**, иначе нельзя выдавать PASS_PRESENTATION за проверенное изображение.
+- **Единственное следующее действие:** независимый 05 дельта-аудит **на этом SHA** по [Issue #25 и комментариям 00](https://github.com/kr13t1/ts-reliability-lab/issues/25#issuecomment-6628212767). Проверить original accepted G2.4 integration, fixed PNG/CSV/Standing hashes, обе tamper-атаки, нормальный HTML, provenance builder. Затем 00 решает merge; до этого PR #26 открыт.
+- **Стадии:** G1/G2.2/G2.3/G2.4 технические GO, **full G2 NOT GO, G3 CLOSED**, G4 только limited scout; никаких G2.5, новых детекторов, ML/repair/научной новизны. Три отдельных результата — Хабр, отдельная EEG/HFD научная статья, НИР-7.
+
+## LAB-030 — исторический статус (заменён LAB-031)
 
 - **Принятый вычислительный фундамент неизменен:** G1 синтетика GO; G2.2 WISDM read-only GO; G2.3 искусственный freeze GO; G2.4 существующий exact constant-run baseline A **технический GO**, PR #21 merged по LAB-029. Ни новых методов, ни решений о научной нише или классификации.
 - **Наглядный интерфейс:** [PR #26](https://github.com/kr13t1/ts-reliability-lab/pull/26) HEAD `ec5d108bd4ad7c30391e6976eef12af8f359182a` **OPEN/UNMERGED** по результату независимого 05 [Issue #25](https://github.com/kr13t1/ts-reliability-lab/issues/25#issuecomment-6627926365): **CONDITIONAL GO presentation-only, CRITICAL=0/MAJOR=1/MINOR=1**. Обычный оригинальный G2.4 CLI → `visual_lab.build`, 15/15 tests, статический HTML/screenshot воспроизведены, но *безусловная приёмка интерфейса заблокирована*.
