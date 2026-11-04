@@ -141,12 +141,15 @@ def validate_g23_metadata(g23_dir: Path, config: dict) -> dict:
         raise Refusal('BLOCKED_IDENTITY', 'G2.3 selection differs')
     if (sel.get('subject'),sel.get('activity'),sel.get('start_line'),sel.get('end_line'),sel.get('n')) != (1600,'A',1,3574,3574):
         raise Refusal('BLOCKED_IDENTITY','G2.3 record selection differs')
+    provenance_files = prov.get('files_sha256')
+    if type(provenance_files) is not dict:
+        raise Refusal('REJECTED_INPUT', 'G2.3 provenance.files_sha256 must be a JSON object')
     expected_files = {'reference.csv': config['g23_reference_sha256'],
                       'config.json': EXPECTED_CONFIG_SHA, 'selection.json': EXPECTED_SELECTION_SHA}
     expected_files.update({f'alpha_{a}/arrays.csv': d for a,d in EXPECTED_MODE_SHA.items()})
     for rel, digest in expected_files.items():
         _check_bytes(g23_dir/rel, digest, rel)
-        if prov.get('files_sha256',{}).get(rel) != digest:
+        if provenance_files.get(rel) != digest:
             raise Refusal('BLOCKED_IDENTITY', f'G2.3 provenance mismatch: {rel}')
     return {'g23_files_sha256':expected_files, 'g23_provenance_sha256':sha_file(g23_dir/'provenance.json')}
 
