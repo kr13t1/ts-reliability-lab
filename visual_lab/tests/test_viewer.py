@@ -1,4 +1,6 @@
 import csv
+import io
+from contextlib import redirect_stdout
 import hashlib
 import json
 import os
@@ -108,6 +110,10 @@ class IntegrationCases(unittest.TestCase):
         self.assertFalse(manifest['read_raw'])
         self.assertFalse(manifest['recomputed_detector'])
         self.assertTrue(manifest['input_sha256']['g24/1600_E_raw/masks.csv'])
+        self.assertEqual(manifest['viewer_executed_source_sha256'],
+                         hashlib.sha256(Path(viewer.__file__).read_bytes()).hexdigest())
+        if not (Path(viewer.__file__).resolve().parents[1]/'.git').exists():
+            self.assertIsNone(manifest['viewer_git_sha'])
 
     def test_missing_png_rejected(self):
         (self.g24/'1600_E_raw/detection.png').unlink()
@@ -151,6 +157,48 @@ class IntegrationCases(unittest.TestCase):
         self.rewrite_prov()
         with self.assertRaisesRegex(viewer.InputError, 'Mask/source row identity'):
             self.run_viewer()
+
+    def test_swapped_standing_png_with_self_declared_hash_is_rejected(self):
+        standing_png = self.g24/'1600_E_raw/detection.png'
+        walking_png = self.g24/'1600_A_alpha_1/detection.png'
+        assert standing_png.read_bytes() != walking_png.read_bytes()
+        standing_png.write_bytes(walking_png.read_bytes())  # valid, different PNG
+        self.rewrite_prov()  # attacker also repairs the mutable hash map
+        result = io.StringIO()
+        out = Path(self.tmp.name)/'page'
+        with redirect_stdout(result):
+            status = viewer.main(['--g23-dir', str(self.g23), '--g24-dir', str(self.g24),
+                                  '--output-dir', str(out)])
+        self.assertEqual(status, 2)
+        outcome = json.loads(result.getvalue())
+        self.assertEqual(outcome['status'], 'REJECTED_INPUT')
+        self.assertIn('fixed-source SHA mismatch: 1600_E_raw/detection.png', outcome['detail'])
+        self.assertFalse((out/'index.html').exists())
+        self.assertFalse((out/'manifest.json').exists())
+
+    def test_standing_observation_rewrite_with_rehashed_provenance_is_rejected(self):
+        p = self.g24/'1600_E_raw/masks.csv'
+        with p.open(newline='', encoding='utf-8') as f:
+            reader = csv.DictReader(f); rows = list(reader)
+            columns = reader.fieldnames
+        assert columns is not None
+        original = rows[100]['obs_x']
+        rows[100]['obs_x'] = repr(float(original) + .125)
+        with p.open('w', newline='', encoding='utf-8') as f:
+            writer = csv.DictWriter(f, fieldnames=columns, lineterminator='\n')
+            writer.writeheader(); writer.writerows(rows)
+        self.rewrite_prov()  # attacker also repairs the mutable hash map
+        result = io.StringIO()
+        out = Path(self.tmp.name)/'page'
+        with redirect_stdout(result):
+            status = viewer.main(['--g23-dir', str(self.g23), '--g24-dir', str(self.g24),
+                                  '--output-dir', str(out)])
+        self.assertEqual(status, 2)
+        outcome = json.loads(result.getvalue())
+        self.assertEqual(outcome['status'], 'REJECTED_INPUT')
+        self.assertIn('fixed-source SHA mismatch: 1600_E_raw/masks.csv', outcome['detail'])
+        self.assertFalse((out/'index.html').exists())
+        self.assertFalse((out/'manifest.json').exists())
 
     def test_wrong_provenance_type_is_refused(self):
         p = self.g24/'provenance.json'
