@@ -3,6 +3,9 @@ import hashlib
 import json
 import tempfile
 import unittest
+import shutil
+import io
+from contextlib import redirect_stdout
 from pathlib import Path
 from unittest.mock import patch
 import numpy as np
@@ -85,4 +88,58 @@ class PipelineTests(unittest.TestCase):
             out=Path(td);(out/'existing.txt').write_text("do not change me")
             with self.assertRaises(demo.Refusal): demo.execute(G23,INPUT,out,demo.CONFIG_PATH)
             self.assertEqual((out/'existing.txt').read_text(),"do not change me")
+
+class MalformedProvenanceTests(unittest.TestCase):
+    """No external raw is required: malformed metadata must be rejected first."""
+
+    @staticmethod
+    def _copy_metadata(root: Path, files_sha256_marker):
+        root.mkdir(parents=True, exist_ok=True)
+        for name in ('config.json', 'validation.json', 'selection.json'):
+            shutil.copyfile(G23/name, root/name)
+        provenance = json.loads((G23/'provenance.json').read_text(encoding='utf-8'))
+        if files_sha256_marker == '__ABSENT__':
+            provenance.pop('files_sha256', None)
+        else:
+            provenance['files_sha256'] = files_sha256_marker
+        (root/'provenance.json').write_text(json.dumps(provenance), encoding='utf-8')
+
+    def test_invalid_files_sha256_shapes_controlled_refusal(self):
+        cases = [('null', None), ('list', []), ('string', 'invalid'),
+                 ('number', 3), ('missing', '__ABSENT__')]
+        with tempfile.TemporaryDirectory() as td:
+            base = Path(td)
+            for label, malformed in cases:
+                with self.subTest(provenance_files_sha256=label):
+                    source, destination = base/('input_'+label), base/('output_'+label)
+                    self._copy_metadata(source, malformed)
+                    result = demo.execute(source, base/'raw-not-present.txt', destination,
+                                          demo.CONFIG_PATH)
+                    self.assertEqual(result['status'], 'REJECTED_INPUT')
+                    self.assertIn('provenance.files_sha256', result['detail'])
+                    validation = json.loads((destination/'validation.json').read_text())
+                    provenance = json.loads((destination/'provenance.json').read_text())
+                    self.assertEqual(validation['status'], 'REJECTED_INPUT')
+                    self.assertEqual(provenance['status'], 'REJECTED_INPUT')
+                    self.assertIn('validation.json', provenance['files_sha256'])
+                    self.assertFalse((destination/'results.csv').exists())
+                    self.assertFalse((destination/'events.json').exists())
+                    self.assertFalse((destination/'1600_A_alpha_1').exists())
+
+    def test_cli_null_hash_map_exit_two_with_artifacts(self):
+        with tempfile.TemporaryDirectory() as td:
+            base = Path(td)
+            source, output = base/'g23', base/'output'
+            self._copy_metadata(source, None)
+            out = io.StringIO()
+            with redirect_stdout(out):
+                exit_code = demo.main(['--g23-dir', str(source),
+                    '--standing-input', str(base/'missing-raw.txt'),
+                    '--output-dir', str(output)])
+            self.assertEqual(exit_code, 2)
+            self.assertEqual(json.loads(out.getvalue())['status'], 'REJECTED_INPUT')
+            self.assertEqual(json.loads((output/'validation.json').read_text())['status'], 'REJECTED_INPUT')
+            self.assertEqual(json.loads((output/'provenance.json').read_text())['status'], 'REJECTED_INPUT')
+            self.assertFalse((output/'results.csv').exists())
+
 if __name__=='__main__':unittest.main()
