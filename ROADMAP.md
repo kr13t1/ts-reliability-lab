@@ -19,8 +19,12 @@
 flowchart LR
   A["G1: синтетика\nGO"] --> B["G2.2: WISDM reference\nтехнический GO"]
   B --> C["G2.3: freeze на реальном сигнале\nGO по независимому 05"]
-  C --> G["PROPOSED контракт baseline A\nIssue #16, роль 03"]
-  G --> H["G3: detector/repair/reliability\nНЕ ОТКРЫТ"]
+  C --> G["Baseline A: математический контракт\n00 GO, PR #17"]
+  G --> R["Standing/E read-only precheck\nIssue #18 · роль 02"]
+  R --> P{"00 разрешит учебный G2.4?"}
+  P -->|положительное решение| T["Код и независимый аудит 05\nЕщё НЕ РАЗРЕШЕНЫ"]
+  P -->|блокер| X["Устранить ограничение источника"]
+  T -.-> H["G3: detector/repair/reliability\nНЕ ОТКРЫТ"]
   H --> I["G4: prior-art gap\nНЕ ПРИНЯТ"]
   I --> J["G5: одна математическая задача\nНЕ ВЫБРАНА"]
 ```
