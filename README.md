@@ -6,7 +6,7 @@
 ## Куда смотреть
 
 - [Актуальная дорожная карта](ROADMAP.md) (старые картинки roadmap.png/svg отражают раннюю версию)
-- [Единственная следующая задача: математический контракт baseline A](docs/NEXT_ACTION.md)
+- [Единственная следующая задача: роль 02 проверяет Standing/E input](docs/NEXT_ACTION.md)
 - [Текущее состояние](docs/PROJECT_STATE.md) и [журнал решений](docs/DECISIONS.md)
 - [Проверенное синтетическое G1](g1/README.md), исходный код, 32 теста, сохранённые результаты
 - [Паспорт реальных данных — черновик](data/DATASET_CARD_G2_DRAFT.md), [provenance](data/provenance/), [принятый read-only G2.2](g2/README.md), [принятый G2.3 freeze-demo](g23/README.md), [независимый отчёт 05](docs/audits/G23_FREEZE_IMPLEMENTATION_AUDIT_05.md)
@@ -25,6 +25,8 @@ py -3.13 -m venv .venv
 Конкретные параметры запуска содержатся в `g1/README.md`; **используйте его и не изменяйте принятый контракт**. Сохранённые файлы `g1/results/` относятся только к синтетическому G1. `g1/` скопирован без изменения файлов из проверенного `G1_RELIABILITY_LAB_v1(1).zip`; в исходном архиве нет git-commit SHA.
 
 - [Проверенные ближайшие исследования 2025–2026](docs/research/G4_SCOUT_FREEZE_2026-11-04.md) и [план трёх результатов с требованиями НИР-7](docs/publications/THREE_OUTPUTS_AND_NIR7_PLAN.md)
+
+- [Проверенный математический контракт baseline A](docs/g2/G24_CONSTANT_RUN_BASELINE_SPEC.md) и [review 00](docs/g2/G24_SPEC_REVIEW_00.md) — документ GO, detector **не реализован**. [Вход Standing/E ожидает проверки 02](https://github.com/kr13t1/ts-reliability-lab/issues/18).
 
 ## Три независимых целевых выхода
 
