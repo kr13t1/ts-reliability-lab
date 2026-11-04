@@ -45,3 +45,29 @@ Python 3.13.5, NumPy 2.3.5, Matplotlib 3.10.8 on Linux; 26 tests passed with ver
 The frozen predictor flags x[1190:2382), while assigned injection is x[1191:2382): **one boundary FP** at anchor i=1190. On both negative controls no run of length 3 was detected; this is **not** a real sensor false-alarm-rate result. All three cases are from one subject and do not yield independent trials, generalizable accuracies, confidence intervals or latency claims. Unknown: whether any natural sensor faults exist; session identities, physical q units and remote UCI checksums.
 
 The author's reproducibility bundle with full sample CSV and PNG is G24_ISSUE20_IMPLEMENTATION_v1.zip (shared with the user for 05). PR stores source and factual summaries; per-sample files can be recreated with the four commands above. No merge until 05 read-only audit on frozen SHA and separate 00 decision.
+
+## Delta after independent audit 05 (original HEAD 99c88cff)
+
+Audit 05 identified **MAJOR-01**: a syntactically valid G2.3 provenance JSON with
+`"files_sha256": null` caused an unhandled `AttributeError` before refusal artifacts
+were written. The G2.4 input gate now requires `files_sha256` to be a JSON object,
+and rejects null, list, string, number, or missing values with `REJECTED_INPUT`
+(exit 2 for CLI) and persisted `validation.json`/`provenance.json`. No detector,
+threshold, injected masks, raw source, or three-case experimental result is changed.
+The new tests simulate malformed metadata using copies of the already committed
+G2.3 metadata and **do not require WISDM raw**:
+
+    python -m unittest g24.tests.test_pipeline.MalformedProvenanceTests -v
+    python -m unittest discover -s g24/tests -v
+
+`g24/reports/events.json` has also been adjusted to the float representation
+that `json.dumps` writes for defined rates (`0.0`, `1.0` rather than `0`, `1`);
+**numerical values and the mask counts did not change**.
+
+`.github/workflows/g24-fixture-tests.yml` runs the G2.4 fixture tests on a
+GitHub-hosted Python 3.13.5 environment. The verified raw TXT is *deliberately not*
+committed, so raw-dependent `PipelineTests` are skipped in GitHub CI; a green
+fixture check **does not substitute** for independent raw integration audit 05.
+The latter must still rerun the same CLI with `data/raw/data_1600_accel_phone.txt`
+and the accepted G2.3 output. Until 05 audits the updated PR HEAD and 00 decides,
+G2.4 is **not** technically accepted; full G2 NOT GO and G3 closed.
