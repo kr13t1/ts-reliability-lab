@@ -1,11 +1,19 @@
 # PROJECT_STATE.md — Лаборатория надёжности временных рядов
 
-Версия: v1.23 (G1, G2.2, G2.3 технические GO; G2.4 PR #21 только на независимом аудите 05; full G2 NOT GO, G3 CLOSED)  
+Версия: v1.24 (G1, G2.2, G2.3, G2.4 ограниченные технические GO; полный G2 NOT GO, G3 CLOSED; далее наглядная offline-сборка)  
 Дата фиксации: 2026-11-04  
 Координатор: ветка 00  
 Нормативные документы: `RESEARCH_LAB_CHARTER_v1.md`; `RESEARCH_LAB_CHAT_STARTERS_v1.md`.
 
-## LAB-028 — актуальный статус на 2026-11-04
+## LAB-029 — актуальный статус на 2026-11-04
+
+- **G2.4 технически принят по решению 00 после независимого дельта-аудита 05:** original audit PR #24 (COND GO on SHA `99c88cff3970f7b71fabefeb94f7c88f7a662013`) в main, squash `37aa12e4b50f4d15cd948dfbd51e7085f45f8a5e`; delta review 05 [Issue #23](https://github.com/kr13t1/ts-reliability-lab/issues/23#issuecomment-6627225305) на новом fixed HEAD `a242f09eba6c1b2b2dcbe2073665e26580c211a2` **GO**, CRITICAL/MAJOR/MINOR=0/0/0 оставшихся. Implementation [PR #21](https://github.com/kr13t1/ts-reliability-lab/pull/21) merged `91bd08c3564e8c335013480274ce2c0c5428acbb`, PR #22 закрыт как дублирующая реализация без merge. Issues #20/#23 закрыты.
+- **Факт аудитa:** original принят G2.2/G2.3 в связке с G2.4 (source-копия проверена по Git blobs, **без .git checkout** и без adapters), независимый raw SHA, 28/28 локальных тестов, три PASS_DEMO, одинаковые non-provenance выходы. Отдельный G2.4 CI fixture-only: 20 исполненных и 8 честно skipped raw-tests; raw отдельно проверен аудитором.
+- **Числа ограниченного учебного примера:** Walking/A α0 TP/FP/FN/TN `0/0/0/3574`; α1 `1191/1/0/2382` (один неизбежный anchor FP, i=1190); Standing/E без нашей инъекции `0/0/0/3572`. Неповреждённая *нашим оператором* запись `Z=0` **не** proven-clean sensor; субъекты/сессии не независимы, физическая единица q UNKNOWN, full UCI remote attestation UNVERIFIED.
+- **Для пользователя уже создан [первый наглядный путеводитель](LAB_VISUAL_WALKTHROUGH.md)** с настоящими сохранёнными G1/G2.3 графиками и точными командами генерации G2.4. Следующий **единственный** [Issue #25](https://github.com/kr13t1/ts-reliability-lab/issues/25) — роль 04 собирает локальный offline HTML viewer/галерею **только из принятых исходных CSV/PNG**, без новых датчиковых моделей/метрик/сценариев и без открытия G3. Отдельная presentation-review 05/00 перед merge нового интерфейса. Work не требуется.
+- **Границы:** G1 GO; G2.2 read-only technical GO; G2.3 artificial freeze GO; G2.4 pedagogical exact-run baseline A GO; **полный G2 NOT GO**, G3 closed, G4 limited scout only, G5/G6 закрыты. Хабр — честная инженерная статья с failure cases; научная EEG/HFD статья A/B отдельно; НИР-7 по C с математикой и реальными выполненными опытами; новизна, реальная fault detection или тема ВКР не заявлены.
+
+## LAB-028 — исторический статус (заменён LAB-029)
 
 - **Подтверждено из GitHub:** для Issue #20 опубликованы две отдельные реализации `g24/`: PR #21 frozen `99c88cff3970f7b71fabefeb94f7c88f7a662013` (15 файлов, 26 заявленных unit tests) и альтернативный draft PR #22 frozen `176a5ee6096d24a8dbec0258a52d838938847bc7` (11 файлов, 25 заявленных tests). 00 выбрал **только PR #21** как канонический объект независимого аудита 05; PR #22 закрыт без merge как организационный дубль, не как технически опровергнутая реализация. Никакие байты из двух PR не смешивать.
 - **G2.4 пока НЕ GO:** PR #21 OPEN/UNMERGED, source HEAD `99c88cff3970f7b71fabefeb94f7c88f7a662013`. Авторские, не аудированные на оригинальном checkout расчёты 1600/A alpha0 `TP/FP/FN/TN=0/0/0/3574`, 1600/A alpha1 `1191/1/0/2382`, 1600/E без инъекции `0/0/0/3572`; 26 тестов и два CLI заявлены автором. Локальное воспроизведение использовало **временные совместимые g2/g23 adapters**, что требует отдельной проверки 05 с неизменёнными оригинальными модулями.
