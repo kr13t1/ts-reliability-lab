@@ -1,11 +1,18 @@
 # PROJECT_STATE.md — Лаборатория надёжности временных рядов
 
-Версия: v1.22 (G1 GO; G2.2/G2.3 технические GO; математический baseline A + Standing/E input precheck GO; узкая реализация G2.4 разрешена, результатов ещё нет; full G2 NOT GO, G3–G6 CLOSED)  
+Версия: v1.23 (G1, G2.2, G2.3 технические GO; G2.4 PR #21 только на независимом аудите 05; full G2 NOT GO, G3 CLOSED)  
 Дата фиксации: 2026-11-04  
 Координатор: ветка 00  
 Нормативные документы: `RESEARCH_LAB_CHARTER_v1.md`; `RESEARCH_LAB_CHAT_STARTERS_v1.md`.
 
-## LAB-027 — актуальный статус на 2026-11-04
+## LAB-028 — актуальный статус на 2026-11-04
+
+- **Подтверждено из GitHub:** для Issue #20 опубликованы две отдельные реализации `g24/`: PR #21 frozen `99c88cff3970f7b71fabefeb94f7c88f7a662013` (15 файлов, 26 заявленных unit tests) и альтернативный draft PR #22 frozen `176a5ee6096d24a8dbec0258a52d838938847bc7` (11 файлов, 25 заявленных tests). 00 выбрал **только PR #21** как канонический объект независимого аудита 05; PR #22 закрыт без merge как организационный дубль, не как технически опровергнутая реализация. Никакие байты из двух PR не смешивать.
+- **G2.4 пока НЕ GO:** PR #21 OPEN/UNMERGED, source HEAD `99c88cff3970f7b71fabefeb94f7c88f7a662013`. Авторские, не аудированные на оригинальном checkout расчёты 1600/A alpha0 `TP/FP/FN/TN=0/0/0/3574`, 1600/A alpha1 `1191/1/0/2382`, 1600/E без инъекции `0/0/0/3572`; 26 тестов и два CLI заявлены автором. Локальное воспроизведение использовало **временные совместимые g2/g23 adapters**, что требует отдельной проверки 05 с неизменёнными оригинальными модулями.
+- **Ровно один следующий шаг:** [Issue #23](https://github.com/kr13t1/ts-reliability-lab/issues/23) — 05 независимо аудирует замороженный PR #21: код, original g2/g23, raw SHA и Standing/E segment, per-sample Zhat/Z, TP/FP/FN/TN, CSV/PNG, provenance и negative cases; результаты аудитора и решение 00 о merge обязательны.
+- **Не меняется:** G1 GO; G2.2/G2.3 ограниченные технические GO; математический контракт baseline A и Standing/E input GO; **full G2 NOT GO, G3 CLOSED, G4 only preliminary scout, G5/G6 CLOSED**. Никаких реальных hardware fault labels, физической единицы q, независимых session IDs, full remote-UCI attestation или научной новизны. Три выхода: честный Хабр, отдельная статья EEG/HFD A/B, НИР-7 по воспроизводимым C.
+
+## LAB-027 — исторический статус (заменён LAB-028)
 
 - **Вход Standing/E подтверждён.** Роль 02 сдала [PR #19](https://github.com/kr13t1/ts-reliability-lab/pull/19), frozen `f05b9f92e09b93946c10ef5d62a4a619e07423d2`, один документ `docs/g2/G24_STANDING_CONTROL_PRECHECK_02.md`. 00 **независимо по исходным ZIP/TXT байтам**, не по авторской таблице, повторил: transport SHA `7aca931a3af368bae0ac932140aff270f9cd5f0c6c783e393c83c1672628f503`; raw member SHA `40b7f60880b495ccb3c345b9ab11216dfa6bbb2bb887bcb45fb55020278fc22f`; raw 64 311 физических строк; 1600/E строк **14292..17863**, N=3572, q_first `241892286783982`, q_last `242072100924919`; сохранены x/y/z, q strictly increasing внутри блока, соседние D/F; exact byte region `[777955,970663)`, **192 708 bytes**, SHA `50edfd731735d54cd76fe4c0a38da914fca7b567ae4e3b3d389f2d687fadb61d`. **GO только input precheck, C/M/m=0/0/0**, PR #19 merged squash `c4cff35467f44bc9e5df523ec2a17e4bd2cfb2a8`.
 - **Техническая G2.4 разрешена к исполнению только в узком объёме:** математический `G24_CONSTANT_RUN_BASELINE_SPEC.md` уже принят в LAB-026; существующая exact constant-run эвристика baseline A (`L=3`, `epsilon=0`, `Zhat` из **только наблюдаемого X_obs**). Случаи: 1600/A alpha=0, 1600/A alpha=1, 1600/E без нашей инъекции. **Код/метрики G2.4 ещё не существуют; GO для итогового G2.4 результата пока нет.**
