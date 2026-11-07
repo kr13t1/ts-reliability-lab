@@ -1,11 +1,18 @@
 # PROJECT_STATE.md — Лаборатория надёжности временных рядов
 
-Версия: v1.28 (LAB-033: новая научная статья только по C; G1/G2.2/G2.3/G2.4 и Linux viewer — ограниченные технические GO; full G2 NOT GO; G3 CLOSED)  
+Версия: v1.29 (LAB-034: Windows diagnosis verified from user JSON; Issue #27 portability implementation only, pending 05; G1/G2.2/G2.3/G2.4 technical GO, Linux viewer presentation GO; full G2 NOT GO, G3 CLOSED)  
 Дата фиксации: 2026-11-04  
 Координатор: ветка 00  
 Нормативные документы: `RESEARCH_LAB_CHARTER_v1.md`; `RESEARCH_LAB_CHAT_STARTERS_v1.md`.
 
-## LAB-033 — действующие публикационные цели и реальный Windows feedback / 2026-11-04
+## LAB-034 — действующий статус / 2026-11-07
+
+- **Подтверждённый пользовательский отчёт:** [Windows viewer diagnosis](diagnostics/WINDOWS_VIEWER_20261107.md). Windows Python 3.11.9, NumPy 2.3.5, Matplotlib 3.10.8, genuine raw SHA верен, `g24.demo PASS_DEMO`; **4/4 G2.4 CSV fixed hashes OK**, **3/3 G2.4 PNG DIFF**; `g24/provenance.json.files_sha256` использует `\\` в relative keys, viewer `REJECTED_INPUT exit 2`, HTML не создан. Это документированная пользовательская диагностика, **не независимый 05 Windows execution**. Прежний Linux viewer presentation-only GO LAB-032 не отменён.
+- **Единственное следующее активное поручение:** [Issue #27](https://github.com/kr13t1/ts-reliability-lab/issues/27), ветка **04/Work**. Зафиксирован [WINDOWS_VIEWER_PORTABILITY_CONTRACT_v1](specs/WINDOWS_VIEWER_PORTABILITY_CONTRACT_v1.md), разрешён **только небольшой source PR в `visual_lab/`**: безопасная нормализация Windows/POSIX provenance paths с отказом от ambiguous/colliding, portable `--g24-png-mode omit` без встраивания/объявления verified PNG и с SVG по pinned CSV; legacy strict mode прежний. После реализации независимый **05** на exact HEAD, затем настоящий Windows positive smoke и лишь 00 merge.
+- **Публикационный приоритет:** Хабр на реально воспроизводимом и понятном UI; текущий viewer статичен, **настоящая интерактивность будет отдельной следующей задачей только после закрытия #27**. Научная статья только по проекту C и НИР-7 используют общую базу без ранних заявлений о новизне.
+- **Границы:** G1, G2.2, G2.3, G2.4 — ограниченные технические GO, Linux viewer — presentation-only GO; **Windows viewer NOT GO**, **full G2 NOT GO, G3 CLOSED**, G4 scout only, G5/G6 closed, G2.5 нет. Не менять принятые метрики, не использовать test для tuning, не утверждать hardware fault labels.
+
+## LAB-033 — исторический статус (дополнен LAB-034) / 2026-11-04
 
 - **Решение пользователя:** единственная планируемая научная статья — **по текущему проекту C** (надёжность алгоритмов на повреждённых измерительных рядах), а не по прежнему архивному направлению. Архив сохраняется как история, но не входит в активные планы и обсуждения. Совместная база **Хабр + новая научная статья C + НИР-7/будущая ВКР C**; [GOALS](GOALS.md), [план Article & Invention](publications/C_SCIENTIFIC_ARTICLE_AND_INVENTION_PLAN.md). Ниша/новый метод/тема ещё не выбраны, G4 scout only, G5/G6 не открыты.
 - **На Windows подтверждено пользователем:** `python3` 3.11.9 и настоящий WISDM raw дают `g24.demo = PASS_DEMO` (raw/source/three_cases PASS). Но `visual_lab.build = REJECTED_INPUT` на `1600_A_alpha_0/masks.csv`, потому что входной `g24/provenance.json` записал Windows backslash path keys; независимая проверка fixed pins показывает **4/4 CSV SHA OK**, **3/3 PNG SHA DIFF** относительно Linux frozen build. `index.html` официальным viewer на Windows **не создан**. Отдельный HTML preview был статическим, не интерактивным. **Нельзя объявлять UI готовым для пользователя.** Linux presentation-only GO LAB-032 остаётся в границах той среды.
