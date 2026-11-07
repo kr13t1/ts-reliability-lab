@@ -1,11 +1,19 @@
 # PROJECT_STATE.md — Лаборатория надёжности временных рядов
 
-Версия: v1.29 (LAB-034: Windows diagnosis verified from user JSON; Issue #27 portability implementation only, pending 05; G1/G2.2/G2.3/G2.4 technical GO, Linux viewer presentation GO; full G2 NOT GO, G3 CLOSED)  
+Версия: v1.30 (LAB-035: PR #28 portability patch submitted on frozen SHA, CI fixture-only success, independent 05 pending; full G2 NOT GO, G3 CLOSED)  
 Дата фиксации: 2026-11-07  
 Координатор: ветка 00  
 Нормативные документы: `RESEARCH_LAB_CHARTER_v1.md`; `RESEARCH_LAB_CHAT_STARTERS_v1.md`.
 
-## LAB-034 — действующий статус / 2026-11-07
+## LAB-035 — действующий статус / 2026-11-07
+
+- **Windows-препятствие:** пользователем подтверждены `g24.demo PASS_DEMO`, 4/4 CSV SHA OK, 3/3 PNG DIFF, Windows `\\` path keys и `visual_lab.build REJECTED_INPUT` в [read-only диагностике](diagnostics/WINDOWS_VIEWER_20261107.md). Принятая вычислительная часть не опровергнута, но Windows UI до сих пор **NOT GO**.
+- **Реализация 04 без Work:** по единственной [Issue #27](https://github.com/kr13t1/ts-reliability-lab/issues/27) создан [PR #28](https://github.com/kr13t1/ts-reliability-lab/pull/28) на frozen HEAD `63f7036e87761cb0f0899d0a5e96d355866411eb`, OPEN/NOT MERGED. Opt-in `--g24-png-mode omit` исключает все непроверенные G2.4 PNG, строит прежние SVG и метрики из fixed-source CSV, `provenance` Windows/POSIX keys нормализуются лишь безопасно; default strict Linux pins сохранены. Никакого детектора или нового алгоритма в PR нет.
+- **Выполнено, но ограничено:** [CI run](https://github.com/kr13t1/ts-reliability-lab/actions/runs/42370177943) SUCCESS Python3.11/3.13 Linux `compileall` и unittest: **23 discovered / 10 PASS / 13 SKIPPED raw integrations** для каждой версии; результаты **не** означают Windows GO и не заменяют независимый 05 аудит. Старый strict HTML SHA требуется отдельно воспроизвести на genuine raw/PNG.
+- **Единственный следующий шаг:** независимый 05 delta-review [на точном PR #28 HEAD](https://github.com/kr13t1/ts-reliability-lab/issues/27#issuecomment-6706639341), C/M/m + scoped GO/CONDITIONAL GO/NO-GO; затем пользовательский Windows 3.11.9 smoke с уже сохранённым `output_g24` и только потом 00 решение merge. Отдельную настоящую UI-интерактивность для Хабра открыть лишь после закрытия переносимости.
+- **Границы:** G1/G2.2/G2.3/G2.4 технические GO, Linux static viewer presentation-only GO, Windows viewer NOT GO, **full G2 NOT GO, G3 CLOSED**; G4 limited scout, G5/G6 not opened, научная новизна не установлена. Три текущие цели: инженерный Хабр, новая научная статья C, НИР-7/ВКР C.
+
+## LAB-034 — исторический статус (заменён LAB-035) / 2026-11-07
 
 - **Подтверждённый пользовательский отчёт:** [Windows viewer diagnosis](diagnostics/WINDOWS_VIEWER_20261107.md). Windows Python 3.11.9, NumPy 2.3.5, Matplotlib 3.10.8, genuine raw SHA верен, `g24.demo PASS_DEMO`; **4/4 G2.4 CSV fixed hashes OK**, **3/3 G2.4 PNG DIFF**; `g24/provenance.json.files_sha256` использует `\\` в relative keys, viewer `REJECTED_INPUT exit 2`, HTML не создан. Это документированная пользовательская диагностика, **не независимый 05 Windows execution**. Прежний Linux viewer presentation-only GO LAB-032 не отменён.
 - **Единственное следующее активное поручение:** [Issue #27](https://github.com/kr13t1/ts-reliability-lab/issues/27), ветка **04/Work**. Зафиксирован [WINDOWS_VIEWER_PORTABILITY_CONTRACT_v1](specs/WINDOWS_VIEWER_PORTABILITY_CONTRACT_v1.md), разрешён **только небольшой source PR в `visual_lab/`**: безопасная нормализация Windows/POSIX provenance paths с отказом от ambiguous/colliding, portable `--g24-png-mode omit` без встраивания/объявления verified PNG и с SVG по pinned CSV; legacy strict mode прежний. После реализации независимый **05** на exact HEAD, затем настоящий Windows positive smoke и лишь 00 merge.
