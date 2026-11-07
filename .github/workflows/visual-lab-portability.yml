@@ -1,0 +1,32 @@
+name: Visual lab portability fixture checks
+
+on:
+  pull_request:
+    paths:
+      - 'visual_lab/**'
+      - '.github/workflows/visual-lab-portability.yml'
+  push:
+    paths:
+      - 'visual_lab/**'
+      - '.github/workflows/visual-lab-portability.yml'
+
+jobs:
+  stdlib-viewer:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ['3.11', '3.13']
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Syntax and source-only tests (raw integration intentionally unavailable)
+        run: |
+          python -m compileall -q visual_lab
+          python -m unittest discover -s visual_lab/tests -v
+      - name: Boundary notice
+        run: |
+          echo 'Only fixture/unit tests run here. The real WISDM raw file is not committed; raw integration tests are skipped.'
+          echo 'Windows end-to-end smoke and 05 independent source audit are separate release gates.'
