@@ -64,6 +64,31 @@ class StatelessHelpers(unittest.TestCase):
         with self.assertRaises(viewer.InputError):
             viewer.integer('1.0', 'i')
 
+    def test_windows_and_posix_provenance_are_same_canonical_key(self):
+        pin = "1" * 64
+        normalized = viewer.canonical_g24_files_sha({
+            "results.csv": pin, r"1600_A_alpha_0\masks.csv": pin,
+            "1600_A_alpha_1/masks.csv": pin,
+        })
+        self.assertEqual(normalized["1600_A_alpha_0/masks.csv"], pin)
+        self.assertEqual(len(normalized), 3)
+
+    def test_reject_windows_path_collisions(self):
+        pin = "1" * 64
+        with self.assertRaisesRegex(viewer.InputError, "colliding"):
+            viewer.canonical_g24_files_sha({
+                "1600_E_raw/masks.csv": pin,
+                r"1600_E_raw\masks.csv": pin,
+            })
+
+    def test_reject_unsafe_windows_provenance_path(self):
+        for bad in ("../results.csv", "/results.csv", r"C:\temp\results.csv",
+                    r"..\results.csv", r"foo\\bar.csv", "./results.csv"):
+            with self.subTest(path=bad), self.assertRaises(viewer.InputError):
+                viewer.canonical_g24_files_sha({bad: "1" * 64})
+        with self.assertRaises(viewer.InputError):
+            viewer.canonical_g24_files_sha({"results.csv": "not-a-sha256"})
+
 
 G23 = Path(os.environ.get('VISUAL_LAB_TEST_G23', 'g23/example'))
 G24 = Path(os.environ.get('VISUAL_LAB_TEST_G24', 'output_g24'))
@@ -81,9 +106,9 @@ class IntegrationCases(unittest.TestCase):
         shutil.copytree(G23, self.g23)
         shutil.copytree(G24, self.g24)
 
-    def run_viewer(self, name='page'):
+    def run_viewer(self, name='page', mode='strict'):
         out = Path(self.tmp.name)/name
-        result = viewer.build(self.g23, self.g24, out)
+        result = viewer.build(self.g23, self.g24, out, g24_png_mode=mode)
         return out, result
 
     def rewrite_prov(self):
@@ -94,6 +119,66 @@ class IntegrationCases(unittest.TestCase):
             for relative in d['files_sha256']
         }
         p.write_text(json.dumps(d,ensure_ascii=False,indent=2,sort_keys=True)+'\n',encoding='utf-8')
+
+    def make_windows_provenance(self):
+        p = self.g24 / 'provenance.json'
+        d = json.loads(p.read_text(encoding='utf-8'))
+        d['files_sha256'] = {k.replace('/', '\\'): v for k, v in d['files_sha256'].items()}
+        p.write_text(json.dumps(d, ensure_ascii=False, indent=2, sort_keys=True)+'\n',
+                     encoding='utf-8')
+
+    def test_portable_windows_provenance_omits_unverified_g24_png(self):
+        self.make_windows_provenance()
+        # Original Windows uses different PNG bytes. They may be absent entirely
+        # in the portable mode: do not read, validate, or display them.
+        for case in viewer.CASE_IDS:
+            (self.g24 / case / 'detection.png').unlink()
+        out, result = self.run_viewer('portable', mode='omit')
+        self.assertEqual(result['status'], 'PASS_PRESENTATION')
+        page = (out / 'index.html').read_text(encoding='utf-8')
+        manifest = json.loads((out / 'manifest.json').read_text(encoding='utf-8'))
+        self.assertIn('G2.4 PNG omitted', page)
+        self.assertIn('1190 · FP', page)
+        self.assertIn('TP 1191', page)
+        self.assertEqual(page.count('data:image/png;base64,'), 2)  # Only accepted G2.3
+        self.assertEqual(manifest['g24_png_mode'], 'omit')
+        self.assertFalse(manifest['g24_png_verified'])
+        self.assertFalse(manifest['g24_png_embedded'])
+        self.assertNotIn('g24/1600_E_raw/detection.png', manifest['input_sha256'])
+        self.assertEqual(manifest['input_sha256']['g24/1600_E_raw/masks.csv'],
+                         viewer.G24_FIXED_PINS['1600_E_raw/masks.csv'])
+
+    def test_portable_windows_provenance_rejects_mutated_standing_csv(self):
+        self.make_windows_provenance()
+        p = self.g24 / '1600_E_raw/masks.csv'
+        with p.open(newline='', encoding='utf-8') as handle:
+            reader = csv.DictReader(handle)
+            rows = list(reader)
+            columns = reader.fieldnames
+        self.assertIsNotNone(columns)
+        rows[100]['obs_x'] = repr(float(rows[100]['obs_x']) + .125)
+        with p.open('w', newline='', encoding='utf-8') as handle:
+            writer = csv.DictWriter(handle, fieldnames=columns, lineterminator='\n')
+            writer.writeheader()
+            writer.writerows(rows)
+        prov_path = self.g24 / 'provenance.json'
+        prov = json.loads(prov_path.read_text(encoding='utf-8'))
+        prov['files_sha256'][r'1600_E_raw\masks.csv'] = hashlib.sha256(p.read_bytes()).hexdigest()
+        prov_path.write_text(json.dumps(prov, ensure_ascii=False), encoding='utf-8')
+        with self.assertRaisesRegex(viewer.InputError, 'fixed-source SHA mismatch'):
+            self.run_viewer('tampered_portable', mode='omit')
+
+    def test_strict_windows_provenance_still_rejects_png_swap(self):
+        self.make_windows_provenance()
+        standing = self.g24 / '1600_E_raw/detection.png'
+        walking = self.g24 / '1600_A_alpha_1/detection.png'
+        standing.write_bytes(walking.read_bytes())
+        prov_path = self.g24 / 'provenance.json'
+        prov = json.loads(prov_path.read_text(encoding='utf-8'))
+        prov['files_sha256'][r'1600_E_raw\detection.png'] = hashlib.sha256(standing.read_bytes()).hexdigest()
+        prov_path.write_text(json.dumps(prov, ensure_ascii=False), encoding='utf-8')
+        with self.assertRaisesRegex(viewer.InputError, 'fixed-source SHA mismatch'):
+            self.run_viewer('tampered_strict', mode='strict')
 
     def test_snapshot_html_is_real_and_repeatable(self):
         out1, result1 = self.run_viewer('one')
