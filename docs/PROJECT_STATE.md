@@ -1,7 +1,7 @@
 # PROJECT_STATE.md — Лаборатория надёжности временных рядов
 
 Версия: v1.29 (LAB-034: Windows diagnosis verified from user JSON; Issue #27 portability implementation only, pending 05; G1/G2.2/G2.3/G2.4 technical GO, Linux viewer presentation GO; full G2 NOT GO, G3 CLOSED)  
-Дата фиксации: 2026-11-04  
+Дата фиксации: 2026-11-07  
 Координатор: ветка 00  
 Нормативные документы: `RESEARCH_LAB_CHARTER_v1.md`; `RESEARCH_LAB_CHAT_STARTERS_v1.md`.
 
