@@ -1,4 +1,5 @@
 """Windows portability regression tests. No raw WISDM needed for unit cases."""
+import csv
 import hashlib
 import json
 import os
@@ -41,20 +42,6 @@ class CanonicalPathTests(unittest.TestCase):
             with self.assertRaisesRegex(viewer.InputError, "Invalid PNG mode"):
                 viewer.verified_inputs(Path(tmp), Path(tmp), png_mode="invalid")
 
-    def test_portable_html_never_claims_g24_png_verified(self):
-        # This synthetic test exercises only rendering. It is NOT a G2.4 experiment.
-        fake = {"metrics": {"TP": "0", "FP": "0", "FN": "0", "TN": "1",
-                            "N": "1", "precision": "null", "recall": "null"}}
-        cases = {key: {**fake, "image": None, "observed": [0.0], "z": [0], "pred": [0]}
-                 for key in viewer.CASE_IDS}
-        g23_rows = [{"ref_x": "0"}]
-        model = {"cases": cases, "g23_rows": {1: g23_rows},
-                 "images": {"g23_alpha_0": "eA==", "g23_alpha_1": "eA=="}}
-        # render() uses frozen boundary indices; SVG is valid even for a tiny
-        # synthetic array because it only reads an empty zoom selection via slicing.
-        # Instead of claiming coverage from a fabricated model, test the actual
-        # portable input gate in the integration tests below.
-        self.assertIsNone(cases[viewer.CASE_IDS[0]]["image"])
 
 
 G23 = Path(os.environ.get("VISUAL_LAB_TEST_G23", "g23/example"))
@@ -107,9 +94,18 @@ class PortableIntegrationTests(unittest.TestCase):
     def test_standing_modified_plus_mutable_sha_rejected(self):
         self.as_windows_provenance()
         p = self.g24/"1600_E_raw/masks.csv"
-        data = p.read_bytes().replace(b",0,0\n", b",1,0\n", 1)
-        self.assertNotEqual(data, p.read_bytes(), "Fixture failed to modify Standing")
-        p.write_bytes(data)
+        with p.open(encoding="utf-8", newline="") as f:
+            reader = csv.DictReader(f)
+            rows = list(reader)
+            columns = reader.fieldnames
+        self.assertIsNotNone(columns)
+        original = rows[100]["obs_x"]
+        rows[100]["obs_x"] = repr(float(original) + 0.125)
+        with p.open("w", encoding="utf-8", newline="") as f:
+            writer = csv.DictWriter(f, fieldnames=columns, lineterminator="\n")
+            writer.writeheader()
+            writer.writerows(rows)
+        data = p.read_bytes()
         prov = self.g24/"provenance.json"
         info = json.loads(prov.read_text(encoding="utf-8"))
         info["files_sha256"][r"1600_E_raw\masks.csv"] = hashlib.sha256(data).hexdigest()
