@@ -18,7 +18,7 @@ Windows Python 3.11.9, NumPy 2.3.5, Matplotlib 3.10.8 → accepted `g24.demo PAS
 
 ## Приёмочные испытания
 
-- Legacy Linux strict: original 05-accepted inputs → прежний `PASS_PRESENTATION`, неизменённый HTML SHA `37bb60e254e489c7aa5e40468b6f844a54d272b5956cf74688b14f5c180eb1df`, прежние 17/17 тестов и adversarial PNG+provenance refusal.
+- Legacy Linux strict: original 05-accepted inputs → прежний `PASS_PRESENTATION`, неизменённый HTML SHA должен совпасть с **фактическим ранее аудированным strict-HTML эталоном**, проверяемым по fixture/snapshot тесту 05 (числовой эталон не задан до верификации), прежние 17/17 тестов и adversarial PNG+provenance refusal.
 - Fixture для Windows provenance: те же independently pinned 4 CSV, `\\` в G24 self-declared keys, PNG с отличающимися байтами или отсутствующие → portable `PASS_PRESENTATION` с честным **отсутствием любых G2.4 PNG в HTML**, проверяемым SVG сигналом и метриками. Это проверка механизма, не полноценная Windows acceptance без запуска на Windows.
 - Два негативных ввода portable: (a) `Standing masks.csv.obs_x` изменён при одновременно пересчитанном mutable provenance SHA → `REJECTED_INPUT`, no HTML; (b) `result.csv` или `masks.csv` изменён независимо от source pins и self-declared checksum → `REJECTED_INPUT`; (c) collision двух self-declared canonical paths → `REJECTED_INPUT`.
 - Положительный Windows smoke-test на **подлинном local `output_g24`** отдельно выполняет пользователь: `python3 -m visual_lab.build --g23-dir g23/example --g24-dir output_g24 --output-dir visual_lab_out_portable --g24-png-mode omit`; итог с HTML, stdout, manifest, графиком; если нет запуска, Windows поддержка только кандидат, не принята.
