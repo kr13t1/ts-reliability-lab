@@ -1,0 +1,17 @@
+name: Habr publication artifact check
+on:
+  pull_request:
+    paths:
+      - 'publications/habr/**'
+      - '.github/workflows/habr-publication-check.yml'
+  workflow_dispatch:
+jobs:
+  artifact:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Verify autonomous HTML and explicit draft blockers
+        run: python -m unittest discover -s publications/habr -p 'test_publication.py' -v
