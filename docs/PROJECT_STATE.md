@@ -1,11 +1,20 @@
 # PROJECT_STATE.md — Лаборатория надёжности временных рядов
 
-Версия: v1.30 (LAB-035: PR #28 portability patch submitted on frozen SHA, CI fixture-only success, independent 05 pending; full G2 NOT GO, G3 CLOSED)  
-Дата фиксации: 2026-11-07  
+Версия: v1.31 (LAB-036: Хабр first, single GitHub publication PR #30; private draft awaiting scope audit, no manual archive handoff; G1/G2 technical GO limited; full G2 NOT GO, G3 closed)
+Дата фиксации: 2026-11-15
 Координатор: ветка 00  
 Нормативные документы: `RESEARCH_LAB_CHARTER_v1.md`; `RESEARCH_LAB_CHAT_STARTERS_v1.md`.
 
-## LAB-035 — действующий статус / 2026-11-07
+## LAB-036 — текущий контекст и приоритет / 2026-11-15
+
+- **Пользовательское решение:** Хабр срочнее организационных циклов. **Не просить пользователя передавать ZIP/архивы между ветками**; обмен только GitHub PR/commit SHA и комментариями. Один актуальный исходный комплект — [draft PR #30](https://github.com/kr13t1/ts-reliability-lab/pull/30): `publications/habr/ARTICLE.md`, `publications/habr/demo/index.html`, provenance/README, raw-independent тест и CI. Авторский HTML был перенесён в GitHub с восстановленным исходным конечным LF, чтобы **сохранить SHA-256 `9d45b2f...`**; не принимать hash mismatch путём подмены эталона. Пока 05 audit не проведён и статья не опубликована.
+- **Что уже есть:** текст ~13 тысяч знаков, HTML с интерактивным переключением трёх заранее заданных сценариев и осей, визуальным масштабом и масками; иллюстративный кейс с фитнес-приложением. WISDM subject 1600, искусственный freeze X, ограниченные метрики уже принятых G2.3/G2.4. Это **иллюстрация**, не новый метод, не тест настоящего шагомера.
+- **Оставшиеся препятствия к публикации:** полный генератор HTML `build_demo.py`/template и raw-dependent tests находились в локальном публикационном комплекте, но **пока не перенесены в PR #30**; прежний ZIP имел ошибку относительного пути в `test_demo.py` и 2 skip без raw/ref. Нужны исправленное end-to-end воспроизведение, независимый 05 аудит PR #30, доступная без авторизации публичная ссылка на демонстрацию и вставленные изображения/URL в статье. PR #30 draft и не merge, публичное размещение без действия владельца не делать.
+- **Не блокировать Хабр на не связанном инженерном споре:** открыты две Windows portability реализации [#28](https://github.com/kr13t1/ts-reliability-lab/pull/28) и [#29](https://github.com/kr13t1/ts-reliability-lab/pull/29). Поскольку на **#29** пользователь реально получил `PASS_PRESENTATION exit 0` и 05 дал scoped `CONDITIONAL GO`, именно #29 — проверенный у пользователя candidate; #28 — альтернативная реализация. Ни один не merged; это **отдельный вопрос статического viewer**, а не автоматический gate самостоятельной Habr HTML-демонстрации.
+- **Один следующий минимальный шаг:** закончить включение исходного Python builder/template + исправленных raw-dependent tests в *тот же* PR #30 (без новых архивов или новых Issue), затем передать 05 **только PR link + frozen SHA**. Не проводить новый G2/G3/ML эксперимент ради скорой инженерной публикации.
+- **Научный контур:** новая статья, НИР-7 и ВКР — по проекту C после отдельного прицельного prior-art, математического контракта и независимых экспериментов, без заявки на новизну на основании Хабра. Full G2 NOT GO, G3 CLOSED.
+
+## LAB-035 — исторический статус / 2026-11-07
 
 - **Windows-препятствие:** пользователем подтверждены `g24.demo PASS_DEMO`, 4/4 CSV SHA OK, 3/3 PNG DIFF, Windows `\\` path keys и `visual_lab.build REJECTED_INPUT` в [read-only диагностике](diagnostics/WINDOWS_VIEWER_20261107.md). Принятая вычислительная часть не опровергнута, но Windows UI до сих пор **NOT GO**.
 - **Реализация 04 без Work:** по единственной [Issue #27](https://github.com/kr13t1/ts-reliability-lab/issues/27) создан [PR #28](https://github.com/kr13t1/ts-reliability-lab/pull/28) на frozen HEAD `63f7036e87761cb0f0899d0a5e96d355866411eb`, OPEN/NOT MERGED. Opt-in `--g24-png-mode omit` исключает все непроверенные G2.4 PNG, строит прежние SVG и метрики из fixed-source CSV, `provenance` Windows/POSIX keys нормализуются лишь безопасно; default strict Linux pins сохранены. Никакого детектора или нового алгоритма в PR нет.
