@@ -17,7 +17,7 @@ page.on('request', request => {
 });
 try {
   await page.goto(pathToFileURL(path.join(root, 'demo', 'index.html')).href);
-  await page.waitForSelector('svg#plot polyline');
+  await page.waitForSelector('svg#plot path');
   assert.equal(await page.locator('#nAssigned').innerText(), '1191');
   assert.equal(await page.locator('#nPredicted').innerText(), '1192');
   assert.equal(await page.locator('#nFP').innerText(), '1');
