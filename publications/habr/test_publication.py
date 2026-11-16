@@ -39,8 +39,10 @@ class HabrPublicationTests(unittest.TestCase):
     def test_article_requires_release_links(self):
         # Draft assertion: this version is not yet allowed to be published.
         self.assertIn("ССЫЛКА НА ПУБЛИЧНОЕ HTML-ДЕМО", self.article)
-        self.assertIn("ИЛЛЮСТРАЦИЯ 1", self.article)
-        self.assertIn("ИЛЛЮСТРАЦИЯ 2", self.article)
+        self.assertIn("figures/overview.svg", self.article)
+        self.assertIn("figures/boundary.svg", self.article)
+        self.assertTrue((ROOT / "figures" / "overview.svg").is_file())
+        self.assertTrue((ROOT / "figures" / "boundary.svg").is_file())
 
 if __name__ == "__main__":
     unittest.main()
