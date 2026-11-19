@@ -1,3 +1,11 @@
+# LAB-040 — sole next action
+
+02: update admission manifest under explicit prospective exploratory exposure criterion in DECISIONS LAB-040; exact 1601/A pins from PR #36; no re-download, no new outcomes. Scoped 05 admission review, then separate 00 decision for fixture-only guard gate. https://github.com/kr13t1/ts-reliability-lab/issues/34#issuecomment-6996840417
+
+Publication priority: comparative RMSE/dynamics graphs and factual technical materials for author-written article; no requirement for positive target outcome or full diploma study before article. Habr rule 4 applies. Full G2 NOT GO, G3 CLOSED.
+
+## History
+
 # LAB-039 — единственное следующее действие
 
 02: [Issue #34](https://github.com/kr13t1/ts-reliability-lab/issues/34#issuecomment-6996401406) — независимое получение официального UCI member и документирование exposure history. Только затем повторить §2 eligibility с новым PR и 05. Иначе BLOCKED_NO_ELIGIBLE_DATA. PR #35 принят лишь как документ о блокировке. Никаких raw в Git, runner/fixtures/evaluation. Full G2 NOT GO, G3 CLOSED.
