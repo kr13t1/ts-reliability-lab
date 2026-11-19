@@ -1,3 +1,9 @@
+# LAB-042 — sole next action
+
+04: https://github.com/kr13t1/ts-reliability-lab/issues/40 — narrow real-input adapter, synthetic validation before target opening, one frozen 1601/A comparison, actual evidence and 05 review in same PR. No tuning or new provenance research. Article priority: actual comparison plots. Full G2 NOT GO, G3 CLOSED.
+
+## History
+
 # LAB-041 — sole next action
 
 04: https://github.com/kr13t1/ts-reliability-lab/issues/38 — implement frozen repair dynamics protocol and run mandatory synthetic-only acceptance tests in normal Python and -O. No target evaluation. Independent 05 implementation audit then separate 00 evaluation decision. Conditional 1601/A admission finalized; private history UNKNOWN. Full G2 NOT GO, G3 CLOSED. Article priority remains actual comparative graphs and author-written technical material.
