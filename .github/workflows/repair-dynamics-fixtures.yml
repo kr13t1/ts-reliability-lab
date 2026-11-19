@@ -1,0 +1,87 @@
+name: LAB-041 synthetic repair dynamics gate
+on:
+  pull_request:
+    paths:
+      - 'explorations/repair_dynamics/**'
+      - '.github/workflows/repair-dynamics-fixtures.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  fixture-only:
+    runs-on: ubuntu-24.04
+    env:
+      OPENBLAS_NUM_THREADS: '1'
+      OMP_NUM_THREADS: '1'
+      MKL_NUM_THREADS: '1'
+      MPLBACKEND: Agg
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13.5'
+      - name: Install pinned binary dependencies
+        run: |
+          python -m pip install --only-binary=:all: -r explorations/repair_dynamics/requirements.txt
+          python -m pip freeze
+          python -c 'import numpy as n; n.show_config()'
+      - name: Run mandatory tests in separate normal and optimized processes
+        shell: bash
+        run: |
+          set +e
+          mkdir -p fixture_artifacts
+          EXPECTED_OPTIMIZE=0 python -m unittest discover -s explorations/repair_dynamics/tests -v > fixture_artifacts/tests_normal.log 2>&1
+          normal=$?
+          cat fixture_artifacts/tests_normal.log
+          EXPECTED_OPTIMIZE=1 python -O -m unittest discover -s explorations/repair_dynamics/tests -v > fixture_artifacts/tests_optimized.log 2>&1
+          optimized=$?
+          cat fixture_artifacts/tests_optimized.log
+          printf '{"normal":%s,"optimized":%s}\n' "$normal" "$optimized" | tee fixture_artifacts/test_exits.json
+          if [ "$normal" -ne 0 ] || [ "$optimized" -ne 0 ]; then exit 1; fi
+          if grep -Ei 'skipped|expected failures|unexpected successes' fixture_artifacts/tests_*.log; then exit 1; fi
+          grep -E 'Ran [0-9]+ tests' fixture_artifacts/tests_normal.log
+          grep -E 'Ran [0-9]+ tests' fixture_artifacts/tests_optimized.log
+      - name: Execute frozen synthetic grid twice and compare evidence
+        shell: bash
+        run: |
+          set +e
+          python -m explorations.repair_dynamics.run --output-dir fixture_artifacts/normal > fixture_artifacts/run_normal.log 2>&1
+          normal=$?
+          cat fixture_artifacts/run_normal.log
+          python -O -m explorations.repair_dynamics.run --output-dir fixture_artifacts/optimized > fixture_artifacts/run_optimized.log 2>&1
+          optimized=$?
+          cat fixture_artifacts/run_optimized.log
+          printf '{"normal":%s,"optimized":%s}\n' "$normal" "$optimized" | tee fixture_artifacts/run_exits.json
+          if [ "$normal" -ne 0 ] || [ "$optimized" -ne 0 ]; then exit 1; fi
+          set -e
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          from explorations.repair_dynamics import core as c, run as r
+          root=Path('fixture_artifacts')
+          a,b=root/'normal',root/'optimized'
+          pa=json.loads((a/'provenance.json').read_bytes())
+          pb=json.loads((b/'provenance.json').read_bytes())
+          c.require(pa['optimize']==0 and pb['optimize']==1,'wrong subprocess mode')
+          c.require(pa['git_sha']==pb['git_sha'],'different source commit')
+          c.require(pa['source_sha256']==pb['source_sha256'],'different executing source')
+          r.verify_files(a,pa['files_sha256'])
+          r.verify_files(b,pa['files_sha256'])
+          for n in ('results','paired','summary_methods','summary_paired','decision','validation'):
+              c.compare_evidence(json.loads((a/(n+'.json')).read_bytes()),json.loads((b/(n+'.json')).read_bytes()))
+          d=json.loads((a/'decision.json').read_bytes())
+          report={'scope':'SYNTHETIC_ONLY','git_sha':pa['git_sha'],'byte_identical_non_provenance_files':len(pa['files_sha256']),'exact_discrete_and_numeric_agreement':True,'decision':d,'test_exits':json.loads((root/'test_exits.json').read_bytes()),'run_exits':json.loads((root/'run_exits.json').read_bytes())}
+          r.write_json(root/'comparison.json',report)
+          print(json.dumps(report))
+          print((a/'summary_methods.csv').read_text())
+          print((a/'summary_paired.csv').read_text())
+          PY
+      - name: Upload actual fixture results and logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: repair-dynamics-synthetic-only
+          path: fixture_artifacts/
+          if-no-files-found: warn
