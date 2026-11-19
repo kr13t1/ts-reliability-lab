@@ -153,7 +153,7 @@
   },
   "exposure": {
     "candidate_subject": 1601,
-    "status": "UNVERIFIED_EXPLICIT_HUMAN_DECLARATION_MISSING",
+    "status": "DOCUMENTED_METADATA_ONLY_PRIVATE_HISTORY_UNKNOWN",
     "evidence": [
       {
         "source": "Accepted PR #35 and independent 05 audit",
@@ -166,17 +166,20 @@
       {
         "source": "Available project conversation records, targeted review for 1601/1602",
         "finding": "No explicit first-person declaration by project owner concerning private local work or prior inspection was found; records corroborate metadata-only documented use, not completeness."
+      },
+      {
+        "source": "Targeted retrospective review of available project conversation history (2026-11-19; no new raw inspection)",
+        "finding": "2026-11-01 user ran the three-subject raw metadata precheck; reports for 1601 record counts/labels, q intervals and conditional timing only. Subsequent source audits also checked format/finite values and duplicate rows. Available 2026-11-03/04 G2.2–G2.4 history and 2026-11-18/19 repair pilot records concern 1600. No documented 1601 plots, amplitude/dynamics metrics, detector/repair trials or method decisions found. Conversation history is not an exhaustive log of offline actions; unknown cannot be ruled out."
       }
     ],
     "explicit_human_declaration": {
-      "present": false,
-      "text": null,
-      "required_scope": [
-        "Whether subject 1601 data were previously viewed as signal shapes/plots or examined for amplitude/dynamics properties",
-        "Whether any recovery/detector outcomes on subject 1601 were inspected or subject 1601 was used to choose methods or settings",
-        "Whether the owner knows of additional undocumented work by protocol authors or executors on subject 1601; unknown must be stated as unknown"
-      ],
-      "instruction": "Do not infer no exposure from absence of records. A truthful declaration for the owner's own work and scope of knowledge is needed; 05 and 00 review sufficiency. If prior disqualifying use occurred, 1601 remains excluded; no outcome-based fallback."
+      "present": true,
+      "date": "2026-11-19",
+      "type": "OWNER_RESPONSE_NOT_A_NONEXPOSURE_ATTESTATION",
+      "summary": "When asked about previous inspection of subject 1601, the owner did not identify or confirm prior use and delegated the determination to the project assistant. This is not a denial of previous exposure, nor proof of exposure.",
+      "confirmed_no_prior_disqualifying_exposure": null,
+      "private_history": "UNKNOWN",
+      "instruction": "No further repetitive question to the owner. 05 and 00 assess the documented evidence against unchanged protocol §2. If insufficient, retain block; only 00 may authorize prospective redesign or an alternative evidence requirement by explicit protocol decision. Do not select a different subject or start evaluation on this basis."
     }
   },
   "inventory_delta": {
@@ -238,7 +241,7 @@
     "subject1600": "EXCLUDED_DESIGN_SUBJECT",
     "subject1601": {
       "official_source_evidence": "MATCH_PENDING_05",
-      "exposure": "UNVERIFIED",
+      "exposure": "DOCUMENTED_METADATA_ONLY_PRIVATE_HISTORY_UNKNOWN",
       "eligible": false,
       "run_metadata_from_accepted_PR35": {
         "activity": "A",
@@ -309,5 +312,5 @@
   "computed_method_rows": 0,
   "full_G2": "NOT_GO",
   "G3": "CLOSED",
-  "next_action": "Obtain truthful explicit exposure declaration for 1601; role 05 independently checks acquisition workflow, exact run and prior audit/transport pin and evaluates exposure evidence; role 00 alone decides subsequent §2 admission."
+  "next_action": "05 reviews the exact source acquisition and retrospective evidence including the owner's non-attestation; 00 alone decides whether §2 clearance is established. If not, preserve BLOCKED_NO_ELIGIBLE_DATA and consider a separately authorized prospective evidence/holdout plan rather than repeated requests to the owner. No runner, fixtures or evaluation."
 }
