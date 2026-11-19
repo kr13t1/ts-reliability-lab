@@ -352,3 +352,8 @@
 ## LAB-025 — факт приёмки G2.3 и следующий gate (2026-11-04)
 
 Решение 00 в `docs/DECISIONS.md`, audit PR #15 и implementation PR #13 приняты; техническая G2.3 закрыта. Без разрешения 00 не переходить от предложенного математического контракта baseline A к программированию, моделям и G3.
+
+
+## LAB-037 — 2026-11-19 — repair exploration accepted; CSS v3 release
+
+Current decisions: exploratory Repair Pilot v1 GO only ([PR #31](https://github.com/kr13t1/ts-reliability-lab/pull/31), audited HEAD f886e2689c4c5e96ccbdbb3397643efa1672b31b, merge 459c011be09d5886ce56901bbcea2d648d52459d); CSS-only v3 GO ([public PR #2](https://github.com/kr13t1/ts-reliability-habr-demo/pull/2), audited HEAD 15abbd9f90ca7670377765a3803d05434ea805a6, merge e0717d01acc3298e9a69ad9da296cbd07cca7e78). Habr submission 315280 rejected under rule 4; no resubmission of AI-authored article. Full G2 NOT GO; G3 CLOSED; G4 scout only; G5/G6 closed. Current single next research task: [Issue #32](https://github.com/kr13t1/ts-reliability-lab/issues/32), prospective protocol for error vs dynamics on independently eligible recording, no new outcomes until approval. See DECISIONS LAB-037. Public v3 deployment must pass anonymous hash check before declaring live.
