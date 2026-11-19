@@ -1,0 +1,5 @@
+Gary M. Weiss (2019), WISDM Smartphone and Smartwatch Activity and Biometrics Dataset, UCI 507, DOI 10.24432/C5HK59, CC BY 4.0. Observed reference; controlled X freeze and oracle repair; not a physical fault test.
+Private exposure history UNKNOWN. Subject-disjoint relative to documented design/pilot; no guarantee of untouched test, statistical independence, session independence, or population generalization.
+Private audit artifact only. Real recorded reference, artificial freeze, known oracle mask.
+Linear uses the right boundary; Hold and AR do not. No physical fault or population claims.
+q: original integer; unit/epoch UNKNOWN. Gap length and x-axis are indices, not seconds.
