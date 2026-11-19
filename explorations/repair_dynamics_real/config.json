@@ -1,0 +1,41 @@
+{
+  "scope": "LAB042_FIXED_REAL_RECORDING",
+  "evaluation_authorized_by": "LAB-042",
+  "subject": 1601,
+  "activity": "A",
+  "N": 4512,
+  "source_first_line": 1,
+  "source_last_line": 4512,
+  "axis": 0,
+  "starts": [
+    400,
+    800,
+    1200,
+    1600,
+    2000,
+    2400,
+    2800,
+    3200
+  ],
+  "lengths": [
+    5,
+    20,
+    80,
+    200
+  ],
+  "ar_order": 10,
+  "ar_context": 256,
+  "methods": [
+    "Hold",
+    "Linear",
+    "AR(10)"
+  ],
+  "seed": null,
+  "mask": "oracle",
+  "primary_pair": "AR(10) - Linear",
+  "primary_L": 200,
+  "sign_tau": 1e-10,
+  "member_sha256": "cafe0c35079ce96909ad6a42b8a65af7349cd416350fe4d0aa78354bb68b20ff",
+  "view_sha256": "61f5cdd0f23ae5d3200b45109dbe5ef2a78bac498fc5815faa1341bd6a8bac0b",
+  "private_exposure_history": "UNKNOWN"
+}

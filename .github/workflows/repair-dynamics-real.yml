@@ -1,0 +1,100 @@
+name: LAB-042 fixed real-recording comparison
+on:
+  pull_request:
+    types: [opened, synchronize]
+    paths:
+      - '.github/workflows/repair-dynamics-real.yml'
+      - 'explorations/repair_dynamics_real/**'
+permissions:
+  contents: read
+jobs:
+  frozen-comparison:
+    if: github.event.pull_request.head.ref == 'issue-40-lab042-frozen-real-evaluation' && github.event.pull_request.head.repo.full_name == github.repository && (github.event.action == 'opened' || github.event.before == 'b7b5e0ef236d175d84b33ad29a0f408ee4c22ed5')
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    env:
+      OPENBLAS_NUM_THREADS: '1'
+      OMP_NUM_THREADS: '1'
+      MKL_NUM_THREADS: '1'
+      MPLBACKEND: Agg
+      LAB042_EXPECTED_HEAD: ${{ github.event.pull_request.head.sha }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13.5'
+      - name: Install accepted numerical environment
+        run: |
+          python -m pip install --only-binary=:all: -r explorations/repair_dynamics/requirements.txt
+          python -m pip freeze
+      - name: PRE-TARGET GATE — synthetic tests normal and optimized, freeze source and environment
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/lab042_evidence"
+          E="$RUNNER_TEMP/lab042_evidence"
+          python -m explorations.repair_dynamics_real.gate --output-dir "$E/gate" | tee "$E/gate_stdout.log"
+      - name: Acquire only the fixed official source after passed gate
+        shell: bash
+        run: |
+          set -euo pipefail
+          E="$RUNNER_TEMP/lab042_evidence"
+          python -m explorations.repair_dynamics_real.run acquire --archive "$RUNNER_TEMP/lab042_source.zip" --gate-dir "$E/gate" --receipt "$E/acquisition.json" | tee "$E/acquire_stdout.log"
+      - name: Execute one frozen comparison and its identical optimized repetition
+        shell: bash
+        run: |
+          set -uo pipefail
+          E="$RUNNER_TEMP/lab042_evidence"
+          python -m explorations.repair_dynamics_real.run run --archive "$RUNNER_TEMP/lab042_source.zip" --gate-dir "$E/gate" --receipt "$E/acquisition.json" --output-dir "$E/normal" > "$E/run_normal.log" 2>&1
+          normal=$?
+          cat "$E/run_normal.log"
+          if [ "$normal" -ne 0 ]; then
+            printf '{"normal":%s,"optimized":null}\n' "$normal" > "$E/run_exits.json"
+            exit 2
+          fi
+          python -O -m explorations.repair_dynamics_real.run run --archive "$RUNNER_TEMP/lab042_source.zip" --gate-dir "$E/gate" --receipt "$E/acquisition.json" --output-dir "$E/optimized" > "$E/run_optimized.log" 2>&1
+          optimized=$?
+          cat "$E/run_optimized.log"
+          printf '{"normal":%s,"optimized":%s}\n' "$normal" "$optimized" | tee "$E/run_exits.json"
+          if [ "$optimized" -ne 0 ]; then exit 2; fi
+          python - <<'PY'
+          import json, os
+          from pathlib import Path
+          from explorations.repair_dynamics import core as c, run as r
+          root=Path(os.environ["RUNNER_TEMP"])/"lab042_evidence"
+          a,b=root/"normal",root/"optimized"
+          pa=json.loads((a/"provenance.json").read_bytes());pb=json.loads((b/"provenance.json").read_bytes())
+          c.require(pa["env"]==pb["env"],"different source/environment")
+          c.require(pa["record_identity"]==pb["record_identity"],"different input identity")
+          c.require(pa["prediction_sha256"]==pb["prediction_sha256"],"frozen predictions differ")
+          r.verify_files(a,pa["files_sha256"]);r.verify_files(b,pa["files_sha256"])
+          for n in ("results","paired","summary_methods","summary_paired","decision","validation"):
+              c.compare_evidence(json.loads((a/(n+".json")).read_bytes()),json.loads((b/(n+".json")).read_bytes()))
+          report={"status":"PASS_FIXED_REPETITION","scope":"LAB042_FIXED_REAL_RECORDING","git_sha":pa["env"]["git_sha"],
+                  "byte_identical_non_provenance_files":len(pa["files_sha256"]),
+                  "exact_discrete_and_numeric_agreement":True,"private_exposure_history":"UNKNOWN",
+                  "decision":json.loads((a/"decision.json").read_bytes())}
+          r.write_json(root/"comparison.json",report)
+          print("LAB042_COMPARISON="+json.dumps(report))
+          print((a/"summary_methods.csv").read_text())
+          print((a/"summary_paired.csv").read_text())
+          rows=json.loads((a/"paired.json").read_bytes())
+          print("LAB042_PRIMARY_PAIRS="+json.dumps([x for x in rows if x["L"]==200 and x["pair"]=="AR(10) - Linear"]))
+          print("LAB042_RECORD_IDENTITY="+json.dumps(pa["record_identity"]))
+          print("LAB042_OUTPUT_SHA256="+json.dumps(pa["files_sha256"],sort_keys=True))
+          PY
+      - name: Upload private audit evidence, not the raw ZIP
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: LAB042-fixed-1601A-private-audit
+          path: ${{ runner.temp }}/lab042_evidence/
+          retention-days: 90
+          if-no-files-found: warn
+      - name: Delete temporary official ZIP
+        if: always()
+        shell: bash
+        run: rm -f "$RUNNER_TEMP/lab042_source.zip"
