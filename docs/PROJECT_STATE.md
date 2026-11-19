@@ -357,3 +357,8 @@
 ## LAB-037 — 2026-11-19 — repair exploration accepted; CSS v3 release
 
 Current decisions: exploratory Repair Pilot v1 GO only ([PR #31](https://github.com/kr13t1/ts-reliability-lab/pull/31), audited HEAD f886e2689c4c5e96ccbdbb3397643efa1672b31b, merge 459c011be09d5886ce56901bbcea2d648d52459d); CSS-only v3 GO ([public PR #2](https://github.com/kr13t1/ts-reliability-habr-demo/pull/2), audited HEAD 15abbd9f90ca7670377765a3803d05434ea805a6, merge e0717d01acc3298e9a69ad9da296cbd07cca7e78). Habr submission 315280 rejected under rule 4; no resubmission of AI-authored article. Full G2 NOT GO; G3 CLOSED; G4 scout only; G5/G6 closed. Current single next research task: [Issue #32](https://github.com/kr13t1/ts-reliability-lab/issues/32), prospective protocol for error vs dynamics on independently eligible recording, no new outcomes until approval. See DECISIONS LAB-037. Public v3 deployment must pass anonymous hash check before declaring live.
+
+
+## LAB-038 — 2026-11-19 — prospective protocol accepted
+
+PR #33 frozen 9bbed1f030ddf556d92aa72c7c5aa130e4700925, merged 9bd5168b1a8fb1922a9ef3bde626ca52c7c66ab5. 05 0/0/1, GO protocol only. Data BLOCKED / NOT SELECTED; sole next action 02 eligibility manifest https://github.com/kr13t1/ts-reliability-lab/issues/34. No evaluation/runner. Full G2 NOT GO, G3 CLOSED.
