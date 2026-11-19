@@ -1,3 +1,9 @@
+# LAB-039 — единственное следующее действие
+
+02: [Issue #34](https://github.com/kr13t1/ts-reliability-lab/issues/34#issuecomment-6996401406) — независимое получение официального UCI member и документирование exposure history. Только затем повторить §2 eligibility с новым PR и 05. Иначе BLOCKED_NO_ELIGIBLE_DATA. PR #35 принят лишь как документ о блокировке. Никаких raw в Git, runner/fixtures/evaluation. Full G2 NOT GO, G3 CLOSED.
+
+## История
+
 # LAB-038 — единственное следующее действие
 
 02: https://github.com/kr13t1/ts-reliability-lab/issues/34 — eligibility/provenance manifest по §2 утверждённого REPAIR_DYNAMICS_PROTOCOL_v1.md. Без расчёта методов и раскрытия амплитуд. В случае отсутствия допустимой записи BLOCKED_NO_ELIGIBLE_DATA. Затем 05 manifest audit и отдельное решение 00. Runner/evaluation запрещены. Full G2 NOT GO, G3 CLOSED.
