@@ -372,3 +372,8 @@ PR #35 merged fbd1e17d80363a7e76a9a96258b72e463c64fcb3; 05 0/0/0 GO for blocked 
 ## LAB-040 — 2026-11-19 — source closed; article priority
 
 PR #36 merged 63805652b67200e1816936216f55568d4a38bfc2; source GO for 1601; 05 0/0/0. Scoped prospective exposure clarification accepted in DECISIONS. Next solely updated eligibility manifest and narrow 05 admission review in Issue #34 comment 6996840417; no new target results. Public CSS v3 deploy/verify SUCCESS. Habr first article rejected rule 4; second article not written; comparative E/D results and graphs are immediate research target, no need to repeat provenance. Full G2 NOT GO, G3 CLOSED.
+
+
+## LAB-041 — 2026-11-19 — admission finalized; fixture-only GO
+
+PR #37 merged 580b677b30ed9eb9076a6cafbaa736cb6141c198; audit 05 0/0/0. Fixed 1601/A X N=4512 conditionally admitted, private exposure UNKNOWN. Evaluation NOT AUTHORIZED. Sole next action 04 https://github.com/kr13t1/ts-reliability-lab/issues/38: implement and test synthetic fixtures only; then 05 and 00. Full G2 NOT GO, G3 CLOSED.
