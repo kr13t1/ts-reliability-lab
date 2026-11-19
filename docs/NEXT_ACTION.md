@@ -1,3 +1,9 @@
+# LAB-041 — sole next action
+
+04: https://github.com/kr13t1/ts-reliability-lab/issues/38 — implement frozen repair dynamics protocol and run mandatory synthetic-only acceptance tests in normal Python and -O. No target evaluation. Independent 05 implementation audit then separate 00 evaluation decision. Conditional 1601/A admission finalized; private history UNKNOWN. Full G2 NOT GO, G3 CLOSED. Article priority remains actual comparative graphs and author-written technical material.
+
+## History
+
 # LAB-040 — sole next action
 
 02: update admission manifest under explicit prospective exploratory exposure criterion in DECISIONS LAB-040; exact 1601/A pins from PR #36; no re-download, no new outcomes. Scoped 05 admission review, then separate 00 decision for fixture-only guard gate. https://github.com/kr13t1/ts-reliability-lab/issues/34#issuecomment-6996840417
