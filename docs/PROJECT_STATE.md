@@ -377,3 +377,8 @@ PR #36 merged 63805652b67200e1816936216f55568d4a38bfc2; source GO for 1601; 05 0
 ## LAB-041 — 2026-11-19 — admission finalized; fixture-only GO
 
 PR #37 merged 580b677b30ed9eb9076a6cafbaa736cb6141c198; audit 05 0/0/0. Fixed 1601/A X N=4512 conditionally admitted, private exposure UNKNOWN. Evaluation NOT AUTHORIZED. Sole next action 04 https://github.com/kr13t1/ts-reliability-lab/issues/38: implement and test synthetic fixtures only; then 05 and 00. Full G2 NOT GO, G3 CLOSED.
+
+
+## LAB-042 — 2026-11-19 — synthetic gate accepted; real comparison authorized
+
+PR #39 merged 585c8ea4f4d8a3250e9d7cbb03c3ac23d6310da0, 05 0/0/0. Sole next work https://github.com/kr13t1/ts-reliability-lab/issues/40: narrow real adapter, synthetic guard checks before opening target, frozen 1601/A experiment, then independent 05. No results yet. Article priority. Full G2 NOT GO, G3 CLOSED.
