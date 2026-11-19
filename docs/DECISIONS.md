@@ -425,3 +425,8 @@
 ## LAB-038 / 2026-11-19 / GO prospective protocol only
 
 Accepted 05 audit https://github.com/kr13t1/ts-reliability-lab/pull/33#issuecomment-6995833488 on exact HEAD 9bbed1f030ddf556d92aa72c7c5aa130e4700925, merged 9bd5168b1a8fb1922a9ef3bde626ca52c7c66ab5. Historical PROPOSED header left intact. MINOR-01 binding later: exact sign/tie/undefined flags, counts and decision status in addition to numeric tolerance; discrepancy blocks decision; separate primary and completeness, invalid execution highest priority. No threshold changes. Sole next task 02 https://github.com/kr13t1/ts-reliability-lab/issues/34; 05 manifest audit then 00. No runner or evaluation authorized; full G2 NOT GO, G3 CLOSED.
+
+
+## LAB-039 / 2026-11-19 / Accept blocked eligibility evidence, no data admission
+
+05 audit https://github.com/kr13t1/ts-reliability-lab/pull/35#issuecomment-6996284584 on exact HEAD 2a2bc1561352ae620f35e005dbca23c65040052d: 0/0/0. Merge fbd1e17d80363a7e76a9a96258b72e463c64fcb3 as documentary evidence only. 1600 excluded, 1601/1602 structurally qualifying, neither source-attested nor exposure-cleared; 48 IDs unavailable in transport. Target null, BLOCKED_NO_ELIGIBLE_DATA, zero scenarios. Authorize only 02 independent official UCI member reacquisition and exposure clearance in Issue #34, preserving prior manifest and frozen protocol; then 05 and 00. No raw in Git, no guard/runner/evaluation. Full G2 NOT GO, G3 CLOSED.
