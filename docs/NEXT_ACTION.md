@@ -1,3 +1,9 @@
+# LAB-043 — sole next action
+
+06: https://github.com/kr13t1/ts-reliability-lab/issues/42 — prepare verified technical evidence pack and author outline; no new experiments, no AI-authored Habr submission, no private raw/public release. Accepted real comparison PR #41. Full G2 NOT GO, G3 CLOSED.
+
+## History
+
 # LAB-042 — sole next action
 
 04: https://github.com/kr13t1/ts-reliability-lab/issues/40 — narrow real-input adapter, synthetic validation before target opening, one frozen 1601/A comparison, actual evidence and 05 review in same PR. No tuning or new provenance research. Article priority: actual comparison plots. Full G2 NOT GO, G3 CLOSED.
