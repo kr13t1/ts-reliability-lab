@@ -1,0 +1,10 @@
+{
+  "python": "3.13.5 (main, Jul 15 2026, 20:25:40) [GCC 14.2.0]",
+  "numpy": "2.3.5",
+  "matplotlib": "3.10.8",
+  "raw_sha256": "40b7f60880b495ccb3c345b9ab11216dfa6bbb2bb887bcb45fb55020278fc22f",
+  "config_sha256": "b04e544bad77eaa408cde8701cf64983854718f6bfd47d336f2ede006922fe45",
+  "spec_sha256": "f971b3a478e0486a13ca74c1aeb4ed267dfc89abc787e9b0cabdcd84ab450a6b",
+  "run_sha256": "77d9bce87d73ddbe49b366d57544ba4d225c1ea53021cbb516f36199a1719129",
+  "archive_sha256": "7aca931a3af368bae0ac932140aff270f9cd5f0c6c783e393c83c1672628f503"
+}

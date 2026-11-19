@@ -1,0 +1,31 @@
+name: Exploratory repair pilot
+on:
+  pull_request:
+    paths:
+      - 'explorations/repair_pilot/**'
+      - 'g23/example/reference.csv'
+      - '.github/workflows/repair-pilot.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  reproduce:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - run: python -m pip install -r explorations/repair_pilot/requirements.txt
+      - name: Check the transferred local evidence
+        working-directory: explorations/repair_pilot
+        run: sha256sum -c LOCAL_TEXT_SHA256.txt
+      - name: Six unit tests
+        working-directory: explorations/repair_pilot
+        run: python -m unittest -v
+      - name: Reproduce from committed reference
+        run: python explorations/repair_pilot/reproduce_reference.py --out /tmp/repair-pilot-reproduction
+      - uses: actions/upload-artifact@v4
+        with:
+          name: repair-pilot-reference-reproduction
+          path: /tmp/repair-pilot-reproduction/
