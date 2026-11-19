@@ -6,6 +6,7 @@ import hashlib
 import json
 import os
 import shutil
+import subprocess
 import sys
 import zipfile
 from pathlib import Path
@@ -251,7 +252,7 @@ def execute(out,archive,gate_dir,receipt):
         r.write_json(out/"provenance.json",prov)
         return valid
     except (c.InvalidExecution,c.NumericFailure,OSError,ValueError,TypeError,KeyError,
-            zipfile.BadZipFile,UnicodeError,RuntimeError,OverflowError) as exc:
+            zipfile.BadZipFile,UnicodeError,RuntimeError,OverflowError,subprocess.SubprocessError) as exc:
         for p in out.iterdir():
             shutil.rmtree(p) if p.is_dir() else p.unlink()
         valid=dict(status=status_for_error(exc),error=str(exc),scope=CONFIG["scope"],
@@ -282,7 +283,7 @@ def main(argv=None):
             print(r.dump(info))
             return 0
         result=execute(args.output_dir,args.archive,args.gate_dir,args.receipt)
-    except (c.InvalidExecution,OSError,ValueError,RuntimeError,zipfile.BadZipFile) as exc:
+    except (c.InvalidExecution,OSError,ValueError,TypeError,KeyError,RuntimeError,zipfile.BadZipFile,subprocess.SubprocessError) as exc:
         # Acquisition failure cannot be interpreted as a comparison.
         result=dict(status=status_for_error(exc),error=str(exc),scope=CONFIG["scope"])
         if args.command=="acquire" and not args.receipt.exists():
