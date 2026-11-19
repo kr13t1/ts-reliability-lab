@@ -237,5 +237,805 @@
     "full_G2": "NOT_GO",
     "G3": "CLOSED"
   },
-  "next_gate": "Independent 05 review of blocked manifest. 00 alone decides whether to authorize new evidence acquisition; no fixture runner or evaluation until separate permission."
+  "next_gate": "Independent 05 review of blocked manifest. 00 alone decides whether to authorize new evidence acquisition; no fixture runner or evaluation until separate permission.",
+  "inventory": [
+    {
+      "subject_id": 1600,
+      "documented_in_uci_inventory": true,
+      "local_member_available": true,
+      "member_path": "wisdm-dataset/raw/phone/accel/data_1600_accel_phone.txt",
+      "transport_member": "data_1600_accel_phone.txt",
+      "member_sha256": "40b7f60880b495ccb3c345b9ab11216dfa6bbb2bb887bcb45fb55020278fc22f",
+      "member_size_bytes": 3451789,
+      "transport_crc32": "965e2cc1",
+      "physical_line_count": 64311,
+      "local_manifest_and_previous_precheck_match": true,
+      "full_file_schema_valid": true,
+      "all_subject_ids_match": true,
+      "all_xyz_finite_float64": true,
+      "independent_official_member_identity_verified": false,
+      "A_runs": [
+        {
+          "activity": "A",
+          "start_line_1_based": 1,
+          "end_line_1_based": 3574,
+          "N": 3574,
+          "preceding_activity": null,
+          "following_activity": "B",
+          "q_first": "252207666810782",
+          "q_last": "252387581668153",
+          "q_strictly_increasing": true,
+          "minimum_N_pass": true,
+          "raw_run_bytes": 196807,
+          "raw_run_sha256": "ae6dd110d610e4558d95541e6aa74933456131cd30d9c568603a0df46531d8c9",
+          "canonical_view_bytes": 226795,
+          "canonical_view_sha256": "8bf61ee71f68e0648ead7bc8eb8b6c44414e28411bd6de65e5f9dadf9c28eb38",
+          "physical_continuity": "UNKNOWN",
+          "session_id": null
+        }
+      ],
+      "exposure_status": "EXCLUDED_DESIGN_SUBJECT",
+      "eligible": false,
+      "reasons": [
+        "DESIGN_SUBJECT_EXCLUDED_ENTIRELY",
+        "INDEPENDENT_OFFICIAL_MEMBER_IDENTITY_NOT_VERIFIED"
+      ]
+    },
+    {
+      "subject_id": 1601,
+      "documented_in_uci_inventory": true,
+      "local_member_available": true,
+      "member_path": "wisdm-dataset/raw/phone/accel/data_1601_accel_phone.txt",
+      "transport_member": "data_1601_accel_phone.txt",
+      "member_sha256": "cafe0c35079ce96909ad6a42b8a65af7349cd416350fe4d0aa78354bb68b20ff",
+      "member_size_bytes": 4405756,
+      "transport_crc32": "0b298b7f",
+      "physical_line_count": 81457,
+      "local_manifest_and_previous_precheck_match": true,
+      "full_file_schema_valid": true,
+      "all_subject_ids_match": true,
+      "all_xyz_finite_float64": true,
+      "independent_official_member_identity_verified": false,
+      "A_runs": [
+        {
+          "activity": "A",
+          "start_line_1_based": 1,
+          "end_line_1_based": 4512,
+          "N": 4512,
+          "preceding_activity": null,
+          "following_activity": "B",
+          "q_first": "265073308304101",
+          "q_last": "265253274644607",
+          "q_strictly_increasing": true,
+          "minimum_N_pass": true,
+          "raw_run_bytes": 244067,
+          "raw_run_sha256": "ec776464a6d72da9b568d1d6949dd0881a5bd1fd8949f2d185074da293b7d11f",
+          "canonical_view_bytes": 282497,
+          "canonical_view_sha256": "61f5cdd0f23ae5d3200b45109dbe5ef2a78bac498fc5815faa1341bd6a8bac0b",
+          "physical_continuity": "UNKNOWN",
+          "session_id": null
+        }
+      ],
+      "exposure_status": "DOCUMENTED_METADATA_ONLY_IN_REVIEWED_RECORDS_FULL_HISTORY_UNVERIFIED",
+      "eligible": false,
+      "reasons": [
+        "INDEPENDENT_OFFICIAL_MEMBER_IDENTITY_NOT_VERIFIED",
+        "FULL_PREVIOUS_EXPOSURE_HISTORY_NOT_CONFIRMED"
+      ]
+    },
+    {
+      "subject_id": 1602,
+      "documented_in_uci_inventory": true,
+      "local_member_available": true,
+      "member_path": "wisdm-dataset/raw/phone/accel/data_1602_accel_phone.txt",
+      "transport_member": "data_1602_accel_phone.txt",
+      "member_sha256": "c815ae4099014aaf34a720cd5f56d604f3f84cf667fbdd31d18acd921f4049da",
+      "member_size_bytes": 4629305,
+      "transport_crc32": "ae259d55",
+      "physical_line_count": 84890,
+      "local_manifest_and_previous_precheck_match": true,
+      "full_file_schema_valid": true,
+      "all_subject_ids_match": true,
+      "all_xyz_finite_float64": true,
+      "independent_official_member_identity_verified": false,
+      "A_runs": [
+        {
+          "activity": "A",
+          "start_line_1_based": 1,
+          "end_line_1_based": 3572,
+          "N": 3572,
+          "preceding_activity": null,
+          "following_activity": "B",
+          "q_first": "99019527581830",
+          "q_last": "99199341722902",
+          "q_strictly_increasing": true,
+          "minimum_N_pass": true,
+          "raw_run_bytes": 195103,
+          "raw_run_sha256": "ed84a06976e17bd1ea44c8e82850a2365451d5a12cf10fc5e914d6fe350ece92",
+          "canonical_view_bytes": 225073,
+          "canonical_view_sha256": "bce36d2e5617bcf3b8f41f1419d329f869955049ece9ce1ce221cca8b18f7ffe",
+          "physical_continuity": "UNKNOWN",
+          "session_id": null
+        }
+      ],
+      "exposure_status": "DOCUMENTED_METADATA_ONLY_IN_REVIEWED_RECORDS_FULL_HISTORY_UNVERIFIED",
+      "eligible": false,
+      "reasons": [
+        "INDEPENDENT_OFFICIAL_MEMBER_IDENTITY_NOT_VERIFIED",
+        "FULL_PREVIOUS_EXPOSURE_HISTORY_NOT_CONFIRMED"
+      ]
+    },
+    {
+      "subject_id": 1603,
+      "documented_in_uci_inventory": true,
+      "expected_member_path": "wisdm-dataset/raw/phone/accel/data_1603_accel_phone.txt",
+      "local_member_available": false,
+      "actual_metadata": null,
+      "exposure_status": "UNKNOWN",
+      "eligible": false,
+      "reasons": [
+        "RAW_MEMBER_NOT_AVAILABLE_IN_ACCESSIBLE_INPUTS",
+        "INDEPENDENT_OFFICIAL_MEMBER_IDENTITY_NOT_VERIFIED",
+        "EXPOSURE_HISTORY_NOT_VERIFIED"
+      ]
+    },
+    {
+      "subject_id": 1604,
+      "documented_in_uci_inventory": true,
+      "expected_member_path": "wisdm-dataset/raw/phone/accel/data_1604_accel_phone.txt",
+      "local_member_available": false,
+      "actual_metadata": null,
+      "exposure_status": "UNKNOWN",
+      "eligible": false,
+      "reasons": [
+        "RAW_MEMBER_NOT_AVAILABLE_IN_ACCESSIBLE_INPUTS",
+        "INDEPENDENT_OFFICIAL_MEMBER_IDENTITY_NOT_VERIFIED",
+        "EXPOSURE_HISTORY_NOT_VERIFIED"
+      ]
+    },
+    {
+      "subject_id": 1605,
+      "documented_in_uci_inventory": true,
+      "expected_member_path": "wisdm-dataset/raw/phone/accel/data_1605_accel_phone.txt",
+      "local_member_available": false,
+      "actual_metadata": null,
+      "exposure_status": "UNKNOWN",
+      "eligible": false,
+      "reasons": [
+        "RAW_MEMBER_NOT_AVAILABLE_IN_ACCESSIBLE_INPUTS",
+        "INDEPENDENT_OFFICIAL_MEMBER_IDENTITY_NOT_VERIFIED",
+        "EXPOSURE_HISTORY_NOT_VERIFIED"
+      ]
+    },
+    {
+      "subject_id": 1606,
+      "documented_in_uci_inventory": true,
+      "expected_member_path": "wisdm-dataset/raw/phone/accel/data_1606_accel_phone.txt",
+      "local_member_available": false,
+      "actual_metadata": null,
+      "exposure_status": "UNKNOWN",
+      "eligible": false,
+      "reasons": [
+        "RAW_MEMBER_NOT_AVAILABLE_IN_ACCESSIBLE_INPUTS",
+        "INDEPENDENT_OFFICIAL_MEMBER_IDENTITY_NOT_VERIFIED",
+        "EXPOSURE_HISTORY_NOT_VERIFIED"
+      ]
+    },
+    {
+      "subject_id": 1607,
+      "documented_in_uci_inventory": true,
+      "expected_member_path": "wisdm-dataset/raw/phone/accel/data_1607_accel_phone.txt",
+      "local_member_available": false,
+      "actual_metadata": null,
+      "exposure_status": "UNKNOWN",
+      "eligible": false,
+      "reasons": [
+        "RAW_MEMBER_NOT_AVAILABLE_IN_ACCESSIBLE_INPUTS",
+        "INDEPENDENT_OFFICIAL_MEMBER_IDENTITY_NOT_VERIFIED",
+        "EXPOSURE_HISTORY_NOT_VERIFIED"
+      ]
+    },
+    {
+      "subject_id": 1608,
+      "documented_in_uci_inventory": true,
+      "expected_member_path": "wisdm-dataset/raw/phone/accel/data_1608_accel_phone.txt",
+      "local_member_available": false,
+      "actual_metadata": null,
+      "exposure_status": "UNKNOWN",
+      "eligible": false,
+      "reasons": [
+        "RAW_MEMBER_NOT_AVAILABLE_IN_ACCESSIBLE_INPUTS",
+        "INDEPENDENT_OFFICIAL_MEMBER_IDENTITY_NOT_VERIFIED",
+        "EXPOSURE_HISTORY_NOT_VERIFIED"
+      ]
+    },
+    {
+      "subject_id": 1609,
+      "documented_in_uci_inventory": true,
+      "expected_member_path": "wisdm-dataset/raw/phone/accel/data_1609_accel_phone.txt",
+      "local_member_available": false,
+      "actual_metadata": null,
+      "exposure_status": "UNKNOWN",
+      "eligible": false,
+      "reasons": [
+        "RAW_MEMBER_NOT_AVAILABLE_IN_ACCESSIBLE_INPUTS",
+        "INDEPENDENT_OFFICIAL_MEMBER_IDENTITY_NOT_VERIFIED",
+        "EXPOSURE_HISTORY_NOT_VERIFIED"
+      ]
+    },
+    {
+      "subject_id": 1610,
+      "documented_in_uci_inventory": true,
+      "expected_member_path": "wisdm-dataset/raw/phone/accel/data_1610_accel_phone.txt",
+      "local_member_available": false,
+      "actual_metadata": null,
+      "exposure_status": "UNKNOWN",
+      "eligible": false,
+      "reasons": [
+        "RAW_MEMBER_NOT_AVAILABLE_IN_ACCESSIBLE_INPUTS",
+        "INDEPENDENT_OFFICIAL_MEMBER_IDENTITY_NOT_VERIFIED",
+        "EXPOSURE_HISTORY_NOT_VERIFIED"
+      ]
+    },
+    {
+      "subject_id": 1611,
+      "documented_in_uci_inventory": true,
+      "expected_member_path": "wisdm-dataset/raw/phone/accel/data_1611_accel_phone.txt",
+      "local_member_available": false,
+      "actual_metadata": null,
+      "exposure_status": "UNKNOWN",
+      "eligible": false,
+      "reasons": [
+        "RAW_MEMBER_NOT_AVAILABLE_IN_ACCESSIBLE_INPUTS",
+        "INDEPENDENT_OFFICIAL_MEMBER_IDENTITY_NOT_VERIFIED",
+        "EXPOSURE_HISTORY_NOT_VERIFIED"
+      ]
+    },
+    {
+      "subject_id": 1612,
+      "documented_in_uci_inventory": true,
+      "expected_member_path": "wisdm-dataset/raw/phone/accel/data_1612_accel_phone.txt",
+      "local_member_available": false,
+      "actual_metadata": null,
+      "exposure_status": "UNKNOWN",
+      "eligible": false,
+      "reasons": [
+        "RAW_MEMBER_NOT_AVAILABLE_IN_ACCESSIBLE_INPUTS",
+        "INDEPENDENT_OFFICIAL_MEMBER_IDENTITY_NOT_VERIFIED",
+        "EXPOSURE_HISTORY_NOT_VERIFIED"
+      ]
+    },
+    {
+      "subject_id": 1613,
+      "documented_in_uci_inventory": true,
+      "expected_member_path": "wisdm-dataset/raw/phone/accel/data_1613_accel_phone.txt",
+      "local_member_available": false,
+      "actual_metadata": null,
+      "exposure_status": "UNKNOWN",
+      "eligible": false,
+      "reasons": [
+        "RAW_MEMBER_NOT_AVAILABLE_IN_ACCESSIBLE_INPUTS",
+        "INDEPENDENT_OFFICIAL_MEMBER_IDENTITY_NOT_VERIFIED",
+        "EXPOSURE_HISTORY_NOT_VERIFIED"
+      ]
+    },
+    {
+      "subject_id": 1614,
+      "documented_in_uci_inventory": true,
+      "expected_member_path": "wisdm-dataset/raw/phone/accel/data_1614_accel_phone.txt",
+      "local_member_available": false,
+      "actual_metadata": null,
+      "exposure_status": "UNKNOWN",
+      "eligible": false,
+      "reasons": [
+        "RAW_MEMBER_NOT_AVAILABLE_IN_ACCESSIBLE_INPUTS",
+        "INDEPENDENT_OFFICIAL_MEMBER_IDENTITY_NOT_VERIFIED",
+        "EXPOSURE_HISTORY_NOT_VERIFIED"
+      ]
+    },
+    {
+      "subject_id": 1615,
+      "documented_in_uci_inventory": true,
+      "expected_member_path": "wisdm-dataset/raw/phone/accel/data_1615_accel_phone.txt",
+      "local_member_available": false,
+      "actual_metadata": null,
+      "exposure_status": "UNKNOWN",
+      "eligible": false,
+      "reasons": [
+        "RAW_MEMBER_NOT_AVAILABLE_IN_ACCESSIBLE_INPUTS",
+        "INDEPENDENT_OFFICIAL_MEMBER_IDENTITY_NOT_VERIFIED",
+        "EXPOSURE_HISTORY_NOT_VERIFIED"
+      ]
+    },
+    {
+      "subject_id": 1616,
+      "documented_in_uci_inventory": true,
+      "expected_member_path": "wisdm-dataset/raw/phone/accel/data_1616_accel_phone.txt",
+      "local_member_available": false,
+      "actual_metadata": null,
+      "exposure_status": "UNKNOWN",
+      "eligible": false,
+      "reasons": [
+        "RAW_MEMBER_NOT_AVAILABLE_IN_ACCESSIBLE_INPUTS",
+        "INDEPENDENT_OFFICIAL_MEMBER_IDENTITY_NOT_VERIFIED",
+        "EXPOSURE_HISTORY_NOT_VERIFIED"
+      ]
+    },
+    {
+      "subject_id": 1617,
+      "documented_in_uci_inventory": true,
+      "expected_member_path": "wisdm-dataset/raw/phone/accel/data_1617_accel_phone.txt",
+      "local_member_available": false,
+      "actual_metadata": null,
+      "exposure_status": "UNKNOWN",
+      "eligible": false,
+      "reasons": [
+        "RAW_MEMBER_NOT_AVAILABLE_IN_ACCESSIBLE_INPUTS",
+        "INDEPENDENT_OFFICIAL_MEMBER_IDENTITY_NOT_VERIFIED",
+        "EXPOSURE_HISTORY_NOT_VERIFIED"
+      ]
+    },
+    {
+      "subject_id": 1618,
+      "documented_in_uci_inventory": true,
+      "expected_member_path": "wisdm-dataset/raw/phone/accel/data_1618_accel_phone.txt",
+      "local_member_available": false,
+      "actual_metadata": null,
+      "exposure_status": "UNKNOWN",
+      "eligible": false,
+      "reasons": [
+        "RAW_MEMBER_NOT_AVAILABLE_IN_ACCESSIBLE_INPUTS",
+        "INDEPENDENT_OFFICIAL_MEMBER_IDENTITY_NOT_VERIFIED",
+        "EXPOSURE_HISTORY_NOT_VERIFIED"
+      ]
+    },
+    {
+      "subject_id": 1619,
+      "documented_in_uci_inventory": true,
+      "expected_member_path": "wisdm-dataset/raw/phone/accel/data_1619_accel_phone.txt",
+      "local_member_available": false,
+      "actual_metadata": null,
+      "exposure_status": "UNKNOWN",
+      "eligible": false,
+      "reasons": [
+        "RAW_MEMBER_NOT_AVAILABLE_IN_ACCESSIBLE_INPUTS",
+        "INDEPENDENT_OFFICIAL_MEMBER_IDENTITY_NOT_VERIFIED",
+        "EXPOSURE_HISTORY_NOT_VERIFIED"
+      ]
+    },
+    {
+      "subject_id": 1620,
+      "documented_in_uci_inventory": true,
+      "expected_member_path": "wisdm-dataset/raw/phone/accel/data_1620_accel_phone.txt",
+      "local_member_available": false,
+      "actual_metadata": null,
+      "exposure_status": "UNKNOWN",
+      "eligible": false,
+      "reasons": [
+        "RAW_MEMBER_NOT_AVAILABLE_IN_ACCESSIBLE_INPUTS",
+        "INDEPENDENT_OFFICIAL_MEMBER_IDENTITY_NOT_VERIFIED",
+        "EXPOSURE_HISTORY_NOT_VERIFIED"
+      ]
+    },
+    {
+      "subject_id": 1621,
+      "documented_in_uci_inventory": true,
+      "expected_member_path": "wisdm-dataset/raw/phone/accel/data_1621_accel_phone.txt",
+      "local_member_available": false,
+      "actual_metadata": null,
+      "exposure_status": "UNKNOWN",
+      "eligible": false,
+      "reasons": [
+        "RAW_MEMBER_NOT_AVAILABLE_IN_ACCESSIBLE_INPUTS",
+        "INDEPENDENT_OFFICIAL_MEMBER_IDENTITY_NOT_VERIFIED",
+        "EXPOSURE_HISTORY_NOT_VERIFIED"
+      ]
+    },
+    {
+      "subject_id": 1622,
+      "documented_in_uci_inventory": true,
+      "expected_member_path": "wisdm-dataset/raw/phone/accel/data_1622_accel_phone.txt",
+      "local_member_available": false,
+      "actual_metadata": null,
+      "exposure_status": "UNKNOWN",
+      "eligible": false,
+      "reasons": [
+        "RAW_MEMBER_NOT_AVAILABLE_IN_ACCESSIBLE_INPUTS",
+        "INDEPENDENT_OFFICIAL_MEMBER_IDENTITY_NOT_VERIFIED",
+        "EXPOSURE_HISTORY_NOT_VERIFIED"
+      ]
+    },
+    {
+      "subject_id": 1623,
+      "documented_in_uci_inventory": true,
+      "expected_member_path": "wisdm-dataset/raw/phone/accel/data_1623_accel_phone.txt",
+      "local_member_available": false,
+      "actual_metadata": null,
+      "exposure_status": "UNKNOWN",
+      "eligible": false,
+      "reasons": [
+        "RAW_MEMBER_NOT_AVAILABLE_IN_ACCESSIBLE_INPUTS",
+        "INDEPENDENT_OFFICIAL_MEMBER_IDENTITY_NOT_VERIFIED",
+        "EXPOSURE_HISTORY_NOT_VERIFIED"
+      ]
+    },
+    {
+      "subject_id": 1624,
+      "documented_in_uci_inventory": true,
+      "expected_member_path": "wisdm-dataset/raw/phone/accel/data_1624_accel_phone.txt",
+      "local_member_available": false,
+      "actual_metadata": null,
+      "exposure_status": "UNKNOWN",
+      "eligible": false,
+      "reasons": [
+        "RAW_MEMBER_NOT_AVAILABLE_IN_ACCESSIBLE_INPUTS",
+        "INDEPENDENT_OFFICIAL_MEMBER_IDENTITY_NOT_VERIFIED",
+        "EXPOSURE_HISTORY_NOT_VERIFIED"
+      ]
+    },
+    {
+      "subject_id": 1625,
+      "documented_in_uci_inventory": true,
+      "expected_member_path": "wisdm-dataset/raw/phone/accel/data_1625_accel_phone.txt",
+      "local_member_available": false,
+      "actual_metadata": null,
+      "exposure_status": "UNKNOWN",
+      "eligible": false,
+      "reasons": [
+        "RAW_MEMBER_NOT_AVAILABLE_IN_ACCESSIBLE_INPUTS",
+        "INDEPENDENT_OFFICIAL_MEMBER_IDENTITY_NOT_VERIFIED",
+        "EXPOSURE_HISTORY_NOT_VERIFIED"
+      ]
+    },
+    {
+      "subject_id": 1626,
+      "documented_in_uci_inventory": true,
+      "expected_member_path": "wisdm-dataset/raw/phone/accel/data_1626_accel_phone.txt",
+      "local_member_available": false,
+      "actual_metadata": null,
+      "exposure_status": "UNKNOWN",
+      "eligible": false,
+      "reasons": [
+        "RAW_MEMBER_NOT_AVAILABLE_IN_ACCESSIBLE_INPUTS",
+        "INDEPENDENT_OFFICIAL_MEMBER_IDENTITY_NOT_VERIFIED",
+        "EXPOSURE_HISTORY_NOT_VERIFIED"
+      ]
+    },
+    {
+      "subject_id": 1627,
+      "documented_in_uci_inventory": true,
+      "expected_member_path": "wisdm-dataset/raw/phone/accel/data_1627_accel_phone.txt",
+      "local_member_available": false,
+      "actual_metadata": null,
+      "exposure_status": "UNKNOWN",
+      "eligible": false,
+      "reasons": [
+        "RAW_MEMBER_NOT_AVAILABLE_IN_ACCESSIBLE_INPUTS",
+        "INDEPENDENT_OFFICIAL_MEMBER_IDENTITY_NOT_VERIFIED",
+        "EXPOSURE_HISTORY_NOT_VERIFIED"
+      ]
+    },
+    {
+      "subject_id": 1628,
+      "documented_in_uci_inventory": true,
+      "expected_member_path": "wisdm-dataset/raw/phone/accel/data_1628_accel_phone.txt",
+      "local_member_available": false,
+      "actual_metadata": null,
+      "exposure_status": "UNKNOWN",
+      "eligible": false,
+      "reasons": [
+        "RAW_MEMBER_NOT_AVAILABLE_IN_ACCESSIBLE_INPUTS",
+        "INDEPENDENT_OFFICIAL_MEMBER_IDENTITY_NOT_VERIFIED",
+        "EXPOSURE_HISTORY_NOT_VERIFIED"
+      ]
+    },
+    {
+      "subject_id": 1629,
+      "documented_in_uci_inventory": true,
+      "expected_member_path": "wisdm-dataset/raw/phone/accel/data_1629_accel_phone.txt",
+      "local_member_available": false,
+      "actual_metadata": null,
+      "exposure_status": "UNKNOWN",
+      "eligible": false,
+      "reasons": [
+        "RAW_MEMBER_NOT_AVAILABLE_IN_ACCESSIBLE_INPUTS",
+        "INDEPENDENT_OFFICIAL_MEMBER_IDENTITY_NOT_VERIFIED",
+        "EXPOSURE_HISTORY_NOT_VERIFIED"
+      ]
+    },
+    {
+      "subject_id": 1630,
+      "documented_in_uci_inventory": true,
+      "expected_member_path": "wisdm-dataset/raw/phone/accel/data_1630_accel_phone.txt",
+      "local_member_available": false,
+      "actual_metadata": null,
+      "exposure_status": "UNKNOWN",
+      "eligible": false,
+      "reasons": [
+        "RAW_MEMBER_NOT_AVAILABLE_IN_ACCESSIBLE_INPUTS",
+        "INDEPENDENT_OFFICIAL_MEMBER_IDENTITY_NOT_VERIFIED",
+        "EXPOSURE_HISTORY_NOT_VERIFIED"
+      ]
+    },
+    {
+      "subject_id": 1631,
+      "documented_in_uci_inventory": true,
+      "expected_member_path": "wisdm-dataset/raw/phone/accel/data_1631_accel_phone.txt",
+      "local_member_available": false,
+      "actual_metadata": null,
+      "exposure_status": "UNKNOWN",
+      "eligible": false,
+      "reasons": [
+        "RAW_MEMBER_NOT_AVAILABLE_IN_ACCESSIBLE_INPUTS",
+        "INDEPENDENT_OFFICIAL_MEMBER_IDENTITY_NOT_VERIFIED",
+        "EXPOSURE_HISTORY_NOT_VERIFIED"
+      ]
+    },
+    {
+      "subject_id": 1632,
+      "documented_in_uci_inventory": true,
+      "expected_member_path": "wisdm-dataset/raw/phone/accel/data_1632_accel_phone.txt",
+      "local_member_available": false,
+      "actual_metadata": null,
+      "exposure_status": "UNKNOWN",
+      "eligible": false,
+      "reasons": [
+        "RAW_MEMBER_NOT_AVAILABLE_IN_ACCESSIBLE_INPUTS",
+        "INDEPENDENT_OFFICIAL_MEMBER_IDENTITY_NOT_VERIFIED",
+        "EXPOSURE_HISTORY_NOT_VERIFIED"
+      ]
+    },
+    {
+      "subject_id": 1633,
+      "documented_in_uci_inventory": true,
+      "expected_member_path": "wisdm-dataset/raw/phone/accel/data_1633_accel_phone.txt",
+      "local_member_available": false,
+      "actual_metadata": null,
+      "exposure_status": "UNKNOWN",
+      "eligible": false,
+      "reasons": [
+        "RAW_MEMBER_NOT_AVAILABLE_IN_ACCESSIBLE_INPUTS",
+        "INDEPENDENT_OFFICIAL_MEMBER_IDENTITY_NOT_VERIFIED",
+        "EXPOSURE_HISTORY_NOT_VERIFIED"
+      ]
+    },
+    {
+      "subject_id": 1634,
+      "documented_in_uci_inventory": true,
+      "expected_member_path": "wisdm-dataset/raw/phone/accel/data_1634_accel_phone.txt",
+      "local_member_available": false,
+      "actual_metadata": null,
+      "exposure_status": "UNKNOWN",
+      "eligible": false,
+      "reasons": [
+        "RAW_MEMBER_NOT_AVAILABLE_IN_ACCESSIBLE_INPUTS",
+        "INDEPENDENT_OFFICIAL_MEMBER_IDENTITY_NOT_VERIFIED",
+        "EXPOSURE_HISTORY_NOT_VERIFIED"
+      ]
+    },
+    {
+      "subject_id": 1635,
+      "documented_in_uci_inventory": true,
+      "expected_member_path": "wisdm-dataset/raw/phone/accel/data_1635_accel_phone.txt",
+      "local_member_available": false,
+      "actual_metadata": null,
+      "exposure_status": "UNKNOWN",
+      "eligible": false,
+      "reasons": [
+        "RAW_MEMBER_NOT_AVAILABLE_IN_ACCESSIBLE_INPUTS",
+        "INDEPENDENT_OFFICIAL_MEMBER_IDENTITY_NOT_VERIFIED",
+        "EXPOSURE_HISTORY_NOT_VERIFIED"
+      ]
+    },
+    {
+      "subject_id": 1636,
+      "documented_in_uci_inventory": true,
+      "expected_member_path": "wisdm-dataset/raw/phone/accel/data_1636_accel_phone.txt",
+      "local_member_available": false,
+      "actual_metadata": null,
+      "exposure_status": "UNKNOWN",
+      "eligible": false,
+      "reasons": [
+        "RAW_MEMBER_NOT_AVAILABLE_IN_ACCESSIBLE_INPUTS",
+        "INDEPENDENT_OFFICIAL_MEMBER_IDENTITY_NOT_VERIFIED",
+        "EXPOSURE_HISTORY_NOT_VERIFIED"
+      ]
+    },
+    {
+      "subject_id": 1637,
+      "documented_in_uci_inventory": true,
+      "expected_member_path": "wisdm-dataset/raw/phone/accel/data_1637_accel_phone.txt",
+      "local_member_available": false,
+      "actual_metadata": null,
+      "exposure_status": "UNKNOWN",
+      "eligible": false,
+      "reasons": [
+        "RAW_MEMBER_NOT_AVAILABLE_IN_ACCESSIBLE_INPUTS",
+        "INDEPENDENT_OFFICIAL_MEMBER_IDENTITY_NOT_VERIFIED",
+        "EXPOSURE_HISTORY_NOT_VERIFIED"
+      ]
+    },
+    {
+      "subject_id": 1638,
+      "documented_in_uci_inventory": true,
+      "expected_member_path": "wisdm-dataset/raw/phone/accel/data_1638_accel_phone.txt",
+      "local_member_available": false,
+      "actual_metadata": null,
+      "exposure_status": "UNKNOWN",
+      "eligible": false,
+      "reasons": [
+        "RAW_MEMBER_NOT_AVAILABLE_IN_ACCESSIBLE_INPUTS",
+        "INDEPENDENT_OFFICIAL_MEMBER_IDENTITY_NOT_VERIFIED",
+        "EXPOSURE_HISTORY_NOT_VERIFIED"
+      ]
+    },
+    {
+      "subject_id": 1639,
+      "documented_in_uci_inventory": true,
+      "expected_member_path": "wisdm-dataset/raw/phone/accel/data_1639_accel_phone.txt",
+      "local_member_available": false,
+      "actual_metadata": null,
+      "exposure_status": "UNKNOWN",
+      "eligible": false,
+      "reasons": [
+        "RAW_MEMBER_NOT_AVAILABLE_IN_ACCESSIBLE_INPUTS",
+        "INDEPENDENT_OFFICIAL_MEMBER_IDENTITY_NOT_VERIFIED",
+        "EXPOSURE_HISTORY_NOT_VERIFIED"
+      ]
+    },
+    {
+      "subject_id": 1640,
+      "documented_in_uci_inventory": true,
+      "expected_member_path": "wisdm-dataset/raw/phone/accel/data_1640_accel_phone.txt",
+      "local_member_available": false,
+      "actual_metadata": null,
+      "exposure_status": "UNKNOWN",
+      "eligible": false,
+      "reasons": [
+        "RAW_MEMBER_NOT_AVAILABLE_IN_ACCESSIBLE_INPUTS",
+        "INDEPENDENT_OFFICIAL_MEMBER_IDENTITY_NOT_VERIFIED",
+        "EXPOSURE_HISTORY_NOT_VERIFIED"
+      ]
+    },
+    {
+      "subject_id": 1641,
+      "documented_in_uci_inventory": true,
+      "expected_member_path": "wisdm-dataset/raw/phone/accel/data_1641_accel_phone.txt",
+      "local_member_available": false,
+      "actual_metadata": null,
+      "exposure_status": "UNKNOWN",
+      "eligible": false,
+      "reasons": [
+        "RAW_MEMBER_NOT_AVAILABLE_IN_ACCESSIBLE_INPUTS",
+        "INDEPENDENT_OFFICIAL_MEMBER_IDENTITY_NOT_VERIFIED",
+        "EXPOSURE_HISTORY_NOT_VERIFIED"
+      ]
+    },
+    {
+      "subject_id": 1642,
+      "documented_in_uci_inventory": true,
+      "expected_member_path": "wisdm-dataset/raw/phone/accel/data_1642_accel_phone.txt",
+      "local_member_available": false,
+      "actual_metadata": null,
+      "exposure_status": "UNKNOWN",
+      "eligible": false,
+      "reasons": [
+        "RAW_MEMBER_NOT_AVAILABLE_IN_ACCESSIBLE_INPUTS",
+        "INDEPENDENT_OFFICIAL_MEMBER_IDENTITY_NOT_VERIFIED",
+        "EXPOSURE_HISTORY_NOT_VERIFIED"
+      ]
+    },
+    {
+      "subject_id": 1643,
+      "documented_in_uci_inventory": true,
+      "expected_member_path": "wisdm-dataset/raw/phone/accel/data_1643_accel_phone.txt",
+      "local_member_available": false,
+      "actual_metadata": null,
+      "exposure_status": "UNKNOWN",
+      "eligible": false,
+      "reasons": [
+        "RAW_MEMBER_NOT_AVAILABLE_IN_ACCESSIBLE_INPUTS",
+        "INDEPENDENT_OFFICIAL_MEMBER_IDENTITY_NOT_VERIFIED",
+        "EXPOSURE_HISTORY_NOT_VERIFIED"
+      ]
+    },
+    {
+      "subject_id": 1644,
+      "documented_in_uci_inventory": true,
+      "expected_member_path": "wisdm-dataset/raw/phone/accel/data_1644_accel_phone.txt",
+      "local_member_available": false,
+      "actual_metadata": null,
+      "exposure_status": "UNKNOWN",
+      "eligible": false,
+      "reasons": [
+        "RAW_MEMBER_NOT_AVAILABLE_IN_ACCESSIBLE_INPUTS",
+        "INDEPENDENT_OFFICIAL_MEMBER_IDENTITY_NOT_VERIFIED",
+        "EXPOSURE_HISTORY_NOT_VERIFIED"
+      ]
+    },
+    {
+      "subject_id": 1645,
+      "documented_in_uci_inventory": true,
+      "expected_member_path": "wisdm-dataset/raw/phone/accel/data_1645_accel_phone.txt",
+      "local_member_available": false,
+      "actual_metadata": null,
+      "exposure_status": "UNKNOWN",
+      "eligible": false,
+      "reasons": [
+        "RAW_MEMBER_NOT_AVAILABLE_IN_ACCESSIBLE_INPUTS",
+        "INDEPENDENT_OFFICIAL_MEMBER_IDENTITY_NOT_VERIFIED",
+        "EXPOSURE_HISTORY_NOT_VERIFIED"
+      ]
+    },
+    {
+      "subject_id": 1646,
+      "documented_in_uci_inventory": true,
+      "expected_member_path": "wisdm-dataset/raw/phone/accel/data_1646_accel_phone.txt",
+      "local_member_available": false,
+      "actual_metadata": null,
+      "exposure_status": "UNKNOWN",
+      "eligible": false,
+      "reasons": [
+        "RAW_MEMBER_NOT_AVAILABLE_IN_ACCESSIBLE_INPUTS",
+        "INDEPENDENT_OFFICIAL_MEMBER_IDENTITY_NOT_VERIFIED",
+        "EXPOSURE_HISTORY_NOT_VERIFIED"
+      ]
+    },
+    {
+      "subject_id": 1647,
+      "documented_in_uci_inventory": true,
+      "expected_member_path": "wisdm-dataset/raw/phone/accel/data_1647_accel_phone.txt",
+      "local_member_available": false,
+      "actual_metadata": null,
+      "exposure_status": "UNKNOWN",
+      "eligible": false,
+      "reasons": [
+        "RAW_MEMBER_NOT_AVAILABLE_IN_ACCESSIBLE_INPUTS",
+        "INDEPENDENT_OFFICIAL_MEMBER_IDENTITY_NOT_VERIFIED",
+        "EXPOSURE_HISTORY_NOT_VERIFIED"
+      ]
+    },
+    {
+      "subject_id": 1648,
+      "documented_in_uci_inventory": true,
+      "expected_member_path": "wisdm-dataset/raw/phone/accel/data_1648_accel_phone.txt",
+      "local_member_available": false,
+      "actual_metadata": null,
+      "exposure_status": "UNKNOWN",
+      "eligible": false,
+      "reasons": [
+        "RAW_MEMBER_NOT_AVAILABLE_IN_ACCESSIBLE_INPUTS",
+        "INDEPENDENT_OFFICIAL_MEMBER_IDENTITY_NOT_VERIFIED",
+        "EXPOSURE_HISTORY_NOT_VERIFIED"
+      ]
+    },
+    {
+      "subject_id": 1649,
+      "documented_in_uci_inventory": true,
+      "expected_member_path": "wisdm-dataset/raw/phone/accel/data_1649_accel_phone.txt",
+      "local_member_available": false,
+      "actual_metadata": null,
+      "exposure_status": "UNKNOWN",
+      "eligible": false,
+      "reasons": [
+        "RAW_MEMBER_NOT_AVAILABLE_IN_ACCESSIBLE_INPUTS",
+        "INDEPENDENT_OFFICIAL_MEMBER_IDENTITY_NOT_VERIFIED",
+        "EXPOSURE_HISTORY_NOT_VERIFIED"
+      ]
+    },
+    {
+      "subject_id": 1650,
+      "documented_in_uci_inventory": true,
+      "expected_member_path": "wisdm-dataset/raw/phone/accel/data_1650_accel_phone.txt",
+      "local_member_available": false,
+      "actual_metadata": null,
+      "exposure_status": "UNKNOWN",
+      "eligible": false,
+      "reasons": [
+        "RAW_MEMBER_NOT_AVAILABLE_IN_ACCESSIBLE_INPUTS",
+        "INDEPENDENT_OFFICIAL_MEMBER_IDENTITY_NOT_VERIFIED",
+        "EXPOSURE_HISTORY_NOT_VERIFIED"
+      ]
+    }
+  ]
 }
