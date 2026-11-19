@@ -1,0 +1,36 @@
+{
+  "scope": "SYNTHETIC_ONLY",
+  "evaluation_authorized": false,
+  "subject": "SYNTHETIC",
+  "activity": "A",
+  "axis": 0,
+  "starts": [
+    400,
+    800,
+    1200,
+    1600,
+    2000,
+    2400,
+    2800,
+    3200
+  ],
+  "lengths": [
+    5,
+    20,
+    80,
+    200
+  ],
+  "ar_order": 10,
+  "ar_context": 256,
+  "methods": [
+    "Hold",
+    "Linear",
+    "AR(10)"
+  ],
+  "seed": null,
+  "mask": "oracle",
+  "primary_pair": "AR(10) - Linear",
+  "primary_L": 200,
+  "sign_tau": 1e-10,
+  "fixture_sha256": "365757ca56a5486da6834450d44332921a31ff4741658de5a5c1cc6b930c34ea"
+}
