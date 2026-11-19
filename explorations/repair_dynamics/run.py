@@ -210,7 +210,8 @@ def evaluate(ref,q,frozen):
             out,meta,error=item["outputs"][method]
             row=dict(subject="SYNTHETIC",run="fixture-1",source_first_line=1,
                      source_last_line=N,s=s,e=e,L=L,method=method,status="OK",failure_reason=None)
-            common=dict(E=None,E_reason="NUMERIC_FAILURE",A=None,B=None,D=None,
+            common=dict(E=None,E_reason="NUMERIC_FAILURE",A=None,A_reason="NUMERIC_FAILURE",
+                        B=None,B_reason="NUMERIC_FAILURE",D=None,
                         D_reason="NUMERIC_FAILURE",V=None,V_reason="NUMERIC_FAILURE",
                         A_B_zero_flag=None,n_pairs=L-1,left_error=None,right_error=None,
                         outside_max=None,outside_identical=None)
@@ -324,6 +325,7 @@ def evidence():
     return dict(scope="SYNTHETIC_ONLY",evaluation_authorized=False,seed=None,
                 argv=sys.argv,python=platform.python_version(),numpy=np.__version__,
                 matplotlib=matplotlib.__version__,platform=platform.platform(),
+                blas_identity=np.show_config(mode="dicts")["Build Dependencies"]["blas"],
                 blas=buf.getvalue(),threads={k:os.environ.get(k) for k in
                  ("OPENBLAS_NUM_THREADS","OMP_NUM_THREADS","MKL_NUM_THREADS")},
                 optimize=sys.flags.optimize,git_sha=head,
@@ -338,6 +340,13 @@ def execute(out,bundle=None,config_bytes=None,root=ROOT):
     try:
         c.require(np.__version__=="2.3.5" and prov["matplotlib"]=="3.10.8" and
                   prov["python"]=="3.13.5","environment differs from pinned versions")
+        c.require(sys.platform=="linux" and platform.machine()=="x86_64"
+                  and prov["blas_identity"].get("name")=="scipy-openblas"
+                  and prov["blas_identity"].get("version")=="0.3.30"
+                  and os.environ.get("OPENBLAS_NUM_THREADS")=="1"
+                  and os.environ.get("OMP_NUM_THREADS")=="1"
+                  and os.environ.get("MKL_NUM_THREADS")=="1",
+                  "requires pinned Linux x86_64 NumPy OpenBLAS 0.3.30, one thread")
         prov["pinned_inputs"]=check_sources(root)
         cfg=check_config((HERE/"config.json").read_bytes() if config_bytes is None else config_bytes)
         data=make_bundle() if bundle is None else bundle
