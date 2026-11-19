@@ -76,7 +76,8 @@ def outside(ref, q, output, output_q, z):
             "invalid reconstructed shape/dtype/finite")
     require(isinstance(z, np.ndarray) and z.dtype == bool and z.shape == ref.shape,
             "invalid assigned mask")
-    require(q == output_q and type(output_q) is tuple, "q changed")
+    require(type(output_q) is tuple and all(type(v) is int for v in output_q)
+            and q == output_q, "q changed or converted")
     require(np.array_equal(ref[~z], output[~z]), "changed outside assigned mask")
     return 0.0
 
@@ -203,12 +204,14 @@ def metrics(ref, output, q, output_q, z, s, L):
     expected[0, s:s+L] = True
     require(np.array_equal(z, expected), "evaluation mask differs from assigned I")
     e = s+L
-    row = dict(E=None, E_reason=None, A=None, B=None, D=None, D_reason=None,
+    row = dict(E=None, E_reason=None, A=None, A_reason=None, B=None, B_reason=None,
+               D=None, D_reason=None,
                V=None, V_reason=None, A_B_zero_flag=None,
                n_pairs=max(0, L-1), left_error=None, right_error=None,
                outside_max=0.0, outside_identical=True)
     if L == 0:
-        row.update(E_reason="NO_INJECTION", D_reason="NO_INJECTION",
+        row.update(E_reason="NO_INJECTION", A_reason="NO_INJECTION", B_reason="NO_INJECTION",
+                   D_reason="NO_INJECTION",
                    V_reason="NO_INJECTION")
         return row
     x, y = ref[0, s:e], output[0, s:e]
@@ -218,7 +221,8 @@ def metrics(ref, output, q, output_q, z, s, L):
             row.update(E=rms(residual), left_error=finite_scalar(residual[0]),
                        right_error=finite_scalar(-residual[-1]))
             if L == 1:
-                row.update(D_reason="INSUFFICIENT_PAIRS", V_reason="INSUFFICIENT_PAIRS")
+                row.update(A_reason="INSUFFICIENT_PAIRS", B_reason="INSUFFICIENT_PAIRS",
+                           D_reason="INSUFFICIENT_PAIRS", V_reason="INSUFFICIENT_PAIRS")
                 return row
             dx, dy = np.diff(x), np.diff(y)
             A, B = rms(dy-dx), rms(dx)
