@@ -253,13 +253,31 @@ def sign(x):
     return "+" if x > TAU else "-" if x < -TAU else "tie"
 
 
+def record_window(row):
+    """Complete typed record/window identity, independent of numeric metrics."""
+    keys = ("subject", "run", "source_first_line", "source_last_line", "s", "e", "L")
+    require(isinstance(row, dict) and all(k in row for k in keys),
+            "missing record/window identity")
+    subject, run, first, last, s, e, L = (row[k] for k in keys)
+    require(all(type(v) is int or (type(v) is str and bool(v.strip()))
+                for v in (subject, run)), "invalid subject/run identity")
+    require(all(type(v) is int for v in (first, last, s, e, L))
+            and 1 <= first <= last and s >= C and L > 0 and e == s+L
+            and e < last-first+1, "invalid source/window boundaries")
+    # Type-tag IDs so equal-looking integer/string IDs never coalesce.
+    return (type(subject), subject, type(run), run, first, last, s, e, L)
+
+
 def pair(a, b):
-    require((a["s"], a["L"]) == (b["s"], b["L"]), "unpaired windows")
+    require(record_window(a) == record_window(b), "unpaired record/window identity")
+    require((a.get("method"), b.get("method")) in PAIRS,
+            "invalid ordered pair of distinct methods")
     E1, E2, D1, D2 = a["E"], b["E"], a["D"], b["D"]
     ok = a["status"] == b["status"] == "OK"
     de = finite_scalar(E1-E2) if ok and E1 is not None and E2 is not None else None
     dd = finite_scalar(D1-D2) if ok and D1 is not None and D2 is not None else None
     return dict(subject=a["subject"], run=a["run"], s=a["s"], L=a["L"], e=a["e"],
+                source_first_line=a["source_first_line"], source_last_line=a["source_last_line"],
                 pair=a["method"]+" - "+b["method"], E_left=E1, E_right=E2,
                 D_left=D1, D_right=D2, delta_E=de, delta_D=dd,
                 sign_E=sign(de), sign_D=sign(dd),
@@ -282,9 +300,22 @@ def stats(v):
     return dict(mean=avg(v), min=u[0], max=u[-1], median=med)
 
 
+def check_summary_group(rows, key, allowed):
+    require(len(rows) == len(STARTS), "incomplete summary grid")
+    identities = [record_window(row) for row in rows]
+    require(tuple(row["s"] for row in rows) == STARTS,
+            "incomplete or misordered summary grid")
+    first = identities[0]
+    label = rows[0].get(key)
+    require(label in allowed and first[-1] in LENGTHS
+            and all(identity[:6] == first[:6] and identity[-1] == first[-1]
+                    and row.get(key) == label
+                    for identity, row in zip(identities, rows)),
+            "mixed record, length or method/pair in summary")
+
+
 def paired_summary(rows):
-    require(len(rows) == 8 and tuple(r["s"] for r in rows) == STARTS,
-            "incomplete or misordered paired grid")
+    check_summary_group(rows, "pair", tuple(a+" - "+b for a,b in PAIRS))
     both = [r for r in rows if r["delta_E"] is not None and r["delta_D"] is not None]
     er = [r["delta_E"] for r in rows if r["delta_E"] is not None]
     dr = [r["delta_D"] for r in rows if r["delta_D"] is not None]
@@ -304,7 +335,7 @@ def paired_summary(rows):
 
 
 def method_summary(rows):
-    require(len(rows)==8 and tuple(r["s"] for r in rows)==STARTS, "bad method grid")
+    check_summary_group(rows, "method", METHODS)
     e = [r["E"] for r in rows if r["E"] is not None]
     d = [r["D"] for r in rows if r["D"] is not None]
     return dict(subject=rows[0]["subject"], run=rows[0]["run"], L=rows[0]["L"],
@@ -330,18 +361,28 @@ def decision(primary, complete, invalid=False):
 
 
 def compare_evidence(a, b):
-    """Independent comparison gate: numeric tolerance AND exact discrete evidence."""
-    if type(a) is float or type(b) is float:
-        require(type(a) in (int,float) and type(b) in (int,float)
-                and math.isfinite(a) and math.isfinite(b), "numeric type/finite mismatch")
+    """Independent comparison gate: exact JSON types/discrete values; float tolerance only."""
+    require(type(a) is type(b), "exact evidence type mismatch")
+    if type(a) is float:
+        require(math.isfinite(a) and math.isfinite(b), "nonfinite metric")
         require(abs(a-b) <= 1e-10 + 1e-10*max(abs(a),abs(b)), "numeric tolerance mismatch")
-    elif isinstance(a, dict):
-        require(isinstance(b,dict) and a.keys()==b.keys(), "schema mismatch")
+    elif type(a) is dict:
+        require(a.keys()==b.keys(), "schema mismatch")
         for k in a:
+            # Reject even two identically mistyped counters/indices/ranks.
+            integer_key = (k.startswith("n_") or k in (
+                "i", "index", "s", "e", "L", "N", "q", "source_line",
+                "source_first_line", "source_last_line", "axis", "rank",
+                "joint_count", "numeric_failures", "optimize",
+                "E_+", "E_-", "E_tie", "E_undefined",
+                "D_+", "D_-", "D_tie", "D_undefined"))
+            if integer_key:
+                require(all(type(v) is int or (k == "rank" and v is None)
+                            for v in (a[k], b[k])), "discrete field must be integer: "+k)
             compare_evidence(a[k], b[k])
-    elif isinstance(a, list):
-        require(isinstance(b,list) and len(a)==len(b), "length mismatch")
+    elif type(a) is list:
+        require(len(a)==len(b), "length mismatch")
         for x,y in zip(a,b):
             compare_evidence(x,y)
     else:
-        require(type(a) is type(b) and a==b, "exact integer/status/sign/undefined mismatch")
+        require(a==b, "exact integer/status/sign/undefined mismatch")

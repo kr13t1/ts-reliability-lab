@@ -281,10 +281,76 @@ class MetricTests(unittest.TestCase):
             with self.assertRaises(c.InvalidExecution):
                 c.compare_evidence(a,b)
 
+    def test_delta_discrete_evidence_type_confusion(self):
+        c.compare_evidence({"n_valid":8,"rank":10,"s":400,"E":1.0,"D":None},
+                           {"n_valid":8,"rank":10,"s":400,"E":1.0000000001,"D":None})
+        c.compare_evidence({"rank":None,"joint_discordance":True},
+                           {"rank":None,"joint_discordance":True})
+        for key,a,b in [
+            ("n_valid",8,8.0000000001), ("n_valid",0,5e-11), ("n_valid",8,8.0),
+            ("n_valid",8.0,8), ("n_valid",8.0,8.0), ("n_valid",True,True),
+            ("rank",10,10.0), ("rank",10.0,10.0), ("rank",None,0),
+            ("s",400,400.0), ("e",405,406), ("source_first_line",1,1.0),
+            ("E_tie",0,0.0), ("joint_count",1,1.00000000001),
+            ("joint_discordance",True,1), ("D",None,0.0),
+            ("status","OK","UNDEFINED"), ("sign_E","-","tie"),
+            ("completed_plan_status","COMPLETE_PLAN","INCOMPLETE_PLAN"),
+        ]:
+            with self.subTest(key=key,a=a,b=b), self.assertRaises(c.InvalidExecution):
+                c.compare_evidence({"rows":[{key:a}]},{"rows":[{key:b}]})
+        for a,b in [(1.0,1.001),(float("inf"),float("inf")),
+                    (float("nan"),float("nan"))]:
+            with self.assertRaises(c.InvalidExecution):
+                c.compare_evidence(a,b)
+
+    def test_delta_pair_requires_complete_typed_record_identity(self):
+        base=dict(subject="SYNTHETIC",run="fixture-1",source_first_line=1,
+                  source_last_line=3401,s=400,e=405,L=5,status="OK",E=1.,D=2.)
+        a=base|dict(method="AR(10)")
+        b=base|dict(method="Linear",E=2.,D=1.)
+        p=c.pair(a,b)
+        self.assertEqual((p["delta_E"],p["delta_D"],p["joint_discordance"]),(-1.,1.,True))
+        self.assertEqual((p["source_first_line"],p["source_last_line"]),(1,3401))
+        for bad in [
+            b|{"subject":"OTHER"}, b|{"run":"other"},
+            b|{"source_first_line":2}, b|{"source_last_line":3402},
+            b|{"s":800,"e":805}, b|{"L":20,"e":420},
+            b|{"e":406}, b|{"s":400.0}, b|{"L":True},
+            b|{"source_last_line":3401.0}, b|{"method":"AR(10)"},
+            b|{"method":"UNKNOWN"}, {k:v for k,v in b.items() if k!="source_last_line"},
+        ]:
+            with self.subTest(bad=bad), self.assertRaises(c.InvalidExecution):
+                c.pair(a,bad)
+        with self.assertRaises(c.InvalidExecution):
+            c.pair(a|{"e":406},b|{"e":406})
+        with self.assertRaises(c.InvalidExecution):
+            c.pair(a|{"subject":1},b|{"subject":True})
+        with self.assertRaises(c.InvalidExecution):
+            c.pair(b,a)
+
+    def test_delta_summary_rejects_mixed_records_lengths_and_labels(self):
+        methods=[];pairs=[]
+        for s in c.STARTS:
+            base=dict(subject="SYNTHETIC",run="fixture-1",source_first_line=1,
+                      source_last_line=3401,s=s,e=s+5,L=5,status="OK",E=1.,D=2.)
+            a=base|dict(method="AR(10)")
+            b=base|dict(method="Linear",E=2.,D=1.)
+            methods.append(a);pairs.append(c.pair(a,b))
+        self.assertEqual(c.method_summary(methods)["n_total"],8)
+        self.assertEqual(c.paired_summary(pairs)["n_valid"],8)
+        for rows,func,key,other in [(methods,c.method_summary,"method","Hold"),
+                                    (pairs,c.paired_summary,"pair","AR(10) - Hold")]:
+            for change in [{"subject":"OTHER"},{"run":"other"},{"source_first_line":2},
+                           {"source_last_line":3402},{"L":20,"e":rows[0]["s"]+20},
+                           {"e":rows[0]["e"]+1},{key:other},{"s":400.0}]:
+                with self.subTest(key=key,change=change), self.assertRaises(c.InvalidExecution):
+                    func([rows[0]|change]+rows[1:])
+
     def test_paired_denominators_and_decision_precedence(self):
         rows=[]
         for s in c.STARTS:
-            base=dict(s=s,e=s+200,L=200,subject="SYNTHETIC",run="f",status="OK")
+            base=dict(s=s,e=s+200,L=200,subject="SYNTHETIC",run="f",status="OK",
+                      source_first_line=1,source_last_line=3401)
             ar=base|dict(method="AR(10)",E=1.,D=2.)
             lin=base|dict(method="Linear",E=2.,D=1.)
             rows.append(c.pair(ar,lin))
