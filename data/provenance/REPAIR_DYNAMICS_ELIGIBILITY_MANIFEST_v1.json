@@ -1,0 +1,241 @@
+{
+  "schema_version": "1.0",
+  "date": "2026-11-19",
+  "role": "02",
+  "decision_authority": "00",
+  "issue": 34,
+  "LAB": "LAB-038",
+  "status": "BLOCKED_NO_ELIGIBLE_DATA",
+  "audit_status": "PENDING_05",
+  "evaluation_authorized": false,
+  "runner_authorized": false,
+  "selected_subject": null,
+  "selected_run": null,
+  "selected_reference_sha256": null,
+  "contract": {
+    "path": "docs/specs/REPAIR_DYNAMICS_PROTOCOL_v1.md",
+    "version": "1.0",
+    "section": 2,
+    "approved_pr": 33,
+    "approved_head_sha": "9bbed1f030ddf556d92aa72c7c5aa130e4700925",
+    "merge_sha": "9bd5168b1a8fb1922a9ef3bde626ca52c7c66ab5",
+    "git_blob_sha": "7d5c0f21bbe63575ff3f7302460589791b03d7b5",
+    "audit": "https://github.com/kr13t1/ts-reliability-lab/pull/33#issuecomment-6995833488"
+  },
+  "dataset": {
+    "name": "WISDM Smartphone and Smartwatch Activity and Biometrics Dataset",
+    "author": "Gary M. Weiss",
+    "release_year": 2019,
+    "uci_id": 507,
+    "doi": "10.24432/C5HK59",
+    "license": "CC BY 4.0",
+    "official_listing": "https://archive.ics.uci.edu/dataset/507/wisdm%2Bsmartphone%2B",
+    "official_download_url": "https://archive.ics.uci.edu/static/public/507/wisdm%2Bsmartphone%2Band%2Bsmartwatch%2Bactivity%2Band%2Bbiometrics%2Bdataset.zip",
+    "official_listing_checked_date": "2026-11-19",
+    "official_documented_subject_ids": [
+      1600,
+      1650
+    ],
+    "official_documented_subject_count": 51,
+    "official_actual_archive_inventory_read": false,
+    "official_reacquisition": {
+      "status": "FAILED",
+      "date": "2026-11-19",
+      "attempts": [
+        "UCI download link: web fetch rejected because binary exceeds size limit",
+        "Container curl: DNS resolution failed",
+        "Direct download tool: download failed"
+      ],
+      "trusted_checksum_found": false,
+      "independent_member_byte_comparison_performed": false
+    },
+    "previous_local_archive_evidence": {
+      "status": "REPORTED_NOT_REHASHED_THIS_CHECK",
+      "historical_report_date": "2026-11-01",
+      "outer_name": "uci507.zip",
+      "outer_sha256": "6e0147f181d8f5275918db65eeb9dc842a0185d37cb6b2f30cbf74ee6e205469",
+      "outer_size_bytes": 310292805,
+      "inner_name": "wisdm-dataset.zip",
+      "inner_sha256": "1cf32e8d3a0ecc101bd299fba22545273dcb7de1c9565e0b7844abdfbc6b1695",
+      "inner_size_bytes": 309713877,
+      "partial_prefix_bytes_reported": 151511010,
+      "full_remote_attestation": "UNVERIFIED",
+      "selected_member_covered_by_prefix": "NOT_ESTABLISHED"
+    },
+    "transport": {
+      "name": "G2_RAW_FOR_AUDIT_05.zip",
+      "sha256": "7aca931a3af368bae0ac932140aff270f9cd5f0c6c783e393c83c1672628f503",
+      "size_bytes": 4373638,
+      "zip_crc_all_members_pass": true,
+      "unchanged_before_after": true,
+      "inventory_complete_for_transport": true,
+      "member_paths_unique": true,
+      "activity_key": {
+        "member": "activity_key.txt",
+        "source_path": "wisdm-dataset/activity_key.txt",
+        "sha256": "ddca4cfb34ea3c4642f73a22dc498e2d77f435be4e836f87f37c274ec5ee4c26",
+        "size_bytes": 210,
+        "crc32": "3c56e5f5",
+        "A": "Walking"
+      },
+      "historical_precheck_json_sha256": "f534d093b003327019dec214c1c332e95c1d413ad25efd7943df4082422e8a57"
+    }
+  },
+  "inventory_scope": {
+    "official_documented_count": 51,
+    "locally_available_subject_ids": [
+      1600,
+      1601,
+      1602
+    ],
+    "missing_subject_ids": [
+      1603,
+      1604,
+      1605,
+      1606,
+      1607,
+      1608,
+      1609,
+      1610,
+      1611,
+      1612,
+      1613,
+      1614,
+      1615,
+      1616,
+      1617,
+      1618,
+      1619,
+      1620,
+      1621,
+      1622,
+      1623,
+      1624,
+      1625,
+      1626,
+      1627,
+      1628,
+      1629,
+      1630,
+      1631,
+      1632,
+      1633,
+      1634,
+      1635,
+      1636,
+      1637,
+      1638,
+      1639,
+      1640,
+      1641,
+      1642,
+      1643,
+      1644,
+      1645,
+      1646,
+      1647,
+      1648,
+      1649,
+      1650
+    ],
+    "note": "All 51 documented IDs logged individually; only three raw TXT byte streams available. Absence in accessible inputs is not evidence of absence from UCI."
+  },
+  "selection_rule": {
+    "group": "subject_id",
+    "activity": "A",
+    "sensor": "phone/accel",
+    "axis": 0,
+    "whole_maximal_run": true,
+    "sort_by": [
+      "numeric_subject_id",
+      "physical_start_line_1_based"
+    ],
+    "minimum_N": 3401,
+    "design_excluded_subject_ids": [
+      1600
+    ],
+    "eligible_count": 0,
+    "first_structurally_eligible_non_design_candidate": {
+      "subject_id": 1601,
+      "first_line": 1,
+      "last_line": 4512,
+      "N": 4512,
+      "eligibility": "UNVERIFIED_NOT_SELECTED"
+    },
+    "physical_sessions_independent": "UNKNOWN",
+    "statistical_independence": "NOT_ESTABLISHED",
+    "timestamp_unit": "UNKNOWN",
+    "timestamp_epoch": "UNKNOWN"
+  },
+  "exposure_review": {
+    "status": "INCOMPLETE",
+    "documented_design_subject": 1600,
+    "reviewed_sources": [
+      "data/provenance/G2_MULTI_SUBJECT_PRECHECK.json",
+      "data/DATASET_CARD_G2_DRAFT.md",
+      "docs/G2_AUDIT_REVIEW_00_LAB017.md",
+      "docs/g2/G2_REAL_SIGNAL_SPEC.md",
+      "docs/g2/G2_TIMESTAMP_SEMANTICS_02.md",
+      "docs/PROJECT_STATE.md",
+      "docs/DECISIONS.md",
+      "explorations/repair_pilot/SPEC.md",
+      "explorations/repair_pilot/config.json",
+      "explorations/repair_pilot/provenance.json",
+      "PR #31 audit and PR list #1–33",
+      "local G2_MULTI_SUBJECT_REVIEW_02.zip parser and historical Project reports",
+      "available project conversation history"
+    ],
+    "finding": "Available records describe 1601/1602 SHA/count/format/finite/q prechecks only; no located evidence of their shape, dynamics, trial outcomes or decisions using amplitudes. Unrecorded local work/private history cannot be exhaustively verified. Not a declaration of zero prior exposure."
+  },
+  "canonical_view": {
+    "encoding": "UTF-8",
+    "line_endings": "LF",
+    "header": "i,source_line,subject,activity,q,x,y,z",
+    "serialization": "csv.writer lineterminator LF; original unaltered field tokens (remove only row terminator and terminal semicolon); physical line 1-based; i starts 0",
+    "storage": "in-memory only; published hashes and byte counts, no amplitudes or raw/view files"
+  },
+  "frozen_future_plan": {
+    "sweep": "held_out_evaluation",
+    "active": false,
+    "starts": [
+      400,
+      800,
+      1200,
+      1600,
+      2000,
+      2400,
+      2800,
+      3200
+    ],
+    "lengths": [
+      5,
+      20,
+      80,
+      200
+    ],
+    "axis": 0,
+    "ar_order": 10,
+    "ar_context": 256,
+    "methods": [
+      "Hold",
+      "Linear",
+      "AR(10)"
+    ],
+    "mask": "oracle",
+    "seed": null,
+    "planned_scenarios": 32,
+    "planned_method_rows": 96,
+    "computed_scenarios": 0,
+    "computed_method_rows": 0
+  },
+  "restrictions": {
+    "raw_changed": false,
+    "amplitudes_published": false,
+    "signal_shapes_inspected": false,
+    "repair_or_detector_executed": false,
+    "runner_implemented": false,
+    "full_G2": "NOT_GO",
+    "G3": "CLOSED"
+  },
+  "next_gate": "Independent 05 review of blocked manifest. 00 alone decides whether to authorize new evidence acquisition; no fixture runner or evaluation until separate permission."
+}
