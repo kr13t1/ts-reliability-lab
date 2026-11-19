@@ -420,3 +420,8 @@
 - 05 accepted CSS-only v3 [audit](https://github.com/kr13t1/ts-reliability-habr-demo/pull/2#issuecomment-6995539845), 0/0/1; GO for public design only, merged #2 at e0717d01acc3298e9a69ad9da296cbd07cca7e78. Tablet/desktop chart label readability debt accepted; no data/JS changes. Expected public HTML SHA256 8beb04cc8730d3c1cb6a72a66b103781f0d7f6588f0f79008a00e5c56bace7d1; verify deploy separately. Old pinned archive is v2.
 - Habr declined prior article under rule 4 according to user supplied moderator message. No attempt to evade rule or claim publication; site/portfolio remain separate.
 - Next: Issue #32, prospective protocol only; independent data eligibility check, common information regime, RMSE plus primary dynamics metric, no evaluation until 00 after 05. Full G2 NOT GO; G3 CLOSED; G4 scout; G5/G6 closed. No new method or thesis topic approved.
+
+
+## LAB-038 / 2026-11-19 / GO prospective protocol only
+
+Accepted 05 audit https://github.com/kr13t1/ts-reliability-lab/pull/33#issuecomment-6995833488 on exact HEAD 9bbed1f030ddf556d92aa72c7c5aa130e4700925, merged 9bd5168b1a8fb1922a9ef3bde626ca52c7c66ab5. Historical PROPOSED header left intact. MINOR-01 binding later: exact sign/tie/undefined flags, counts and decision status in addition to numeric tolerance; discrepancy blocks decision; separate primary and completeness, invalid execution highest priority. No threshold changes. Sole next task 02 https://github.com/kr13t1/ts-reliability-lab/issues/34; 05 manifest audit then 00. No runner or evaluation authorized; full G2 NOT GO, G3 CLOSED.
