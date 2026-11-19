@@ -27,8 +27,20 @@ def current():
               e["blas_identity"].get("version")=="0.3.30" and
               all(v=="1" for v in e["threads"].values()) and
               __import__("platform").machine()=="x86_64", "environment differs from accepted LAB-041")
-    c.require(git("status","--porcelain","--untracked-files=no")=="","tracked checkout changed")
-    paths=git("ls-files",PKG,".github/workflows/repair-dynamics-real.yml").splitlines()
+    head=git("rev-parse","HEAD")
+    expected=os.environ.get("LAB042_EXPECTED_HEAD")
+    c.require(expected is not None and head==expected,"checkout is not the exact PR head")
+    # Existing repository files unrelated to this experiment may be modified
+    # by the runner. Record status (do not claim a wholly clean checkout).
+    # Fail closed on EVERY executable/package/test/config/authority byte
+    # against HEAD, including all accepted fixture paths, not a global boolean.
+    status=git("status","--porcelain","--untracked-files=no")
+    paths=git("ls-files",PKG,"explorations/repair_dynamics",
+              "explorations/__init__.py",".github/workflows/repair-dynamics-real.yml").splitlines()
+    c.require(Path(c.__file__).resolve()==a.ROOT/"explorations/repair_dynamics/core.py"
+              and Path(r.__file__).resolve()==a.ROOT/"explorations/repair_dynamics/run.py"
+              and Path(a.__file__).resolve()==HERE/"adapter.py",
+              "unexpected imported implementation path")
     c.require(PKG+"/adapter.py" in paths and PKG+"/run.py" in paths
               and PKG+"/tests/test_adapter.py" in paths and PKG+"/config.json" in paths,
               "not a frozen implementation checkout")
@@ -40,7 +52,7 @@ def current():
     a.check_sources()
     pip=subprocess.run([sys.executable,"-m","pip","freeze"],check=True,
                        capture_output=True,text=True,timeout=30).stdout
-    return dict(git_sha=git("rev-parse","HEAD"),sources_sha256=sources,
+    return dict(git_sha=head,sources_sha256=sources,tracked_status=status,
                 environment={k:e[k] for k in ("python","numpy","matplotlib","platform",
                                                "blas_identity","threads","blas")},
                 pip_freeze=pip)

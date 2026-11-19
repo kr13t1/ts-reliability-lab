@@ -16,12 +16,12 @@ right boundary and L. Hold and AR use left only; Linear is offline/noncausal.
 No tuning, fallback, data replacement or additional scenario.
 
 ## Controlled run
-The private PR workflow fires on opening the designated same-repository PR.
+The private PR workflow fires on opening the designated same-repository PR (or one synchronize event following the pre-target failure at b7b5e0e).
 It checks out the exact head, installs the accepted Linux x86_64 environment
 (Python 3.13.5, NumPy 2.3.5, scipy-openblas 0.3.30 one thread, Matplotlib 3.10.8),
 runs accepted and new synthetic test suites in separate normal and -O
 processes, records actual exits/counts, and freezes source/config/environment
-and pip freeze. Only a successful gate allows acquisition. Failure blocks
+and pip freeze. The gate records full tracked status, requires the actual PR HEAD and verifies every tracked executable/package/test/config/authority byte against that HEAD, including the accepted fixture package. Only a successful gate allows acquisition. Failure blocks
 the real step. The gate evidence is not independent authority against arbitrary
 editing of trusted code; the approved decision pins and controlled workflow
 supply authorization. Transitive dependencies recorded, not separately

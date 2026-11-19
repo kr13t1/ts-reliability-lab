@@ -1,7 +1,7 @@
 name: LAB-042 fixed real-recording comparison
 on:
   pull_request:
-    types: [opened]
+    types: [opened, synchronize]
     paths:
       - '.github/workflows/repair-dynamics-real.yml'
       - 'explorations/repair_dynamics_real/**'
@@ -9,7 +9,7 @@ permissions:
   contents: read
 jobs:
   frozen-comparison:
-    if: github.event.pull_request.head.ref == 'issue-40-lab042-frozen-real-evaluation' && github.event.pull_request.head.repo.full_name == github.repository
+    if: github.event.pull_request.head.ref == 'issue-40-lab042-frozen-real-evaluation' && github.event.pull_request.head.repo.full_name == github.repository && (github.event.action == 'opened' || github.event.before == 'b7b5e0ef236d175d84b33ad29a0f408ee4c22ed5')
     runs-on: ubuntu-24.04
     timeout-minutes: 15
     env:
@@ -17,6 +17,7 @@ jobs:
       OMP_NUM_THREADS: '1'
       MKL_NUM_THREADS: '1'
       MPLBACKEND: Agg
+      LAB042_EXPECTED_HEAD: ${{ github.event.pull_request.head.sha }}
     steps:
       - uses: actions/checkout@v4
         with:
