@@ -382,3 +382,8 @@ PR #37 merged 580b677b30ed9eb9076a6cafbaa736cb6141c198; audit 05 0/0/0. Fixed 16
 ## LAB-042 — 2026-11-19 — synthetic gate accepted; real comparison authorized
 
 PR #39 merged 585c8ea4f4d8a3250e9d7cbb03c3ac23d6310da0, 05 0/0/0. Sole next work https://github.com/kr13t1/ts-reliability-lab/issues/40: narrow real adapter, synthetic guard checks before opening target, frozen 1601/A experiment, then independent 05. No results yet. Article priority. Full G2 NOT GO, G3 CLOSED.
+
+
+## LAB-043 — 2026-11-19 — accepted real comparison; article preparation
+
+PR #41 merged 7eef989018fedfb706d974b54716ef5ada696238; 05 0/0/1, GO for factual technical article evidence. TARGET_DISCORDANCE_OBSERVED / COMPLETE_PLAN on fixed 1601/A comparison only. No expansion/rerun. Next sole action 06 https://github.com/kr13t1/ts-reliability-lab/issues/42. Article not published; Habr author-written requirement. Full G2 NOT GO, G3 CLOSED.
