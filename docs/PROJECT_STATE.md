@@ -367,3 +367,8 @@ PR #33 frozen 9bbed1f030ddf556d92aa72c7c5aa130e4700925, merged 9bd5168b1a8fb1922
 ## LAB-039 — 2026-11-19 — eligibility stop accepted
 
 PR #35 merged fbd1e17d80363a7e76a9a96258b72e463c64fcb3; 05 0/0/0 GO for blocked report only. Data BLOCKED_NO_ELIGIBLE_DATA, target null. Sole next action 02 in Issue #34: independently reacquire official source/member and document exposure clearance, then repeat admission only if both gates satisfied. No runner/fixtures/evaluation. Full G2 NOT GO; G3 CLOSED.
+
+
+## LAB-040 — 2026-11-19 — source closed; article priority
+
+PR #36 merged 63805652b67200e1816936216f55568d4a38bfc2; source GO for 1601; 05 0/0/0. Scoped prospective exposure clarification accepted in DECISIONS. Next solely updated eligibility manifest and narrow 05 admission review in Issue #34 comment 6996840417; no new target results. Public CSS v3 deploy/verify SUCCESS. Habr first article rejected rule 4; second article not written; comparative E/D results and graphs are immediate research target, no need to repeat provenance. Full G2 NOT GO, G3 CLOSED.
