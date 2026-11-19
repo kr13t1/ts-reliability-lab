@@ -1,0 +1,115 @@
+name: LAB-039 official UCI member acquisition (metadata only)
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/lab039-uci-source.yml'
+permissions:
+  contents: read
+jobs:
+  source:
+    if: github.event.pull_request.head.ref == 'work/lab039-source-exposure' && github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    timeout-minutes: 9
+    steps:
+      - name: Independent direct UCI acquisition; emit metadata only
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import datetime, hashlib, json, pathlib, platform, re, shutil, tempfile, urllib.request, urllib.parse, zipfile
+          URL = 'https://archive.ics.uci.edu/static/public/507/wisdm%2Bsmartphone%2Band%2Bsmartwatch%2Bactivity%2Band%2Bbiometrics%2Bdataset.zip'
+          MEMBER = 'wisdm-dataset/raw/phone/accel/data_1601_accel_phone.txt'
+          KEY = 'wisdm-dataset/activity_key.txt'
+          PIN = 'cafe0c35079ce96909ad6a42b8a65af7349cd416350fe4d0aa78354bb68b20ff'
+          KP = 'ddca4cfb34ea3c4642f73a22dc498e2d77f435be4e836f87f37c274ec5ee4c26'
+          LIMIT = 400_000_000
+          report = {'schema': 1, 'source_url': URL, 'started_utc': datetime.datetime.now(datetime.timezone.utc).isoformat(), 'python': platform.python_version(), 'status': 'BLOCKED_SOURCE', 'transport_pin_origin': 'PR35 independent audit 6996284584', 'expected_member': MEMBER, 'expected_member_sha256': PIN, 'bytes_received': 0}
+          class SafeRedirect(urllib.request.HTTPRedirectHandler):
+              def redirect_request(self, req, fp, code, msg, headers, newurl):
+                  p = urllib.parse.urlsplit(newurl)
+                  if p.scheme != 'https' or p.hostname != 'archive.ics.uci.edu':
+                      raise ValueError('redirect outside official HTTPS host')
+                  return super().redirect_request(req, fp, code, msg, headers, newurl)
+          def digest(path):
+              h = hashlib.sha256()
+              with path.open('rb') as f:
+                  for block in iter(lambda: f.read(1048576), b''):
+                      h.update(block)
+              return h.hexdigest()
+          def unique(z, name):
+              matches = [i for i in z.infolist() if i.filename == name]
+              if len(matches) != 1 or matches[0].is_dir():
+                  raise ValueError('missing or duplicate exact member')
+              return matches[0]
+          def check_member(z, info):
+              h = hashlib.sha256()
+              n = 0
+              with z.open(info) as f:
+                  for block in iter(lambda: f.read(1048576), b''):
+                      h.update(block)
+                      n += len(block)
+              if n != info.file_size:
+                  raise ValueError('size mismatch')
+              return {'path': info.filename, 'sha256': h.hexdigest(), 'size_bytes': n, 'crc32': format(info.CRC, '08x'), 'crc_verified_by_full_read': True}
+          phase = 'download'
+          try:
+              with tempfile.TemporaryDirectory(prefix='lab039-') as temp:
+                  outer = pathlib.Path(temp, 'outer.zip')
+                  inner = pathlib.Path(temp, 'inner.zip')
+                  opener = urllib.request.build_opener(SafeRedirect())
+                  req = urllib.request.Request(URL, headers={'User-Agent':'ts-reliability-lab metadata provenance LAB-039','Accept-Encoding':'identity'})
+                  with opener.open(req, timeout=40) as response, outer.open('xb') as f:
+                      report['http_status'] = response.status
+                      report['final_url'] = response.geturl()
+                      for name in ('Content-Length', 'ETag', 'Last-Modified', 'Content-Type'):
+                          report[name.lower()] = response.headers.get(name)
+                      p = urllib.parse.urlsplit(response.geturl())
+                      if response.status != 200 or p.scheme != 'https' or p.hostname != 'archive.ics.uci.edu':
+                          raise ValueError('not complete official HTTPS response')
+                      while (block := response.read(1048576)):
+                          report['bytes_received'] += len(block)
+                          if report['bytes_received'] > LIMIT:
+                              raise ValueError('download over size bound')
+                          f.write(block)
+                  if report['content-length'] is not None and int(report['content-length']) != outer.stat().st_size:
+                      raise ValueError('incomplete outer download')
+                  phase = 'outer'
+                  report['outer'] = {'sha256': digest(outer), 'size_bytes': outer.stat().st_size}
+                  with zipfile.ZipFile(outer) as z:
+                      info = unique(z, 'wisdm-dataset.zip')
+                      if info.file_size > LIMIT:
+                          raise ValueError('nested archive over size bound')
+                      with z.open(info) as f, inner.open('xb') as out:
+                          shutil.copyfileobj(f, out, 1048576)
+                      if inner.stat().st_size != info.file_size:
+                          raise ValueError('inner size mismatch')
+                      report['inner'] = {'path': info.filename, 'sha256': digest(inner), 'size_bytes': inner.stat().st_size, 'crc32': format(info.CRC, '08x'), 'crc_verified_by_full_read': True}
+                  phase = 'inner'
+                  with zipfile.ZipFile(inner) as z:
+                      inventory = [int(m.group(1)) for i in z.infolist() if (m := re.fullmatch(r'wisdm-dataset/raw/phone/accel/data_(\d+)_accel_phone\.txt', i.filename))]
+                      report['phone_accel_subject_inventory'] = sorted(inventory)
+                      if sorted(inventory) != list(range(1600,1651)):
+                          raise ValueError('unexpected or duplicate subject inventory')
+                      info = unique(z, MEMBER)
+                      if info.file_size != 4405756:
+                          raise ValueError('unexpected member size')
+                      report['member'] = check_member(z, info)
+                      key_info = unique(z, KEY)
+                      if key_info.file_size != 210:
+                          raise ValueError('unexpected key size')
+                      report['activity_key'] = check_member(z, key_info)
+                  phase = 'compare'
+                  report['member_digest_matches_audited_transport'] = report['member']['sha256'] == PIN and report['member']['size_bytes'] == 4405756 and report['member']['crc32'] == '0b298b7f'
+                  report['activity_key_digest_matches_audited_transport'] = report['activity_key']['sha256'] == KP
+                  if not (report['member_digest_matches_audited_transport'] and report['activity_key_digest_matches_audited_transport']):
+                      raise ValueError('audited pin mismatch')
+                  report['status'] = 'OFFICIAL_MEMBER_DIGEST_MATCH'
+          except Exception as exc:
+              report['failure_phase'] = phase
+              report['error_type'] = type(exc).__name__
+              report['error'] = str(exc)[:300]
+              if hasattr(exc, 'code'):
+                  report['http_error_status'] = exc.code
+          report['finished_utc'] = datetime.datetime.now(datetime.timezone.utc).isoformat()
+          print('LAB039_SOURCE_JSON=' + json.dumps(report, sort_keys=True))
+          raise SystemExit(0 if report['status'] == 'OFFICIAL_MEMBER_DIGEST_MATCH' else 2)
+          PY
