@@ -362,3 +362,8 @@ Current decisions: exploratory Repair Pilot v1 GO only ([PR #31](https://github.
 ## LAB-038 — 2026-11-19 — prospective protocol accepted
 
 PR #33 frozen 9bbed1f030ddf556d92aa72c7c5aa130e4700925, merged 9bd5168b1a8fb1922a9ef3bde626ca52c7c66ab5. 05 0/0/1, GO protocol only. Data BLOCKED / NOT SELECTED; sole next action 02 eligibility manifest https://github.com/kr13t1/ts-reliability-lab/issues/34. No evaluation/runner. Full G2 NOT GO, G3 CLOSED.
+
+
+## LAB-039 — 2026-11-19 — eligibility stop accepted
+
+PR #35 merged fbd1e17d80363a7e76a9a96258b72e463c64fcb3; 05 0/0/0 GO for blocked report only. Data BLOCKED_NO_ELIGIBLE_DATA, target null. Sole next action 02 in Issue #34: independently reacquire official source/member and document exposure clearance, then repeat admission only if both gates satisfied. No runner/fixtures/evaluation. Full G2 NOT GO; G3 CLOSED.
