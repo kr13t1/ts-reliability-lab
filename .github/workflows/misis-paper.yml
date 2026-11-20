@@ -1,0 +1,32 @@
+name: Build draft MISIS paper
+on:
+  push:
+    paths:
+      - 'publications/misis_repair_dynamics/**'
+      - '.github/workflows/misis-paper.yml'
+  pull_request:
+    paths:
+      - 'publications/misis_repair_dynamics/**'
+      - '.github/workflows/misis-paper.yml'
+jobs:
+  latex:
+    runs-on: windows-latest
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@v4
+      - uses: wtfjoke/setup-tectonic@v4
+        with:
+          tectonic-version: "0.17.0"
+      - name: Compile article
+        working-directory: publications/misis_repair_dynamics
+        run: |
+          mkdir -p build
+          tectonic -o build article.tex
+          test -s build/article.pdf
+      - uses: actions/upload-artifact@v4
+        with:
+          name: draft-misis-paper
+          path: publications/misis_repair_dynamics/build/article.pdf
+          if-no-files-found: error
