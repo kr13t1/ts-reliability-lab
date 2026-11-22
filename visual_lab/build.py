@@ -134,8 +134,32 @@ def segments(bits: list[int]) -> list[list[int]]:
     return out
 
 
-def verified_inputs(g23: Path, g24: Path) -> tuple[dict, dict[str, str]]:
+def canonical_g24_files_sha(files: object) -> dict[str, str]:
+    """Safely canonicalize Windows/POSIX G2.4 relative metadata keys.
+
+    Metadata hashes still only attest what the untrusted metadata *claims*;
+    accepted scientific outputs are also pinned independently below.
+    """
+    require(type(files) is dict, "G2.4 provenance.files_sha256 must be a JSON object")
+    canonical: dict[str, str] = {}
+    for raw_key, sha in files.items():
+        require(type(raw_key) is str and type(sha) is str and
+                re.fullmatch(r"[0-9a-f]{64}", sha) is not None,
+                "G2.4 provenance invalid path or SHA-256")
+        name = raw_key.replace("\\", "/")
+        parts = name.split("/")
+        require(all(part not in ("", ".", "..") and
+                    re.fullmatch(r"[A-Za-z0-9_.-]+", part) is not None for part in parts),
+                f"G2.4 provenance unsafe relative path: {raw_key!r}")
+        require(name not in canonical,
+                f"G2.4 provenance ambiguous/colliding path: {name}")
+        canonical[name] = sha
+    return canonical
+
+
+def verified_inputs(g23: Path, g24: Path, g24_png_mode: str = "strict") -> tuple[dict, dict[str, str]]:
     """Check existing artifacts only. No detector, mutation, or raw file access."""
+    require(g24_png_mode in ("strict", "omit"), "Invalid G2.4 PNG presentation mode")
     hashes: dict[str, str] = {}
     def tracked(path: Path, root: Path, prefix: str) -> bytes:
         data = read_bytes(path)
@@ -185,8 +209,7 @@ def verified_inputs(g23: Path, g24: Path) -> tuple[dict, dict[str, str]]:
     v24 = read_json(g24 / "validation.json")
     require(p24.get("status") == "PASS_DEMO" and v24.get("status") == "PASS_DEMO",
             "G2.4 has no PASS_DEMO outputs; run approved g24.demo first")
-    source_map = p24.get("files_sha256")
-    require(type(source_map) is dict, "G2.4 provenance.files_sha256 must be a JSON object")
+    source_map = canonical_g24_files_sha(p24.get("files_sha256"))
     require(p24.get("standing_raw_sha256") == RAW_SHA and p24.get("standing_segment_sha256") == E_SHA,
             "G2.4 Standing/raw SHA identity mismatch")
     require(p24.get("g23_provenance_sha256") == digest(read_bytes(g23 / "provenance.json")),
@@ -204,7 +227,9 @@ def verified_inputs(g23: Path, g24: Path) -> tuple[dict, dict[str, str]]:
             "G2.4 config source identity differs")
     required_files = ["results.csv", "events.json", "config.json", "validation.json"]
     for cid in CASE_IDS:
-        required_files.extend([f"{cid}/masks.csv", f"{cid}/detection.png"])
+        required_files.append(f"{cid}/masks.csv")
+        if g24_png_mode == "strict":
+            required_files.append(f"{cid}/detection.png")
     images: dict[str, str] = {}
     for rel in required_files:
         data = tracked(g24 / rel, g24, "g24")
@@ -278,16 +303,18 @@ def verified_inputs(g23: Path, g24: Path) -> tuple[dict, dict[str, str]]:
         require(event["pred_events"] == expected_pred and event["true_events"] == expected_assigned,
                 f"G2.4 fixed case disagrees with independently audited intervals: {case}")
         data_by_case[case] = {"metrics": metrics, "observed": observed, "pred": predicted,
-                              "z": assigned, "image": images[f"{case}/detection.png"]}
+                              "z": assigned, "image": images.get(f"{case}/detection.png")}
     # Only after all structural/semantic checks: compare against fixed source
     # references embedded in the viewer code, never mutable G2.4 provenance.
     for rel, expected in G24_FIXED_PINS.items():
+        if rel.endswith(".png") and g24_png_mode == "omit":
+            continue  # No trust claim and no image bytes loaded in portable mode.
         require(hashes.get(f"g24/{rel}") == expected,
                 f"G2.4 independent fixed-source SHA mismatch: {rel}. "
                 "PNG bytes may vary by platform; cannot approve an unverified image")
     return {"cases": data_by_case, "g23_rows": g23_rows, "images": images,
             "g23_report": g23_result,
-            "p24": p24}, hashes
+            "g24_png_mode": g24_png_mode, "p24": p24}, hashes
 
 
 def _path(values: list[float], left: int, right: int, y_min: float, y_max: float,
@@ -350,11 +377,17 @@ def render(model: dict, hashes: dict[str,str]) -> str:
     cards = []
     for key, label in zip(CASE_IDS, CASE_LABELS):
         m = cases[key]["metrics"]
+        png_details = (
+            f'<details><summary>Открыть проверенный график</summary>{_image_html(cases[key]["image"],label+" · observed x, Zhat, Z")}</details>'
+            if cases[key]["image"] is not None else
+            '<div class="minor">G2.4 PNG omitted / не проверялись и не встроены. '
+            'Числа и SVG выше построены из независимо проверенных CSV.</div>'
+        )
         cards.append(f'''<article class="mini">
           <div class="mini-title">{html.escape(label)}</div>
           <div class="counts">TP {m['TP']} <b>·</b> FP {m['FP']} <b>·</b> FN {m['FN']} <b>·</b> TN {m['TN']}</div>
           <div class="minor">{m['N']} отсчётов · precision {_rate(m['precision'])} · recall {_rate(m['recall'])}</div>
-          <details><summary>Открыть проверенный график</summary>{_image_html(cases[key]['image'],label+' · observed x, Zhat, Z')}</details>
+          {png_details}
         </article>''')
     images23 = ''.join(f'<details><summary>G2.3 · Walking α={alpha}, исходный и наблюдаемый сигналы</summary>{_image_html(model["images"][f"g23_alpha_{alpha}"], f"G2.3 comparison alpha={alpha}")}</details>' for alpha in (0,1))
     m = cases["1600_A_alpha_1"]["metrics"]
@@ -389,10 +422,10 @@ def _git_sha(root: Path) -> str | None:
     return None
 
 
-def build(g23: Path, g24: Path, out: Path) -> dict:
+def build(g23: Path, g24: Path, out: Path, g24_png_mode: str = "strict") -> dict:
     require(not out.exists() or (out.is_dir() and not any(out.iterdir())),
             f"Output directory must be new/empty; existing files will not be overwritten: {out}")
-    model, hashes = verified_inputs(g23, g24)
+    model, hashes = verified_inputs(g23, g24, g24_png_mode=g24_png_mode)
     page = render(model, hashes).encode("utf-8")
     manifest = {"status": "PRESENTATION_ONLY", "scope": "G2.3/G2.4 precomputed outputs; no detector run",
                 "input_sha256": hashes, "html_sha256": digest(page),
@@ -400,7 +433,14 @@ def build(g23: Path, g24: Path, out: Path) -> dict:
                 "viewer_git_sha": _git_sha(Path(__file__).resolve().parents[1]),
                 "viewer_executed_source_sha256": digest(Path(__file__).resolve().read_bytes()),
                 "g24_fixed_source_pins": G24_FIXED_PINS,
-                "g24_png_attestation_scope": "Exact bytes only: Linux Python 3.13.5 / Matplotlib 3.10.8; 05 ratification pending",
+                "g24_png_mode": g24_png_mode,
+                "g24_png_verified": g24_png_mode == "strict",
+                "g24_png_embedded": g24_png_mode == "strict",
+                "g24_png_attestation_scope": (
+                    "G2.4 PNG excluded, not read, verified or embedded; SVG and metrics from pinned CSV"
+                    if g24_png_mode == "omit" else
+                    "Exact bytes only: Linux Python 3.13.5 / Matplotlib 3.10.8; independent 05 audit"
+                ),
                 "python": platform.python_version(), "seed": None,
                 "external_services": False, "read_raw": False, "recomputed_detector": False,
                 "g23_cases": ["alpha_0", "alpha_1"], "g24_cases": list(CASE_IDS),
@@ -424,9 +464,11 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--g23-dir", type=Path, default=Path("g23/example"))
     parser.add_argument("--g24-dir", type=Path, default=Path("output_g24"))
     parser.add_argument("--output-dir", type=Path, default=Path("visual_lab_out"))
+    parser.add_argument("--g24-png-mode", choices=("strict", "omit"), default="strict",
+                        help="strict: independently pinned Linux PNG bytes; omit: no G2.4 PNG read or display")
     args = parser.parse_args(argv)
     try:
-        result = build(args.g23_dir, args.g24_dir, args.output_dir)
+        result = build(args.g23_dir, args.g24_dir, args.output_dir, g24_png_mode=args.g24_png_mode)
     except (InputError, OSError, UnicodeError, ValueError, KeyError, TypeError) as exc:
         result = {"status": "REJECTED_INPUT", "detail": str(exc)}
     print(json.dumps(result, ensure_ascii=False, sort_keys=True))
