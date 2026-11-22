@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Когда датчик «замер»: интерактивный эксперимент на WISDM</title>
+<style>
+:root{--ink:#1a2734;--muted:#687887;--line:#dae3e6;--surface:#ffffff;--bg:#f6f8f7;--navy:#132735;--teal:#108b83;--blue:#4186b7;--orange:#ec854a;--green:#169d78;--purple:#8655c3;--red:#da525a}
+*{box-sizing:border-box}body{margin:0;color:var(--ink);background:var(--bg);font:15px/1.55 system-ui,-apple-system,Segoe UI,sans-serif}button,input{font:inherit}button{cursor:pointer}button:focus-visible,input:focus-visible,a:focus-visible{outline:3px solid #28a9a0;outline-offset:3px}a{color:#0c736e}button:disabled{cursor:not-allowed;opacity:.5}.container{max-width:1360px;padding:28px 27px 80px;margin:auto}
+.brand{font-size:12px;letter-spacing:.15em;text-transform:uppercase;font-weight:850;color:#54736e;display:flex;align-items:center;gap:10px;margin-bottom:18px}.brandmark{height:10px;width:10px;background:#0f978a;border-radius:3px;transform:rotate(45deg)}.brand small{margin-left:auto;letter-spacing:normal;text-transform:none;font-size:12px;font-weight:500;color:#748582}
+.hero{position:relative;overflow:hidden;background:var(--navy);color:white;padding:36px 38px 37px;border-radius:21px;display:grid;grid-template-columns:minmax(0,1.7fr) minmax(225px,.8fr);gap:20px}.hero:after{content:"";position:absolute;width:420px;height:420px;border-radius:50%;background:radial-gradient(circle,#0d837c55 0,transparent 68%);right:-120px;top:-155px;pointer-events:none}.eyebrow{color:#78d4c8;text-transform:uppercase;letter-spacing:.14em;font-weight:760;font-size:11px}h1{font-size:clamp(27px,3.3vw,43px);line-height:1.13;letter-spacing:-.035em;margin:11px 0 17px;max-width:740px}p{margin:0}.hero p{max-width:790px;color:#c8d8e0;line-height:1.65}.hero-side{z-index:1;align-self:center;border:1px solid #45606b;background:#ffffff0d;border-radius:16px;padding:19px}.hero-side .symbol{color:#71cec2;font:760 25px/1.15 ui-monospace,Consolas,monospace;margin:5px 0 14px}.hero-side p{font-size:13px}.hero-side small{color:#86a39f;font-size:12px}
+.intro-grid{display:grid;grid-template-columns:1.25fr 1fr;gap:15px;margin:18px 0}.panel{background:white;border:1px solid var(--line);border-radius:17px;padding:21px 23px;box-shadow:0 2px 10px #15312f06}.label{font-size:11px;letter-spacing:.1em;color:#588078;text-transform:uppercase;font-weight:800}.panel h2{font-size:19px;letter-spacing:-.025em;margin:5px 0 9px}.panel p{color:#586d79}.inline-list{margin:10px 0 0;padding-left:21px;color:#435561}.inline-list li+li{margin-top:5px}.note{border-left:3px solid #28a69c;background:#eef8f6;border-radius:0 9px 9px 0;padding:10px 13px;color:#2e5552;font-size:13px;margin-top:13px}.caveat{border-left-color:#cf9655;background:#fff7ed;color:#704c25}
+.demo-layout{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(295px,.74fr);gap:15px;align-items:start}.chart-area{min-width:0}.topline{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap}.title{font-size:20px;letter-spacing:-.025em;margin:0}.secondary{color:var(--muted);font-size:13px}.cases{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:18px 0 14px}.case-btn{border:1px solid #dce4e5;background:#f5f7f7;color:#465a63;text-align:left;border-radius:11px;padding:12px 11px;min-height:65px;font-size:13px;font-weight:700;line-height:1.35;transition:background .15s,border .15s}.case-btn span{display:block;font-size:11px;font-weight:550;color:#819097;margin-bottom:3px}.case-btn[aria-pressed="true"]{border-color:#0a847b;background:#e6f6f3;color:#076e67;box-shadow:inset 0 0 0 1px #0a847b}.case-btn[aria-pressed="true"] span{color:#438a81}
+.control-block{display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:space-between;background:#f7f9f9;border:1px solid #e8eeee;border-radius:12px;padding:10px 12px;margin-bottom:13px}.control-line{display:flex;gap:5px;align-items:center;flex-wrap:wrap}.small-label{font-size:12px;font-weight:700;color:#647781;margin-right:5px}.chip{border:1px solid transparent;background:transparent;border-radius:7px;padding:5px 10px;font-size:12px;color:#50636c;min-width:31px}.chip[aria-pressed="true"]{background:#1b3340;color:#fff}.chip:not([aria-pressed="true"]):hover{background:#e8eeee}.legend{display:flex;gap:14px;flex-wrap:wrap;margin:12px 0 7px}.legend label{display:inline-flex;align-items:center;gap:6px;color:#576b75;font-size:12px;cursor:pointer}.legend input{accent-color:#168c82;margin:0}.swatch{width:13px;height:4px;border-radius:4px;display:inline-block}.rangebar{display:flex;gap:15px;align-items:center;margin:4px 0 10px;flex-wrap:wrap}.rangebar input{flex:1;min-width:90px;accent-color:#138d82}.rangebar button{border:1px solid #d9e2e4;border-radius:8px;background:white;padding:5px 9px;font-size:12px;color:#34555b}.windowlabel{font:12px ui-monospace,Consolas,monospace;color:#4f6570}
+.plot{border:1px solid #e5ecec;border-radius:10px;overflow:hidden;background:#fff;cursor:crosshair;width:100%;height:auto;display:block;touch-action:pan-y}.plot text{font-family:system-ui,-apple-system,Segoe UI,sans-serif}.hover{display:flex;justify-content:space-between;gap:12px;background:#f2f7f6;padding:10px 12px;margin-top:10px;border-radius:9px;color:#455a63;font:12px/1.5 ui-monospace,Consolas,monospace;flex-wrap:wrap}.plot-hint{font-size:12px;color:#8a999f;margin-top:8px}.facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:14px 0}.fact{background:#f4f7f7;border-radius:10px;padding:11px}.fact strong{font-size:26px;letter-spacing:-.035em;display:block;line-height:1.15}.fact span{font-size:11px;color:#64757c}.state-label{display:inline-block;border-radius:99px;padding:4px 9px;font-weight:780;font-size:12px;background:#e5f6ee;color:#16845e}.state-label.problem{background:#fff0e6;color:#af602d}.sidepanel h3{font-size:16px;margin:10px 0}.explainer{font-size:13px;color:#586970;line-height:1.65}.metricrow{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin:10px 0 15px}.metricrow div{padding:9px;border:1px solid #edf1f0;border-radius:9px}.metricrow strong{display:block;font-size:18px}.metricrow small{color:#738590}.divider{height:1px;background:#e7eeed;margin:17px 0}.sidepanel .note{font-size:12px}.bottom{margin-top:16px}.bottom-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}.bottom h2{font-size:18px}.bottom p{font-size:13px}.sources{border-top:1px solid var(--line);margin-top:24px;padding-top:16px;color:#64757a;font-size:12px}.sources a{word-break:break-word}code{background:#f1f5f5;padding:2px 5px;border-radius:4px;font-size:.92em}a.buttonlink{border:1px solid #c9dedb;padding:7px 12px;border-radius:9px;display:inline-flex;margin-top:12px;text-decoration:none;font-size:13px;font-weight:700}
+@media(max-width:1050px){.demo-layout{grid-template-columns:1fr}.intro-grid{grid-template-columns:1fr 1fr}}@media(max-width:730px){.container{padding:15px 12px 50px}.hero{padding:25px;grid-template-columns:1fr}.hero-side{display:none}.intro-grid,.bottom-grid{grid-template-columns:1fr}.panel{padding:16px}.cases{grid-template-columns:1fr}.case-btn{min-height:45px}.cases .case-btn span{display:inline;margin:0 6px 0 0}.facts{gap:5px}.fact{padding:9px}.fact strong{font-size:21px}.brand small{display:none}}
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="brand"><span class="brandmark" aria-hidden="true"></span> Сигнал под вопросом <small>Офлайн-лаборатория · без регистрации и установки</small></div>
+  <header class="hero">
+    <div><div class="eyebrow">Реальные измерения + искусственное нарушение</div>
+    <h1>Что если датчик движения «замрёт» посреди прогулки?</h1>
+    <p>Телефон регистрирует ускорение по трём осям. Но что, если одна из них внезапно начнёт повторять одно значение, хотя человек продолжает идти? Переключите сценарии ниже и посмотрите, что сможет заметить самый простой детектор.</p></div>
+    <div class="hero-side"><small>Идея за 10 секунд</small><div class="symbol">X ≠ Y ≠ Z<br>→ X = const</div><p>Одна координата стала постоянной. Означает ли это реальную остановку? Не обязательно.</p></div>
+  </header>
+  <section class="intro-grid" aria-label="Бытовой сценарий и инструкция">
+    <div class="panel"><div class="label">Зачем это обычному пользователю</div><h2>Когда приложение делает выводы по датчику</h2>
+      <p>Фитнес-приложения, датчики движения и системы распознавания активности используют сигналы с акселерометров. Если канал измерений некорректен, выводам может быть трудно доверять. Этот пример показывает <strong>один механизм ошибки входных данных</strong> — не неисправность вашего телефона и не проверку конкретного шагомера.</p>
+      <div class="note">Важная деталь: в нашем эксперименте реальная ходьба взята из WISDM, а «зависание» X мы <strong>внесли специально</strong>. Реальных аппаратных поломок датчика в этом примере не размечено.</div>
+    </div>
+    <div class="panel"><div class="label">Протестировать самому · примерно 30 секунд</div><h2>Три действия, никакого Python</h2>
+      <ol class="inline-list">
+        <li>Нажмите <b>«Ходьба · без сбоя»</b> — это настоящая запись акселерометра.</li>
+        <li>Нажмите <b>«Ходьба · X зависла»</b> — сравните оранжевую и синюю линии.</li>
+        <li>Выберите <b>«Граница»</b> — увидите одну лишнюю точку, которую отметил алгоритм.</li>
+      </ol>
+      <div class="note">Всё работает прямо в этом HTML. Можно переключать оси X/Y/Z, скрывать линии и двигать окно просмотра. Интернет не нужен.</div>
+    </div>
+  </section>
+  <div class="demo-layout">
+    <main class="panel chart-area" id="demo">
+      <div class="topline"><div><div class="label">Шаг 1 · сравните три сценария</div><h2 class="title">Временной ряд акселерометра</h2></div><span id="caseTag" class="state-label problem">Искусственная заморозка X</span></div>
+      <div class="cases" role="group" aria-label="Выбор случая">
+        <button type="button" class="case-btn" data-case="clean" aria-pressed="false"><span>01 / контроль</span>Ходьба · без сбоя</button>
+        <button type="button" class="case-btn" data-case="freeze" aria-pressed="true"><span>02 / вмешательство</span>Ходьба · X зависла</button>
+        <button type="button" class="case-btn" data-case="standing" aria-pressed="false"><span>03 / сравнение</span>Стояние · без вмешательства</button>
+      </div>
+      <div class="control-block">
+        <div class="control-line"><span class="small-label">Ось:</span><button type="button" class="chip" data-axis="x" aria-pressed="true">X</button><button type="button" class="chip" data-axis="y" aria-pressed="false">Y</button><button type="button" class="chip" data-axis="z" aria-pressed="false">Z</button></div>
+        <div class="control-line"><span class="small-label">Масштаб:</span><button type="button" class="chip" data-zoom="all" aria-pressed="false">Весь ряд</button><button type="button" class="chip" data-zoom="region" aria-pressed="false">Повреждение</button><button type="button" class="chip" data-zoom="boundary" aria-pressed="true">Граница</button></div>
+      </div>
+      <div class="legend" role="group" aria-label="Слои графика">
+        <label><input type="checkbox" data-visible="reference" checked><i class="swatch" style="background:var(--blue)"></i>Исходный</label>
+        <label><input type="checkbox" data-visible="observed" checked><i class="swatch" style="background:var(--orange)"></i>После вмешательства</label>
+        <label><input type="checkbox" data-visible="true" checked><i class="swatch" style="background:var(--green)"></i>Назначено Z</label>
+        <label><input type="checkbox" data-visible="pred" checked><i class="swatch" style="background:var(--purple)"></i>Найдено Ẑ</label>
+      </div>
+      <div class="rangebar"><span class="small-label">Центр окна:</span><input id="center" type="range" min="0" max="3573" value="1190" aria-label="Прокрутка ряда по отсчётам"><span id="windowLabel" class="windowlabel">1180–1200</span><button id="reset" type="button">Сброс</button></div>
+      <svg id="plot" class="plot" viewBox="0 0 960 450" role="img" aria-label="Интерактивные линии исходного и повреждённого сигнала, два ряда масок"></svg>
+      <div id="hover" class="hover" aria-live="polite"><span>Наведите на график, чтобы увидеть отсчёт</span></div>
+      <p class="plot-hint">Горизонтальная шкала — <b>индексы отсчётов, не секунды</b>. Обе полосы масок относятся только к оси <b>X</b>, даже если выбрана Y или Z.</p>
+    </main>
+    <aside class="panel sidepanel" aria-live="polite">
+      <div class="label">Шаг 2 · что обнаружено</div><h2 class="title" id="sideTitle">Ходьба с искусственным freeze</h2><p class="secondary" id="sideSub">Один конкретный фрагмент WISDM · испытуемый 1600</p>
+      <div class="facts"><div class="fact"><strong id="nAssigned">1191</strong><span>Затронуто Z</span></div><div class="fact"><strong id="nPredicted">1192</strong><span>Отмечено Ẑ</span></div><div class="fact"><strong id="nFP">1</strong><span>Ложных отметок</span></div></div>
+      <div class="metricrow"><div><small>Precision</small><strong id="precision">99,92%</strong></div><div><small>Recall</small><strong id="recall">100%</strong></div></div>
+      <div class="divider"></div><h3>Что здесь произошло?</h3><p class="explainer" id="explanation">Мы удерживали X на значении предыдущей точки. Детектор заметил серию равных значений и отметил на одну точку больше нашей искусственной маски.</p>
+      <div class="note caveat" id="boundaryHint">На индексе <b>1190</b> X ещё исходный. Инъекция начинается с <b>1191</b>, а алгоритм захватывает обе точки. Это один <b>FP</b> на границе.</div>
+      <div class="divider"></div><h3>Как работает простой baseline</h3><p class="explainer">Если подряд идут хотя бы <b>3 точно равных значения X</b>, детектор ретроспективно отмечает всю серию. Никакого обучения, нейросети или знания истинной маски у него нет.</p>
+      <div class="note">Результаты <strong>не являются оценкой настоящих аппаратных сбоев</strong>. Один испытуемый, одна длинная искусственная инъекция, без классификации шагов или независимого теста.</div>
+    </aside>
+  </div>
+  <section class="bottom bottom-grid">
+    <div class="panel"><div class="label">Для читателя Хабра</div><h2>Почему полезна именно ошибка, а не красивые 100%?</h2><p>Алгоритм действительно находит внесённый freeze, но не знает, где физически началось вмешательство. Это наглядное отличие между <b>обнаружением одинаковых чисел</b> и <b>установлением причины сбоя</b>. При небольшом шуме такой детектор может вообще не найти плато; при настоящем спокойном движении возможны совпадения. Эти случаи здесь обсуждаются как ограничения, а не как новые измеренные результаты.</p></div>
+    <div class="panel"><div class="label">Честные границы</div><h2>Чего мы пока не сделали</h2><p>Мы не проверяли шагомеры, не диагностировали реальный телефон, не строили классификатор активности и не предлагали новый научный метод. «Стояние без инъекции» означает отсутствие <em>нашего вмешательства</em>, а не гарантированно исправный датчик. Проверка разных испытуемых и влияния на downstream ML — отдельные будущие эксперименты.</p></div>
+  </section>
+  <footer class="sources"><b>Происхождение:</b> WISDM Smartphone and Smartwatch Activity and Biometrics Dataset, Gary M. Weiss, 2019, UCI, DOI <a href="https://doi.org/10.24432/C5HK59" target="_blank" rel="noreferrer">10.24432/C5HK59</a>, лицензия CC BY 4.0. Бытовой контекст движения: <a href="https://developer.android.com/develop/sensors-and-location/sensors/sensors_motion" target="_blank" rel="noreferrer">Android Developers, Motion sensors</a>. Данные встроены в HTML из проверенного WISDM subject 1600. Дефект X внесён искусственно по принятому протоколу G2.3; маска обнаружения и метрики соответствуют ограниченному G2.4 baseline. Это отдельный <b>неаудированный интерактивный UI-прототип</b>, не научное доказательство и не замена принятому viewer. Без трекеров, скриптов сети и отправки пользовательских файлов.</footer>
+</div>
+<script>
+'use strict';
+const DB=__EMBEDDED_WISDM_PAYLOAD_JSON__;
+const ST={scenario:'freeze',axis:0,zoom:'boundary',center:1190,visible:{reference:true,observed:true,true:true,pred:true}};
+const F=DB.facts;
+const COLORS={reference:'#4186b7',observed:'#ec854a',true:'#169d78',pred:'#8655c3'};
+const SVG=document.getElementById('plot');
+const getData=()=>ST.scenario==='standing'?DB.standing:DB.walking;
+const getMetrics=()=>F.metrics[ST.scenario];
+const getAssigned=()=>ST.scenario==='freeze'?[F.freeze]:[];
+const getPred=()=>ST.scenario==='freeze'?[F.pred]:[];
+const adjusted=(row,i)=>ST.scenario==='freeze'&&ST.axis===0&&i>=F.freeze[0]&&i<F.freeze[1]?DB.walking[F.freeze[0]-1][0]:row[ST.axis];
+function elem(tag,attributes={},children=''){
+ const attributesText=Object.entries(attributes).map(([k,v])=>` ${k}="${String(v).replaceAll('&','&amp;').replaceAll('"','&quot;')}"`).join('');
+ return `<${tag}${attributesText}>${children}</${tag}>`;
+}
+function viewport(){const n=getData().length;let width=ST.zoom==='all'?n:ST.zoom==='region'?Math.min(1650,n):Math.min(74,n);let start=ST.zoom==='all'?0:Math.max(0,Math.min(n-width,Math.round(ST.center-width/2)));return{start,end:start+width,n,width};}
+function format(n){return Number(n).toFixed(3).replace('.',',');}
+function draw(){
+ const data=getData(),{start,end,n,width}=viewport();
+ const ref=data.slice(start,end).map(row=>row[ST.axis]);
+ const obs=data.slice(start,end).map((row,j)=>adjusted(row,start+j));
+ let min=Math.min(...ref,...obs),max=Math.max(...ref,...obs),delta=(max-min)||1;min-=delta*.09;max+=delta*.09;
+ const X=idx=>72+(idx-start)/(Math.max(1,width-1))*835;
+ const Y=value=>317-(value-min)/(max-min)*265;
+ const path=values=>values.map((v,j)=>(j===0?'M':'L')+X(start+j).toFixed(2)+' '+Y(v).toFixed(2)).join(' ');
+ let out='<rect x="72" y="28" width="835" height="289" fill="#fbfcfc" stroke="#e0e8e8" rx="8"/>';
+ for(let j=0;j<=4;j++){
+  const yy=45+j*64;
+  const yval=max-(yy-28)/289*(max-min);
+  out+=`<line x1="72" y1="${yy}" x2="907" y2="${yy}" stroke="#e9efef"/><text x="64" y="${yy+4}" font-size="12" text-anchor="end" fill="#7a8a8d">${format(yval)}</text>`;
+ }
+ for(let j=0;j<=5;j++){
+  const idx=Math.min(n-1,Math.round(start+j*(width-1)/5)),xx=X(idx);
+  out+=`<line x1="${xx}" y1="28" x2="${xx}" y2="317" stroke="#ecf0f0"/><text x="${xx}" y="338" text-anchor="middle" font-size="12" fill="#61737b">${idx}</text>`;
+ }
+ if(ST.scenario==='freeze'){
+  const a=Math.max(start,F.freeze[0]),b=Math.min(end,F.freeze[1]);
+  if(b>a){const xx=X(a),ww=X(b-1)-xx;out+=`<rect x="${xx}" y="28" width="${Math.max(1,ww)}" height="289" fill="#10a698" opacity=".09"/>`;}
+ }
+ if(ST.visible.reference)out+=`<path d="${path(ref)}" fill="none" stroke="${COLORS.reference}" stroke-width="${width<100?2.8:1.6}" opacity=".95"/>`;
+ if(ST.visible.observed)out+=`<path d="${path(obs)}" fill="none" stroke="${COLORS.observed}" stroke-width="${width<100?2.7:1.4}" opacity=".9"/>`;
+ function row(intervals,y,display,color){
+  let html=`<rect x="72" y="${y}" width="835" height="16" fill="#f0f4f4" rx="4"/>`;
+  if(display)for(const [a,b] of intervals){const aa=Math.max(a,start),bb=Math.min(b,end);if(bb>aa){const xx=X(aa),ww=X(bb-1)-xx+835/Math.max(1,width-1);html+=`<rect x="${xx}" y="${y}" width="${Math.max(2,ww)}" height="16" rx="3" fill="${color}"/>`;}}
+  return html;
+ }
+ out+=`<text x="72" y="365" font-weight="700" font-size="12" fill="#53676e">Назначено Z (ось X)</text>`;
+ out+=row(getAssigned(),373,ST.visible.true,COLORS.true);
+ out+=`<text x="72" y="408" font-weight="700" font-size="12" fill="#53676e">Найдено Ẑ (ось X)</text>`;
+ out+=row(getPred(),417,ST.visible.pred,COLORS.pred);
+ if(ST.scenario==='freeze'&&1190>=start&&1190<end){const xx=X(1190);out+=`<line x1="${xx}" x2="${xx}" y1="28" y2="317" stroke="#d44f51" stroke-width="2" stroke-dasharray="6 5"/><circle cx="${xx}" cy="22" r="5" fill="#d44f51"/>`;if(width<=1650)out+=`<text x="${xx+8}" y="19" fill="#b72f35" font-weight="800" font-size="12">1190 · FP</text>`;}
+ SVG.innerHTML=out;
+ document.getElementById('windowLabel').textContent=`${start}–${end-1}`;
+ document.getElementById('center').value=ST.center;
+ document.getElementById('center').max=n-1;
+}
+function update(){
+ for(const b of document.querySelectorAll('[data-case]'))b.setAttribute('aria-pressed',String(b.dataset.case===ST.scenario));
+ for(const b of document.querySelectorAll('[data-axis]'))b.setAttribute('aria-pressed',String(['x','y','z'][ST.axis]===b.dataset.axis));
+ for(const b of document.querySelectorAll('[data-zoom]'))b.setAttribute('aria-pressed',String(ST.zoom===b.dataset.zoom));
+ const m=getMetrics();
+ document.getElementById('nAssigned').textContent=m.tp+m.fn;
+ document.getElementById('nPredicted').textContent=m.tp+m.fp;
+ document.getElementById('nFP').textContent=m.fp;
+ document.getElementById('precision').textContent=m.tp+m.fp?((100*m.tp/(m.tp+m.fp)).toFixed(2).replace('.',',')+'%'):'не определено';
+ document.getElementById('recall').textContent=m.tp+m.fn?((100*m.tp/(m.tp+m.fn)).toFixed(0)+'%'):'не определено';
+ const isFreeze=ST.scenario==='freeze';const isStanding=ST.scenario==='standing';
+ document.getElementById('caseTag').className='state-label'+(isFreeze?' problem':'');
+ document.getElementById('caseTag').textContent=isFreeze?'Искусственная заморозка X':isStanding?'Стояние · без инъекции':'Ходьба · без инъекции';
+ document.getElementById('sideTitle').textContent=isFreeze?'Ходьба с искусственным freeze':isStanding?'Стояние без инъекции':'Ходьба без повреждения';
+ document.getElementById('explanation').textContent=isFreeze?'Мы удерживаем X на значении предыдущей точки на интервале [1191,2382). Детектор замечает серию равных чисел [1190,2382) и захватывает на одну точку больше. Y и Z остались как в исходной записи.':isStanding?'Это другая настоящая запись того же человека, отмеченная как Standing. Мы ничего не «замораживали», и данный baseline не отметил последовательностей из трёх одинаковых X. Никакой гарантии физической исправности здесь нет.':'Это исходная настоящая ходьба без нашего вмешательства. В данном фиксированном примере простой baseline не нашёл последовательностей из трёх одинаковых значений X.';
+ document.getElementById('boundaryHint').style.display=isFreeze?'block':'none';
+ draw();
+}
+function selectCase(key){ST.scenario=key;ST.zoom=key==='freeze'?'boundary':'all';ST.center=key==='standing'?1200:1190;update();}
+for(const b of document.querySelectorAll('[data-case]'))b.addEventListener('click',()=>selectCase(b.dataset.case));
+for(const b of document.querySelectorAll('[data-axis]'))b.addEventListener('click',()=>{ST.axis=['x','y','z'].indexOf(b.dataset.axis);update()});
+for(const b of document.querySelectorAll('[data-zoom]'))b.addEventListener('click',()=>{ST.zoom=b.dataset.zoom;ST.center=ST.scenario==='standing'?1200:1190;update()});
+for(const c of document.querySelectorAll('[data-visible]'))c.addEventListener('change',()=>{ST.visible[c.dataset.visible]=c.checked;update()});
+document.getElementById('center').addEventListener('input',e=>{ST.center=Number(e.target.value);if(ST.zoom==='all')ST.zoom='region';update()});
+document.getElementById('reset').addEventListener('click',()=>{ST.axis=0;ST.zoom='boundary';ST.center=1190;ST.scenario='freeze';for(const k in ST.visible){ST.visible[k]=true;document.querySelector(`[data-visible="${k}"]`).checked=true;}update()});
+SVG.addEventListener('pointermove',event=>{const rect=SVG.getBoundingClientRect(),x=(event.clientX-rect.left)/rect.width*960;const {start,width,n}=viewport();const i=Math.max(0,Math.min(n-1,Math.round(start+(x-72)/835*(width-1))));const row=getData()[i];const v=adjusted(row,i);const axis=['X','Y','Z'][ST.axis];const mask=getAssigned().some(([a,b])=>a<=i&&i<b);const pred=getPred().some(([a,b])=>a<=i&&i<b);document.getElementById('hover').textContent=`i=${i} · ${axis} исходный: ${format(row[ST.axis])} · ${axis} после: ${format(v)} · Zₓ=${Number(mask)} · Ẑₓ=${Number(pred)}${ST.scenario==='freeze'&&i===1190?' · ЛОЖНАЯ ОТМЕТКА':''}`;});
+SVG.addEventListener('pointerleave',()=>{document.getElementById('hover').textContent='Наведите на график, чтобы увидеть отсчёт';});
+update();
+</script>
+</body>
+</html>

@@ -1,0 +1,36 @@
+name: Habr publication artifact check
+on:
+  pull_request:
+    paths:
+      - 'publications/habr/**'
+      - '.github/workflows/habr-publication-check.yml'
+  workflow_dispatch:
+jobs:
+  artifact:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Verify HTML, embedded mask arithmetic, and explicit draft blockers
+        run: python -m unittest discover -s publications/habr -p 'test_*.py' -v
+  browser:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install pinned browser smoke dependency
+        run: |
+          npm install --no-save --ignore-scripts playwright@1.56.1
+          npx playwright install --with-deps chromium
+      - name: Exercise offline interactive UI and capture screenshots
+        run: node publications/habr/browser_smoke.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: habr-browser-evidence
+          path: publications/habr/browser-evidence/*.png
+          if-no-files-found: warn
