@@ -1,0 +1,27 @@
+name: visual-lab Windows portability tests
+on:
+  pull_request:
+    paths:
+      - 'visual_lab/**'
+      - '.github/workflows/visual-lab-portability.yml'
+  workflow_dispatch:
+
+jobs:
+  viewer-unit:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        python-version: ['3.11', '3.13']
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Compile checked-in viewer
+        run: python -m compileall -q visual_lab
+      - name: Run viewer unit and fixture integration tests
+        run: python -m unittest discover -s visual_lab/tests -v
+      - name: Note raw-independent tests scope
+        run: echo "No raw WISDM in GitHub; integration tests requiring local G2.4 output will be reported as skipped."
